@@ -1,0 +1,39 @@
+<div class="main">
+           <form action='index.php' id="consultar" method='get' class="container contact">
+              <br>
+               <h2 class="titulo-ventana-consultar">{{TITULO_VENTANA}}</h2>
+           <p style='font-weight: bold;'>{{TITULO2}}</p><br>
+           <input type='hidden' name='mode' value='seleccionar-consultar-diagnostico-empresa'>
+           <input id="Num_consecutivo" name="Num_consecutivo" type="hidden" value="0">
+           	<div class="table-responsive">
+           <table id="example" class="table table-bordered table-hover">
+                <thead>
+                    <th>N°</th>
+                    <th>NIT</th>
+                    <th>Nombre Empresa</th>
+                    <th>Razon Social</th> 
+                    <th>Productos/Servicios</th>
+                    <th>Sector Empresa</th>
+                    <th>Nombre Contacto</th>
+                    <th>Fecha</th>
+                </thead>
+                <tbody align="center">
+                {{OPTION}}
+                </tbody>
+                <tfoot>
+                    <th>N°</th>
+                    <th>NIT</th>
+                    <th>Nombre Empresa</th>
+                    <th>Razon Social</th> 
+                    <th>Productos/Servicios</th>
+                    <th>Sector Empresa</th>
+                    <th>Nombre Contacto</th>
+                    <th>Fecha</th>
+                </tfoot>
+           </table>
+           	</div>
+           <input class="subtmit-consultar" id="consultar" type="submit" value="Consultar">
+		    </form>	
+
+</div>
+    

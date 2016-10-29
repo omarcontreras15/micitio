@@ -183,13 +183,38 @@ class DiagnosticoEmpresa extends Controller {
         $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
         $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
-        $this->view = $this->renderView($this->view, "{{PLACEHOLDER}}", "Ingrese el numero de la cedula");
-        $this->view = $this->renderView($this->view, "{{TIPO_OPERACION}}", "CONSULTAR");
+        $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
+        $array = $this->diagnosticoEmpresaModel->consultarDiagEmpresa();
+        $sizeArray = sizeof($array);
+        $option = "";
+        $elementotabla = $this->getTemplate("./app/views/components/tabla-empresa.html");
+
+        if($sizeArray>0){
+            foreach ($array as $element){
+                $temp = $elementotabla;
+                $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
+                $temp = $this->renderView($temp, "{{NIT}}", $element['Codigo_empresa']);
+                //ESTOS DATOS SE SACAN DE LA BASE DE DATOS DEL PROYECTO NUMERO UNO
+                $temp = $this->renderView($temp, "{{EMPRESA}}", $element['Nombre_empresa']);
+                $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $element['razon_social']);
+                $temp = $this->renderView($temp, "{{PRODUCTOS}}", $element['Num_consecutivo']);
+                $temp = $this->renderView($temp, "{{SECTOR}}", $element['Num_consecutivo']);
+                $temp = $this->renderView($temp, "{{CONTACTO}}", $element['Nombres']." ".$element['Apellidos']);
+                $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
+                $option .= $temp;
+            }
+            $this->view = $this->renderView($this->view, "{{OPTION}}", $option);
+        }else{
+            echo "<h2>No Existen Diagnósticos</h2>";
+        }
+        $this->showView($this->view);
+
+
         $this->showView($this->view);    
 
     }
 
-    public function consultarCcDiagIdea($cc, $tipo_operacion){
+    public function consultarDiagIdea($cc, $tipo_operacion){
         $array=$this->diagnosticoIdeaModel->consultarCcDiagIdea($cc);
         $sizeArray=sizeof($array);
         $option="";
