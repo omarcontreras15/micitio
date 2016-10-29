@@ -175,8 +175,7 @@
            foreach($array as $element) {
                 $temp = $elementotabla;
                 $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{NOMBRES}}", $element['Nombres']);
-                $temp = $this->renderView($temp, "{{APELLIDOS}}", $element['Apellidos']);
+                $temp = $this->renderView($temp, "{{NOMBRE}}", $element['Nombres']." ".$element['Apellidos']);
                 $temp = $this->renderView($temp, "{{CC}}", $element['CC']);
                 $temp = $this->renderView($temp, "{{IDEA}}", $element['Idea']);
                 $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
