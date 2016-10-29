@@ -58,20 +58,20 @@
                         } 
                         break;
 
-                        case "seleccionar-consultar-diagnostico-idea":
-                        if(!isset($_SESSION["user_id"])){
-                            $this->user->inicioSesion();
-                        }else{
-                            $this->diagnosticoIdea->consultarForm($_GET["Num_consecutivo"]);       
-                        } 
-                        break;
-
                         case "agregar-plan-accion":
                              if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
                          $this->planAccion->agregarPlanAccion();   
                         }       
+                        break;
+                        case "seleccionar-consultar-diagnostico-idea":
+                        if($_GET["Num_consecutivo"]==="0"){
+                            $this->diagnosticoIdea->ventanaConsultarDiag();
+                        }else{
+                            $this->diagnosticoIdea->consultarForm($_GET["Num_consecutivo"]);
+                        }
+                        
                         break;
                         
                                       
@@ -95,15 +95,6 @@
                     case "procesar-edit-diag-idea":
                     $this->diagnosticoIdea->editarFormDiagnosticoIdea($_POST);
                         break;
-
-                    case "seleccionar-consultar-diagnostico-idea":
-                    if($_POST["Num_consecutivo"]==="0"){
-                        $this->diagnosticoIdea->ventanaConsultarDiag();
-                    }else{
-                        $this->diagnosticoIdea->consultarForm($_POST["Num_consecutivo"]);
-                    }
-                    
-                    break;
                            
                 default:
                           
