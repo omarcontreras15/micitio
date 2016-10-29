@@ -158,52 +158,35 @@
             $this->showView($this->view);
         }
 
-        public function ventanaEditarDiag(){
+       public function ventanaConsultarDiag(){
             $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
-            $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Diagnostico Idea");
-            $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-            $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-            $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Editar diagnostico de la idea");
-            $this->view = $this->renderView($this->view, "{{PLACEHOLDER}}", "Ingrese el numero de la cedula");
-            $this->view = $this->renderView($this->view, "{{TIPO_OPERACION}}", "EDITAR");
-            $this->showView($this->view);    
-
-        }
-         public function ventanaConsultarDiag(){
-            $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
+            $menu = $this->getTemplate("./app/views/components/menu-login.html");
             $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
-            $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+            $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
             $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
             $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
-            $this->view = $this->renderView($this->view, "{{PLACEHOLDER}}", "Ingrese el numero de la cedula");
-            $this->view = $this->renderView($this->view, "{{TIPO_OPERACION}}", "CONSULTAR");
-            $this->showView($this->view);    
+            $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
+            $array=$this->diagnosticoIdeaModel->consultarDiagIdea();
+            $sizeArray=sizeof($array);
+            $option="";
+            $elementotabla = $this->getTemplate("./app/views/components/elemento-tabla.html");
 
-        }
-
-     public function consultarCcDiagIdea($cc){
-           $array=$this->diagnosticoIdeaModel->consultarCcDiagIdea($cc);
-           $sizeArray=sizeof($array);
-           $option="";
-          $form=$form=$this->getTemplate("./app/views/components/form-ventana-diag-idea.html");
-         
-           $form = $this->renderView($form, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
-           $form = $this->renderView($form, "{{RUTA}}","seleccionar-consultar-diagnostico-idea");
-           $form = $this->renderView($form, "{{VALOR_BOTON}}","CONSULTAR DIAGNOSTICO IDEA");
-
-            $form=$this->renderView($form, "{{TAMANIO_ARRAY}}",$sizeArray+1);
            if($sizeArray>0){
-             foreach($array as $element){              
-                 list($fecha)=split(" ", $element["Fecha"], 2);
-                $option=$option."<option value='".$element["Num_consecutivo"]."'>01-000".$element["Num_consecutivo"]."/".$fecha."/".$element["Idea"]."</option>";  
+           foreach($array as $element) {
+                $temp = $elementotabla;
+                $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
+                $temp = $this->renderView($temp, "{{NOMBRES}}", $element['Nombres']);
+                $temp = $this->renderView($temp, "{{APELLIDOS}}", $element['Apellidos']);
+                $temp = $this->renderView($temp, "{{CC}}", $element['CC']);
+                $temp = $this->renderView($temp, "{{IDEA}}", $element['Idea']);
+                $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
+                $option .= $temp;
             }
-            $form=$this->renderView($form, "{{OPTION}}",$option);
-            echo $form;
+            $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
            }else{
                echo "<h2>No Existen Diagnosticos</h2>";
-                  
            }
-          
+            $this->showView($this->view);    
 
         }
 
