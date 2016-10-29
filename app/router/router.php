@@ -38,7 +38,7 @@
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                        $this->diagnosticoIdea->editarForm($_GET["Num_consecutivo"]);
+                            $this->diagnosticoIdea->editarForm($_GET["Num_consecutivo"]);
                         }
                         break;
 
@@ -62,7 +62,7 @@
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                         $this->diagnosticoIdea->consultarForm($_GET["Num_consecutivo"]);       
+                            $this->diagnosticoIdea->consultarForm($_GET["Num_consecutivo"]);       
                         } 
                         break;
 
@@ -97,7 +97,12 @@
                         break;
 
                     case "seleccionar-consultar-diagnostico-idea":
-                    $this->diagnosticoIdea->consultarForm($_POST["Num_consecutivo"]);
+                    if($_POST["Num_consecutivo"]==="0"){
+                        $this->diagnosticoIdea->ventanaConsultarDiag();
+                    }else{
+                        $this->diagnosticoIdea->consultarForm($_POST["Num_consecutivo"]);
+                    }
+                    
                     break;
                            
                 default:
