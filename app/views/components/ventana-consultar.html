@@ -1,0 +1,34 @@
+<link href="public/css/ventana-consultar.css" rel='stylesheet' type='text/css'/>
+ <link href="public/css/style.css" rel='stylesheet' type='text/css'/>
+ <div class="main">
+           <form action='index.php' id="consultar_cc" method='post' class="container contact">
+               <h2>{{TITULO_VENTANA}}</h2>
+           <p style='font-weight: bold;'>{{TITULO2}}</p><br>
+           <input type='hidden' name='mode' value='seleccionar-consultar-diagnostico-idea'>
+           <input id="Num_consecutivo" name="Num_consecutivo" type="hidden">
+           <table id="example" class="table table-bordered table-hover">
+                <thead>
+                    <th>N°</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>C.C.</th>
+                    <th>Idea</th>
+                    <th>Fecha</th>
+                </thead>
+                <tbody align="center">
+                {{OPTION}}
+                </tbody>
+                <tfoot>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>C.C.</th>
+                    <th>Idea</th>
+                    <th>Fecha</th>
+                </tfoot>
+           </table>
+           <input id="consultar" type="submit" value="Consultar">
+		    </form>	
+
+</div>
+    
