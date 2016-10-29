@@ -1358,11 +1358,9 @@ h1.title-header {
 	font-size: 10px;
 }
 .contact {
-    	/*background-image: url("../images/bg-form.jpg");*/
 	padding: 0 1em 0;
 }
 .contact2{
-	/*background-image: url("../images/bg-form.jpg");*/
 	background-color: #ffffff;
 	padding:0 2em 0;
 	border-top: 1px solid #eee;
@@ -1384,7 +1382,9 @@ h1.title-header {
 }
 }
 
-/* estilos propios*/
+/* 
+Estilos propios 
+*/
 
 .container-fixed {
 	max-width: 100%;
@@ -1486,4 +1486,49 @@ tfoot tr th input[type="text"] {
 }
 tr.active, tr.active td {
     background-color:rgba(87, 149, 38, 0.2) !important;
+}
+.titulo-ventana-consultar{
+	padding:20px;
+	background-color:#579526;
+	color:white;
+	padding-left:55px;
+	font-size:35px;
+	text-align: auto;
+	text-transform: uppercase;
+}
+
+.subtmit-consultar {
+	margin: 30px 0px 50px 0px;
+    padding:15px 0px;
+	border: none;
+	width:100%;
+	outline: none;
+    font-size: 20px;
+	letter-spacing: 2px;
+	font-weight: 600;
+	color: #fff;
+	background-color: #9ccc65;
+	border-radius:3px;
+	transition: 0.5s all;
+	cursor:pointer;
+	webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+.subtmit-consultar:hover {
+	background-color:#579526;
+}
+
+.contentStyle{
+  border-radius: 20px; border: 1px solid #999;      
+   background-color: #f2fff2;
+}
+
+
+.titleStyle{
+   border-radius: 20px;
+   border: 1px solid #f4fff7;
+   border-color: #088A08;
+    
 }
