@@ -111,7 +111,7 @@
 				<p>Paso 1</p>
 			</div>
 			<div class="stepwizard-step">
-				<button href="#step-2" type="button" class="btn btn-default btn-circle" disabled>2</button>
+				<button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-default btn-circle" disabled>2</button>
 				<p>Paso 2</p>
 			</div>
 			<div class="stepwizard-step">
@@ -309,16 +309,19 @@
 </div>
 <script>
  //array que guarda el numero de filas que tiene cada tabla de objetivos
- var array=new Array();
- var entro=false;
+ var array;
+ var entro;
  var trTarea;
   //funcion para que se ejecute el script cuando termine de cargar el html
  $(document).ready(function () {
 	 var trResultados=$("#resultados-plan-accion").html();
 	 var contFilasResultados=1;
 	 //agregar evento de clic al boton de guardar soluciones 
-	 $("#boton-soluciones").on("click",function(){
+	 $("#boton-soluciones2").on("click",function(){ 
 		var cont=0;
+		$("#tablas-objetivos").empty();
+		array=new Array();
+		entro=false;
 		//aqui recorro todos los textarea de la tabla problemas 
 		// y por cada uno creo una tabla de objetivos 
 		$(".textCuadrado.soluciones").each(function(){	
