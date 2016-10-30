@@ -79,6 +79,20 @@ class DiagnosticoEmpresaModel extends Model {
         }
         return $array;
     }
+//EMPRESA
+    public function consultarEmpresa(){
+        $this->connect();
+        $consulta = "SELECT emp_nit, emp_nombre FROM empresa";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while($row = mysqli_fetch_array($query)){
+            array_unshift($array, $row);
+        }
+        return $array;
+    }
+
+    
 
 }
 

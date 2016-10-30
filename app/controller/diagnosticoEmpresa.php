@@ -7,18 +7,20 @@ class DiagnosticoEmpresa extends Controller {
 
     private $diagnosticoEmpresaModel;
     private $view;
+    private $menu;
 
 
     public function __construct() {
         $this->diagnosticoEmpresaModel= new diagnosticoEmpresaModel();
         $this->view = $this->getTemplate("./app/views/index.html");
+        $this->menu = $this->getTemplate("./app/views/components/menu-login.html");
+        
     }
 
     public function agregarDiagnosticoEmpresa(){
         $form = $this->getTemplate("./app/views/DiagnosticoEmpresa/diagnosticoEmpresa.html");
-        $menu = $this->getTemplate("./app/views/components/menu-login.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Diagnostico Empresa");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->diagnosticoEmpresaModel->consultarNombreAsesor());
         $this->showView($this->view);    
@@ -46,10 +48,9 @@ class DiagnosticoEmpresa extends Controller {
     public function editarForm($num_consecutivo){
         $row = $this->diagnosticoIdeaModel->consultarForm($num_consecutivo);
         $form= $this->getTemplate("./app/views/DiagnosticoIdea/editarDIdea.html");
-        $menu = $this->getTemplate("./app/views/components/menu-login.html");
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{TITULO}}", "Editar Diagnostico Idea");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view,"{{Num_consecutivo}}" ,$num_consecutivo);
         $this->llenarForm($row);
 
@@ -57,11 +58,10 @@ class DiagnosticoEmpresa extends Controller {
 
     public function consultarForm($num_consecutivo){
         $row = $this->diagnosticoIdeaModel->consultarForm($num_consecutivo);
-        $form= $this->getTemplate("./app/views/DiagnosticoIdea/consultarDIdea.html");
-        $menu = $this->getTemplate("./app/views/components/menu-login.html");
+        $form= $this->getTemplate("./app/views/DiagnosticoIdea/consultarDIdea.html");        
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{TITULO}}", "Consultar Diagnostico Idea");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         foreach($row as $clave=>$valor){
             $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
         }
@@ -165,10 +165,9 @@ class DiagnosticoEmpresa extends Controller {
     }
 
     public function ventanaEditarDiag(){
-        $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
-        $menu = $this->getTemplate("./app/views/components/menu-login.html");
+        $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");        
         $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Diagnostico Idea");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
         $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Editar diagnostico de la idea");
         $this->view = $this->renderView($this->view, "{{PLACEHOLDER}}", "Ingrese el numero de la cedula");
@@ -177,10 +176,9 @@ class DiagnosticoEmpresa extends Controller {
 
     }
     public function ventanaConsultarDiag(){
-        $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
-        $menu = $this->getTemplate("./app/views/components/menu-login.html");
+        $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");        
         $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
         $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
         $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
@@ -243,9 +241,40 @@ class DiagnosticoEmpresa extends Controller {
             echo "<h2>No Existen Diagnosticos</h2>";
 
         }
+    }
+
+
+    public function seleccionarEmpresa(){
+        $ventana = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/tabla-empresas.html");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Empresa");
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+        $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
+        $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la Empresa");
+        $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione la empresa a la que va a realizar el diagnóstico.");
+        $array = $this->diagnosticoEmpresaModel->consultarEmpresa();
+        $sizeArray = sizeof($array);
+        $option = "";
+        $elementotabla = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/empresas-tabla.html");
+
+        if($sizeArray>0){
+        foreach($array as $element) {
+            $temp = $elementotabla;
+            $temp = $this->renderView($temp, "{{NIT}}", $element['emp_nit']);
+            $temp = $this->renderView($temp, "{{NOMBRE}}", $element['emp_nombre']);
+            $option .= $temp;
+        }
+        $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
+        }else{
+            $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existe Ninguna Empresa</h2>");
+        }
+        $this->showView($this->view);  
+
 
 
     }
+
+
+
 
 
 }

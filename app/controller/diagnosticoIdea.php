@@ -213,7 +213,7 @@
             }
             $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
            }else{
-               $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existen Ningun Emprendedor</h2>");
+               $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existe Ningun Emprendedor</h2>");
            }
             $this->showView($this->view);   
 

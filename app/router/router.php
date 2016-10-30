@@ -54,7 +54,7 @@
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                            $this->diagnosticoEmpresa->agregarDiagnosticoEmpresa();        
+                            $this->diagnosticoEmpresa->seleccionarEmpresa();        
                         } 
                         break;
 
@@ -79,6 +79,13 @@
                             $this->diagnosticoIdea->seleccionarEmprendedor();
                         }else{
                             $this->diagnosticoIdea->agregarDiagnosticoIdea($_GET["id"]);
+                        }
+
+                        case "seleccionar-empresa":
+                        if($_GET["id"]==="0"){
+                            $this->diagnosticoEmpresa->seleccionarEmpresa();
+                        }else{
+                            $this->diagnosticoEmpresa->agregarDiagnosticoEmpresa($_GET["id"]);
                         }
 
 

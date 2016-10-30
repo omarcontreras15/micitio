@@ -1,0 +1,26 @@
+ <div class="main">
+           <form action='index.php' id="consultar_cc" method='get' class="container contact">
+              <br>
+               <h2 class="titulo-ventana-consultar">{{TITULO_VENTANA}}</h2>
+           <p style='font-weight: bold;'>{{TITULO2}}</p><br>
+           <input type='hidden' name='mode' value='seleccionar-empresa'>
+           <input id="id" name="id" type="hidden" value="0">
+           	<div class="table-responsive">
+           <table id="example" class="table table-bordered table-hover">
+                <thead> 
+                    <th>NIT</th>
+                    <th>Nombre Comercial</th>
+                </thead>
+                <tbody align="center">
+                {{OPTION}}
+                </tbody>
+                <tfoot>
+                    <th>NIT</th>
+                    <th>Nombre</th>
+                </tfoot>
+           </table>
+           	</div>
+           <input class="subtmit-consultar" id="consultar" type="submit" value="Agregar diagnostico">
+		    </form>	
+
+</div>

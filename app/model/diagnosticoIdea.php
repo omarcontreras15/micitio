@@ -80,6 +80,7 @@ class diagnosticoIdeaModel extends Model {
         return $array;
     }
 
+    //CLIENTE
     public function consultarEmprendedor(){
         $this->connect();
         $consulta = "SELECT cl_cedula, cl_nombre, cl_apellido FROM cliente";
