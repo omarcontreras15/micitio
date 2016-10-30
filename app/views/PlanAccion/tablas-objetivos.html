@@ -1,0 +1,40 @@
+<div class="table-responsive">
+	<div class="iconos-add-delete">
+		<span>Añadir tarea </span><a onclick="agregarTarea({{NUMERO_OBJETIVO}})"><img id="agregar-resultados-plan-accion" src="./public/images/add.png" /></a>
+		<span>&nbsp&nbsp&nbsp Eliminar tarea </span><img id="eliminar-resultados-plan-accion" src="./public/images/delete.png"
+		/>
+	</div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Objetivo {{NUMERO_OBJETIVO}}</th>
+				<th colspan="2">{{OBJETIVO}}
+				</th>
+
+			</tr>
+			<tr>
+				<th>FECHA DE LA REUNION (D/M/A)</th>
+				<th colspan="2"><input class="textCuadrado" type="date" name=""></th>
+			</tr>
+			<tr>
+				<th>FECHA PRÓXIMA REUNIÓN (D/M/A)</th>
+				<th colspan="2"><input class="textCuadrado" type="date" name=""></th>
+			</tr>
+		</thead>
+		<thead>
+			<th>N°</th>
+			<th>TAREAS</th>
+			<th>FECHA DE ENTREGA (D/M/A)</th>
+			</tr>
+		</thead>
+		<tbody id="fila-tarea-{{NUMERO_OBJETIVO}}">
+			<tr>
+				<th scope="row">{{NUMERO_TAREA}}</th>
+				<td><textarea class="textCuadrado" rows="3" name="%{{NUMERO_OBJETIVO}}%-tarea-{{NUMERO_TAREA}}" placeholder="Ingrese las tareas"></textarea></td>
+				<td><input class="textCuadrado" type="date" name=""></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br>
+<hr><br>
