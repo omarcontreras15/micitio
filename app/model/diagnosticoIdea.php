@@ -80,6 +80,27 @@ class diagnosticoIdeaModel extends Model {
         return $array;
     }
 
+    public function consultarEmprendedor(){
+        $this->connect();
+        $consulta = "SELECT cl_cedula, cl_nombre, cl_apellido FROM cliente";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while($row = mysqli_fetch_array($query)){
+            array_unshift($array, $row);
+        }
+        return $array;
+    }
+
+    public function consultarDatosEmprendedor($cc){
+        $this->connect();
+        $consulta = "SELECT cl_cedula, cl_nombre, cl_apellido, cl_telefono, cl_celular, cl_cedula FROM cliente WHERE cl_cedula = ".$cc;
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row= mysqli_fetch_array($query);
+        return $row;
+    }
+
 }
 
 ?>

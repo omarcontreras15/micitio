@@ -30,7 +30,7 @@
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();  
                         }else{
-                            $this->diagnosticoIdea->agregarDiagnosticoIdea();        
+                            $this->diagnosticoIdea->seleccionarEmprendedor();        
                         } 
                       break;
 
@@ -65,14 +65,23 @@
                          $this->planAccion->agregarPlanAccion();   
                         }       
                         break;
+                        
                         case "seleccionar-consultar-diagnostico-idea":
-                        if($_GET["Num_consecutivo"]==="0"){
+                        if($_GET["id"]==="0"){
                             $this->diagnosticoIdea->ventanaConsultarDiag();
                         }else{
-                            $this->diagnosticoIdea->consultarForm($_GET["Num_consecutivo"]);
-                        }
-                        
+                            $this->diagnosticoIdea->consultarForm($_GET["id"]);
+                        }                        
                         break;
+
+                        case "seleccionar-emprendedor":
+                        if($_GET["id"]==="0"){
+                            $this->diagnosticoIdea->seleccionarEmprendedor();
+                        }else{
+                            $this->diagnosticoIdea->agregarDiagnosticoIdea($_GET["id"]);
+                        }
+
+
                         
                                       
                 default:

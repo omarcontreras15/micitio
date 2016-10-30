@@ -149,18 +149,18 @@
                                         <div class="row">
 
                                             <div class="col-md-2"><label>Nombres:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Nombres" required></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="Nombres" value="{{cl_nombre}}" disabled></div>
                                             <div class="col-md-2"><label>Apellidos:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Apellidos" required></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="Apellidos" value="{{cl_apellido}}" disabled></div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-2"><label>CC:</label></div>
-                                            <div class="col-md-4" ><input type="number" name="CC" class="form-control" min="0" required ></div>
+                                            <div class="col-md-4" ><input type="text" name="CC" class="form-control" min="0" value="{{cl_cedula}}" disabled ></div>
 
 
                                             <div class="col-md-3"><label>Posicion que asumira en la empresa:</label></div>
-                                            <div class="col-md-3"><select class="form-control" name="Posicion">
+                                            <div class="col-md-3"><select class="form-control" name="Posicion" required>
                                                 <option value="dueño">Dueño</option>
                                                 <option value="socio">Socio</option>
                                                 <option value="otro">Otro</option>
@@ -169,9 +169,9 @@
                                         <br> 
                                         <div class="row">
                                             <div class="col-md-2"><label>Numero telefonico:</label></div>
-                                            <div class="col-md-4"><input type="number" name="Telefono" class="form-control" min="0"></div>
+                                            <div class="col-md-4"><input type="text" name="Telefono" class="form-control" value="{{cl_telefono}}" disabled></div>
                                             <div class="col-md-2"><label>Celular:</label></div>
-                                            <div class="col-md-4"><input type="number" class="form-control" name="Celular" min="0"></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="Celular" value="{{cl_celular}}" disabled></div>
                                         </div>
 
 
