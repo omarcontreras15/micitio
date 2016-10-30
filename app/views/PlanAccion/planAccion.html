@@ -308,48 +308,86 @@
 </div>
 </div>
 <script>
- //funcion para que se ejecute el script cuando termine de cargar el html
- var contFilasTareas=1;
+ //array que guarda el numero de filas que tiene cada tabla de objetivos
  var array=new Array();
+ var entro=false;
+ var trTarea;
+  //funcion para que se ejecute el script cuando termine de cargar el html
  $(document).ready(function () {
 	 var trResultados=$("#resultados-plan-accion").html();
 	 var contFilasResultados=1;
+	 //agregar evento de clic al boton de guardar soluciones 
 	 $("#boton-soluciones").on("click",function(){
 		var cont=0;
+		//aqui recorro todos los textarea de la tabla problemas 
+		// y por cada uno creo una tabla de objetivos 
 		$(".textCuadrado.soluciones").each(function(){	
+			//obtengo el valor del textarea
 			var solucion=$(this).val();
+			//obtengo la plantilla para agregar las tablas de objetivos 
 			jQuery.get('./app/views/PlanAccion/tablas-objetivos.html', function(data) {
 				cont++;
+				//agrego el valor inicial de 1 fila en el array de las filas de los objetivos
 				array.push(1);
+				//reemplazo los valores en la plantilla que lei anteriormente con jQuery
 				var tablas= data.replace(/{{OBJETIVO}}/gi,solucion);
 				tablas= tablas.replace(/{{NUMERO_TAREA}}/gi,1);
 				tablas= tablas.replace(/{{NUMERO_OBJETIVO}}/gi,cont);
+				//agrego las tablas al div con id tablas-objetivos con la funcion append de jQuery
 				$("#tablas-objetivos").append(tablas);
-		});
-		});
+
+				//agrego el evento al icono de agregar tarea de cada una de las tablas de objetivos
+				$("#"+cont+"-agregar-tarea").on("click", function(){
+					//obtengo la id del icono agregar
+					var id=$(this).attr("id");
+					//obtengo el numero de la tabla objetivo asociado al icono 
+					var num=parseInt(id.substring(0,id.indexOf("-")));
+					//verifico que sea la primera vez que le clic para poder tomar la plantilla de la fila
+					if(!entro){
+					//obtengo el html de la fila de la tarea
+					trTarea=$("#1-fila-tarea").html();
+					entro=true;
+					}
+				//sumo +1 a la contador de la fila de la tabla a la que se le quiere añadir una fila
+				array[num-1]=array[num-1]+1;
+				//remplazo los valores en la platilla
+				var html= trTarea.replace(/1/gi,array[num-1]);
+				html= html.replace(/{{NUMERO_OBJETIVO}}/gi,num);
+				//agrego la fila en la tabla objetivo numero n
+				$("#"+num+"-fila-tarea").append(html);
+			
+									});
+					//agrego el evento al icono de eliminar tarea de cada una de las tablas de objetivos
+				$("#"+cont+"-eliminar-tarea").on("click", function(){
+					//obtengo la id del icono elimar
+					var id=$(this).attr("id");
+					//obtengo el numero de la tabla objetivo asociado al icono 
+					var num=parseInt(id.substring(0,id.indexOf("-")));
+					//verifico que el numero de filas a borrar sean superior a 1
+					if(array[num-1]>1){
+					tbody=$("#"+num+"-fila-tarea tr:last-child").remove();
+					array[num-1]=array[num-1]-1;
+
+					}
+									});
+							});
+				});
+		
 	 });
-	 
+
+	 //agrego el evento al icono de agregar resultados de plan accion 
 	$("#agregar-resultados-plan-accion").on("click", function(){
 		  contFilasResultados++;
 		  var html= trResultados.replace(/1/gi,contFilasResultados);
 		  $("#resultados-plan-accion").append(html);
 	 });
-
+	  //eliminar el evento al icono de agregar resultados de plan accion 
 	 $("#eliminar-resultados-plan-accion").on("click", function(){
+		//verifico que el numero de filas a borrar sean superior a 1
 		  if(contFilasResultados>1){
 			  $("#fila-resultados-"+contFilasResultados).remove();  
 			  contFilasResultados--;
 		  }
 	 });
-
   });
-   function agregarTarea(num){
-	var trTarea=$("#fila-tarea-1").html();
-	array[num]=array[num]+1;
-	console.log(num);
-	var html= trTarea.replace(/1/gi,array[num]);
-	html= html.replace(/%{{NUMERO_OBJETIVO}}%/gi,num);
-	$("#fila-tarea-"+num).append(html);
-
-	 }
 </script>
