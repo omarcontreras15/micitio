@@ -159,7 +159,7 @@
         }
 
        public function ventanaConsultarDiag(){
-            $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
+            $ventana = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/ventana-consultar.html");
             $menu = $this->getTemplate("./app/views/components/menu-login.html");
             $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
             $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
@@ -169,7 +169,7 @@
             $array=$this->diagnosticoIdeaModel->consultarDiagIdea();
             $sizeArray=sizeof($array);
             $option="";
-            $elementotabla = $this->getTemplate("./app/views/components/elemento-tabla.html");
+            $elementotabla = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/elemento-tabla.html");
 
            if($sizeArray>0){
            foreach($array as $element) {
