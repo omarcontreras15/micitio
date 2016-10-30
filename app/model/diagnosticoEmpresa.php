@@ -92,6 +92,24 @@ class DiagnosticoEmpresaModel extends Model {
         return $array;
     }
 
+
+    public function consultarDatosEmpresa($nit){
+        $this->connect();
+        //FALTA POSICION
+        $consulta = "SELECT e.emp_nombre, e.emp_razons, e.emp_servicios, e.emp_telefono, e.emp_celular
+                                    FROM empresa e, contacto c, cliente p
+                                        WHERE e.emp_nit = c.emp_nit
+                                            AND c.cl_cedula = p.cl_cedula
+                                            AND e.emp_nit = ".$nit;
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row= mysqli_fetch_array($query);
+        return $row;
+
+    }
+
+
+
     
 
 }

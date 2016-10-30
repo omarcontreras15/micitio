@@ -17,15 +17,18 @@ class DiagnosticoEmpresa extends Controller {
         
     }
 
-    public function agregarDiagnosticoEmpresa(){
+    public function agregarDiagnosticoEmpresa($nit){
         $form = $this->getTemplate("./app/views/DiagnosticoEmpresa/diagnosticoEmpresa.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Diagnostico Empresa");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->diagnosticoEmpresaModel->consultarNombreAsesor());
+        $array = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($nit);
+        foreach($array as $clave=>$valor){
+            echo $clave;
+            $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+        }
         $this->showView($this->view);    
-
-
     }
 
     public function agregarFormDiagnosticoEmpresa($form){

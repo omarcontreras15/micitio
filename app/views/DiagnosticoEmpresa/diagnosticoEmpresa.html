@@ -136,18 +136,18 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-2"><label>Nombre comercial de la empresa:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Nombres" required></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="Nombre" value="{{emp_nombre}}" disabled></div>
                                             <div class="col-md-2"><label>Razón social:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Apellidos" required></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="RazonS" value="{{emp_razons}}" disabled></div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-2"><label>Nombre de contacto:</label></div>
-                                            <div class="col-md-4" ><input type="text" name="nombre_contacto" class="form-control" min="0" required ></div>
+                                            <div class="col-md-4" ><input type="text" name="nombre_contacto" class="form-control" value="{{cl_nombre}}" disabled ></div>
 
 
                                             <div class="col-md-3"><label>Posicion en la empresa:</label></div>
-                                            <div class="col-md-3"><select class="form-control" name="Posicion">
+                                            <div class="col-md-3"><select class="form-control" name="Posicion" disabled>
                                                 <option value="dueño">Legal</option>
                                                 <option value="dueño">Dueño</option>
                                                 <option value="socio">Socio</option>
@@ -157,16 +157,16 @@
                                         <br> 
                                         <div class="row">
                                             <div class="col-md-2"><label>Numeros de telefono:</label></div>
-                                            <div class="col-md-4"><input type="number" name="Telefono" class="form-control" min="0"></div>
+                                            <div class="col-md-4"><input type="text" name="Telefono" class="form-control" value="{{emp_telefono}}" disabled></div>
                                             <div class="col-md-2"><label>Teléfono móvil:</label></div>
-                                            <div class="col-md-4"><input type="number" class="form-control" name="Celular" min="0"></div>
+                                            <div class="col-md-4"><input type="text" class="form-control" name="Celular" value="{{emp_celular}}" disabled></div>
                                         </div>
                                         <br> 
                                         <div class="row">
                                             <div class="col-md-2"><label>Tiempo de operación:</label></div>
                                             <div class="col-md-4"><input type="text" name="Telefono" class="form-control" min="0"></div>
                                             <div class="col-md-2"><label>¿Cuáles son sus productos y/o servicios?</label></div>
-                                            <div class="col-md-4"><textarea type="text-area" rows="3" class="form-control" name="Celular" min="0" ></textarea></div>
+                                            <div class="col-md-4"><textarea type="text-area" rows="3" class="form-control" name="productos" disabled>{{emp_servicios}}</textarea></div>
                                         </div>
                                     </div>
                                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
