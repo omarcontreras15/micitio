@@ -187,7 +187,7 @@ class DiagnosticoEmpresa extends Controller {
         $array = $this->diagnosticoEmpresaModel->consultarDiagEmpresa();
         $sizeArray = sizeof($array);
         $option = "";
-        $elementotabla = $this->getTemplate("./app/views/components/tabla-empresa.html");
+        $elementotabla = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/tabla-empresa.html");
 
         if($sizeArray>0){
             foreach ($array as $element){

@@ -16,14 +16,17 @@
             $this->menu= $this->getTemplate("./app/views/components/menu-login.html");
         }
         
-        public function agregarDiagnosticoIdea(){
+        public function agregarDiagnosticoIdea($cc){
             $form = $this->getTemplate("./app/views/DiagnosticoIdea/diagnosticoIdea.html"); 
             $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Diagnostico Idea");
             $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
             $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
             $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->diagnosticoIdeaModel->consultarNombreAsesor());
+            $array = $this->diagnosticoIdeaModel->consultarDatosEmprendedor($cc);
+            foreach($array as $clave=>$valor){
+                $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+            }
             $this->showView($this->view);    
-            
             
         }
 
@@ -159,17 +162,16 @@
         }
 
        public function ventanaConsultarDiag(){
-            $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
-            $menu = $this->getTemplate("./app/views/components/menu-login.html");
+            $ventana = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/ventana-consultar.html");
             $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
-            $this->view = $this->renderView($this->view, "{{SESION}}", $menu);
+            $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
             $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
             $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
             $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
             $array=$this->diagnosticoIdeaModel->consultarDiagIdea();
             $sizeArray=sizeof($array);
             $option="";
-            $elementotabla = $this->getTemplate("./app/views/components/elemento-tabla.html");
+            $elementotabla = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/elemento-tabla.html");
 
            if($sizeArray>0){
            foreach($array as $element) {
@@ -186,6 +188,35 @@
                echo "<h2>No Existen Diagnosticos</h2>";
            }
             $this->showView($this->view);    
+
+        }
+
+
+        public function seleccionarEmprendedor(){
+            $ventana = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/tabla-contactos.html");
+            $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
+            $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+            $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
+            $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
+            $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el emprendedor que va a realizar el diagnóstico.");
+            $array = $this->diagnosticoIdeaModel->consultarEmprendedor();
+            $sizeArray = sizeof($array);
+            $option = "";
+            $elementotabla = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/contactos-tabla.html");
+
+            if($sizeArray>0){
+           foreach($array as $element) {
+                $temp = $elementotabla;
+                $temp = $this->renderView($temp, "{{CC}}", $element['cl_cedula']);
+                $temp = $this->renderView($temp, "{{NOMBRE}}", $element['cl_nombre']." ".$element['cl_apellido']);
+                $option .= $temp;
+            }
+            $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
+           }else{
+               $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existen Ningun Emprendedor</h2>");
+           }
+            $this->showView($this->view);   
+
 
         }
 
