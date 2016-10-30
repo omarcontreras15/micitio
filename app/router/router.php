@@ -87,9 +87,7 @@
                         }else{
                             $this->diagnosticoEmpresa->agregarDiagnosticoEmpresa($_GET["id"]);
                         }
-
-
-                        
+                        break;                        
                                       
                 default:
                       header("Location:index.php");
