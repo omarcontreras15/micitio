@@ -1532,3 +1532,7 @@ tr.active, tr.active td {
    border-color: #088A08;
     
 }
+.iconos-add-delete{
+	margin: 5px;
+	float:right;
+}
