@@ -80,6 +80,7 @@
                         }else{
                             $this->diagnosticoIdea->agregarDiagnosticoIdea($_GET["id"]);
                         }
+                        break;
 
                         case "seleccionar-empresa":
                         if($_GET["id"]==="0"){
