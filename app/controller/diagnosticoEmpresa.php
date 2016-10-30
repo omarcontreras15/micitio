@@ -25,7 +25,6 @@ class DiagnosticoEmpresa extends Controller {
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->diagnosticoEmpresaModel->consultarNombreAsesor());
         $array = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($nit);
         foreach($array as $clave=>$valor){
-            echo $clave;
             $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
         }
         $this->showView($this->view);    
