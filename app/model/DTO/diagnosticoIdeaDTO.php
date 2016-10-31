@@ -2,7 +2,6 @@
 
     class DiagnosticoIdeaDTO {
          public $Num_consecutivo;
-         public $Fecha;
          public $Asesor;
          public $CC;
          public $Posicion;
