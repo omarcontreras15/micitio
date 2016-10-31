@@ -51,6 +51,7 @@ class diagnosticoIdeaModel extends Model {
 
 
     public function agregarDificultades ($arrayDTO) {
+        echo sizeof($arrayDTO);
         for($i = 0; $i < count($arrayDTO); $i++){
             $DTO = $arrayDTO[$i];
             $this->setDificultad($DTO->num_consecutivo, $DTO->$numero, $DTO->descripcion);

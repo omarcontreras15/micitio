@@ -15,7 +15,7 @@
          public $Equipo_caracteristicas;
          public $Criterios_contratacion;
          public $Mercado_objetivo;
-         public $Mercado_objetivo_ubicacion;
+         public $Mercado_objetivo_ubica;
          public $Competidores;
          public $Factor_diferenciador;
          public $Condiciones_venta;
@@ -48,7 +48,6 @@
 
 
         public function paso2 ($Idea, $Motivacion, $Elecion, $Productos){
-            echo "entra al DTO";
             $this->Idea = $Idea;
             $this->Motivacion = $Motivacion;
             $this->Elecion = $Elecion;
@@ -62,9 +61,9 @@
             $this->Criterios_contratacion = $Criterios_contratacion;
         }
         
-        public function paso4 ($Mercado_objetivo, $Mercado_objetivo_ubicacion, $Competidores, $Factor_diferenciador, $Condiciones_venta, $Ubicacion_negocio, $Ubicacion_influencia){
+        public function paso4 ($Mercado_objetivo, $Mercado_objetivo_ubica, $Competidores, $Factor_diferenciador, $Condiciones_venta, $Ubicacion_negocio, $Ubicacion_influencia){
             $this->Mercado_objetivo = $Mercado_objetivo;
-            $this->Mercado_objetivo_ubicacion = $Mercado_objetivo_ubicacion;
+            $this->Mercado_objetivo_ubicacion = $Mercado_objetivo_ubica;
             $this->Competidores = $Competidores;
             $this->Factor_diferenciador = $Factor_diferenciador;
             $this->Condiciones_venta = $Condiciones_venta;
