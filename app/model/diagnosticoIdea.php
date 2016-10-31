@@ -74,11 +74,9 @@ class diagnosticoIdeaModel extends Model {
         $insert = "INSERT INTO `diagnostico_idea` (`Asesor`, `CC`, `Posicion`,`Idea`,`Motivacion`, `Elecion`, `Productos`, `Personal_requerido`, `Grupo_empresarial`, `Equipo_caracteristicas`, `Criterios_contratacion`, `Mercado_objetivo`, `Mercado_objetivo_ubica`, `Competidores`, `Factor_diferenciador`, `Condiciones_venta`, `Ubicacion_negocio`, `Ubicacion_influencia`, `Estrategia_precios`, `Canales_distribucion`, `Promocion_negocio`, `Costo_operacion`, `Fuentes_financiacion`, `Tiempo_retorno_inversion`, `Como_estimo_precio`, `Costo_producto`, `Asuntos_finanza`, `Desarrollo_producto`, `Tecnologia_requerida`, `Infraestructura_requerida`, `Regulaciones_operacion`, `Tipo_persona`) VALUES (".$array['Asesor'].",".$array['CC'].",". $array['Posicion'].",".$array['Idea'].",".$array['Motivacion'].",".$array['Elecion'].",".$array['Productos'].",".$array['Personal_requerido'].",".$array['Grupo_empresarial'].",".$array['Equipo_caracteristicas'].",".$array['Criterios_contratacion'].",".$array['Mercado_objetivo'].",".$array['Mercado_objetivo_ubica'].",".$array['Competidores'].",".$array['Factor_diferenciador'].",".$array['Condiciones_venta'].",".$array['Ubicacion_negocio'].",".$array['Ubicacion_influencia'].",".$array['Estrategia_precios'].",".$array['Canales_distribucion'].",".$array['Promocion_negocio'].",".$array['Costo_operacion'].",".$array['Fuentes_financiacion'].",".$array['Tiempo_retorno_inversion'].",".$array['Como_estimo_precio'].",".$array['Costo_producto'].",".$array['Asuntos_finanza'].",".$array['Desarrollo_producto'].",".$array['Tecnologia_requerida'].",".$array['Infraestructura_requerida'].",".$array['Regulaciones_operacion'].",".$array['Tipo_persona'].")";
 
         $this->query($insert);
-        echo "<script>alert('$insert');</script>";
         $consulta="SELECT * FROM diagnostico_idea order by Num_consecutivo desc LIMIT 1";
         $row=mysqli_fetch_array($this->query($consulta));
         $id= $row["Num_consecutivo"];
-        echo $id;
         $this->terminate();
         return $id;
     }
