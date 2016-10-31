@@ -589,16 +589,16 @@
 	 jQuery.get('./app/views/DiagnosticoIdea/componentes/aspectos-mejorar.html', function(data){
             tablaAspectosMejorar=data;
      });
-	 //agrego el evento al icono de agregar resultados de plan accion 
+	 //agrego el evento al icono de agregar aspecto
 	$("#agregar-aspectos-mejorar").on("click", function(){
 		  contFilasAspectos++;
 		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
 		  $("#aspectos-mejorar").append(html);
           $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
 	 });
-	  //eliminar el evento al icono de agregar resultados de plan accion 
+	  //eliminar el evento al icono de agregar aspecto
 	 $("#eliminar-aspectos-mejorar").on("click", function(){
-		//verifico que el numero de filas a borrar sean superior a 1
+		//verifico que el numero de filas a borrar sean superior a 0
 		  if(contFilasAspectos>0){
 			  $("#aspectos-mejorar tr:last-child").remove();
 			  contFilasAspectos--;
