@@ -136,57 +136,17 @@
 				<hr>
 				<br>
 				<div class="form-group">
-
-					<!-- Primera tabla-->
-					<div class="table-responsive">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>N°</th>
-									<th>PROBLEMA</th>
-									<th>CAUSA</th>
-									<th>EFECTO SOBRE LA EMPRESA</th>
-									<th>SOLUCIÓN</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr></tr>
-								<tr>
-									<th scope="row">1</th>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese el problema"></textarea></td>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese la causa"></textarea></td>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese los efectos"></textarea></td>
-									<td><textarea class="textCuadrado soluciones" rows="3" name="" placeholder="Ingrese la solución"></textarea></td>
-									
-								</tr>								
-							</tbody>
-						</table>
-					</div>
-					<div class="table-responsive">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>N°</th>
-									<th>PROBLEMA</th>
-									<th>CAUSA</th>
-									<th>EFECTO SOBRE LA EMPRESA</th>
-									<th>SOLUCIÓN</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr></tr>
-								<tr>
-									<th scope="row">1</th>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese el problema"></textarea></td>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese la causa"></textarea></td>
-									<td><textarea class="textCuadrado" rows="3" name="" placeholder="Ingrese los efectos"></textarea></td>
-									<td><textarea class="textCuadrado soluciones" rows="3" name="" placeholder="Ingrese la solución"></textarea></td>
-									
-								</tr>								
-							</tbody>
-						</table>
-					</div>
-
+				<div id="tablas-problemas" class="table-responsive">
+					<div class="iconos-add-delete">
+						<input type="hidden" id="cant-problemas" name="cant-problemas" value="{{CANT_PROBLEMAS}}"/>
+						<span>Añadir problema </span><img id="agregar-problemas" src="./public/images/add.png"/>
+						<span>&nbsp&nbsp&nbsp Eliminar problema </span><img id="eliminar-problemas" src="./public/images/delete.png"/>
+					</div><br>
+					<!-- tablas objetivos -->
+					
+					{{TABLAS_PROBLEMAS}}
+					
+				</div>
 				</div>
 
 				<button  id="boton-soluciones" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
@@ -202,7 +162,7 @@
 				<h3 style="color:#579526">DEFINICIÓN DE OBJETIVOS</h3>
 				<hr>
 				<br>
-				<div id="tablas-objetivos" class="form-group">
+				<div id="tablas-objetivos-tareas" class="form-group">
 					<!-- Aqui van las tablas de los objetivos 
 					que se insertaran de forma dinamica mediante javascript -->
 					
@@ -316,28 +276,38 @@
  $(document).ready(function () {
 	 var trResultados=$("#resultados-plan-accion").html();
 	 var contFilasResultados=1;
+	 var tablasProblemas;
+	 var tablaObjetivosTareas;
+	 //obtengo la plantilla para agregar las tablas de problemas
+			jQuery.get('./app/views/PlanAccion/componentes/tablas-problemas.html', function(data) {
+					tablasProblemas=data;
+			});
+		//obtengo la plantilla para agregar las tablas de objetivos 
+			jQuery.get('./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html', function(data) {
+				tablaObjetivosTareas=data;
+			});
+			
 	 //agregar evento de clic al boton de guardar soluciones 
 	 $("#boton-soluciones2").on("click",function(){ 
 		var cont=0;
-		$("#tablas-objetivos").empty();
+		$("#tablas-objetivos-tareas").empty();
 		array=new Array();
 		entro=false;
+		//obtengo la cantidad de soluciones ingresadas 
+		 var contSoluciones=$("#cant-problemas").attr("value");
 		//aqui recorro todos los textarea de la tabla problemas 
 		// y por cada uno creo una tabla de objetivos 
-		$(".textCuadrado.soluciones").each(function(){	
+		for(var i=1; i<=contSoluciones;i++){
 			//obtengo el valor del textarea
-			var solucion=$(this).val();
-			//obtengo la plantilla para agregar las tablas de objetivos 
-			jQuery.get('./app/views/PlanAccion/componentes/tablas-objetivos.html', function(data) {
-				cont++;
+			var solucion=$("#soluciones-"+i).val();
 				//agrego el valor inicial de 1 fila en el array de las filas de los objetivos
 				array.push(1);
 				//reemplazo los valores en la plantilla que lei anteriormente con jQuery
-				var tablas= data.replace(/{{OBJETIVO}}/gi,solucion);
+				var tablas= tablaObjetivosTareas.replace(/{{OBJETIVO}}/gi,solucion);
 				tablas= tablas.replace(/{{NUMERO_TAREA}}/gi,1);
-				tablas= tablas.replace(/{{NUMERO_OBJETIVO}}/gi,cont);
-				//agrego las tablas al div con id tablas-objetivos con la funcion append de jQuery
-				$("#tablas-objetivos").append(tablas);
+				tablas= tablas.replace(/{{NUMERO_OBJETIVO}}/gi,i);
+				//agrego las tablas al div con id tablas-objetivos-tareas con la funcion append de jQuery
+				$("#tablas-objetivos-tareas").append(tablas);
 
 				//agrego el evento al icono de agregar tarea de cada una de las tablas de objetivos
 				$("#"+cont+"-agregar-tarea").on("click", function(){
@@ -368,13 +338,12 @@
 					var num=parseInt(id.substring(0,id.indexOf("-")));
 					//verifico que el numero de filas a borrar sean superior a 1
 					if(array[num-1]>1){
-					tbody=$("#"+num+"-fila-tarea tr:last-child").remove();
+					$("#"+num+"-fila-tarea tr:last-child").remove();
 					array[num-1]=array[num-1]-1;
 
 					}
 									});
-							});
-				});
+		}
 		
 	 });
 
@@ -390,6 +359,28 @@
 		  if(contFilasResultados>1){
 			  $("#fila-resultados-"+contFilasResultados).remove();  
 			  contFilasResultados--;
+		  }
+	 });
+
+	  //agrego el evento al icono de agregar problemas
+	$("#agregar-problemas").on("click", function(){
+		var contProblemas=parseInt($("#cant-problemas").attr("value"));
+		  contProblemas++;
+		  $("#cant-problemas").attr("value",contProblemas);
+		  var html= tablasProblemas.replace(/{{NUM_PROBLEMA}}/gi,contProblemas);
+		  $("#tablas-problemas").append(html);
+	 });
+	  //eliminar el evento al icono de agregar resultados de plan accion 
+	 $("#eliminar-problemas").on("click", function(){
+		 var contProblemas=parseInt($("#cant-problemas").attr("value"));
+		  
+		//verifico que el numero de tablas a borrar sean superior a 1
+		//console.log(contProblemas);
+		  if(contProblemas>1){
+			  contProblemas--;
+			   $("#cant-problemas").attr("value",contProblemas);
+			  $("#tablas-problemas table:last-child").remove();
+			   
 		  }
 	 });
   });
