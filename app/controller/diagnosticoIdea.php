@@ -138,8 +138,6 @@
         public function llenarForm($row){
             $this->view = $this->renderView($this->view,"{{Asesor}}" , $row['Asesor']);
             $this->view = $this->renderView($this->view,"{{Fecha}}" , $row['Fecha']);
-            $this->view = $this->renderView($this->view,"{{Nombres}}" , $row['Nombres']);
-            $this->view = $this->renderView($this->view,"{{Apellidos}}" , $row['Apellidos']);
             $this->view = $this->renderView($this->view,"{{CC}}" , $row['CC']);
             
             //select posicion
@@ -157,8 +155,7 @@
                 $this->view = $this->renderView($this->view,'{{opt_otro}}"' , '"selected');
             }
 
-            $this->view = $this->renderView($this->view,"{{Telefono}}" , $row['Telefono']);
-            $this->view = $this->renderView($this->view,"{{Celular}}" , $row['Celular']);
+            
             $this->view = $this->renderView($this->view,"{{Idea}}" , $row['Idea']);
             $this->view = $this->renderView($this->view,"{{Motivacion}}" , $row['Motivacion']);
             $this->view = $this->renderView($this->view,"{{Elecion}}" , $row['Elecion']);
@@ -225,6 +222,16 @@
             $this->view = $this->renderView($this->view,"{{Regulaciones_operacion}}" , $row['Regulaciones_operacion']);
             $this->view = $this->renderView($this->view,"{{Tipo_persona}}" , $row['Tipo_persona']);
             $this->view = $this->renderView($this->view,"{{Aspectos_mejorar}}" , $row['Aspectos_mejorar']);
+
+            //datos del cliente
+            $client = $this->diagnosticoIdeaModel->consultarDatosEmprendedor($row['CC']);
+            foreach($client as $clave=>$valor){
+               $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+            }
+
+
+
+
             $this->showView($this->view);
         }
 
@@ -244,10 +251,11 @@
            foreach($array as $element) {
                 $temp = $elementotabla;
                 $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{NOMBRE}}", $element['cl_nombre']." ".$element['cl_apellido']);
                 $temp = $this->renderView($temp, "{{CC}}", $element['CC']);
                 $temp = $this->renderView($temp, "{{IDEA}}", $element['Idea']);
                 $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
+                $client = $this->diagnosticoIdeaModel->consultarDatosEmprendedor($element['CC']);
+                $temp = $this->renderView($temp, "{{NOMBRE}}", $client['cl_nombre']." ".$client['cl_apellido']);
                 $option .= $temp;
             }
             $this->view=$this->renderView($this->view, "{{OPTION}}",$option);

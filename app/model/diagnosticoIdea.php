@@ -95,7 +95,7 @@ class diagnosticoIdeaModel extends Model {
     //retorna una lista con los datos de los diagnosticos para la tabla de seleccionar diagnostico a consultar
     public function consultarDiagIdea(){
         $this->connect();
-        $consulta = "SELECT d.Num_consecutivo, c.cl_nombre, c.cl_apellido, d.CC, d.Idea, d.Fecha FROM diagnostico_idea d, cliente c, contacto p WHERE d.CC = p.cl_cedula AND p.cl_cedula = c.cl_cedula";
+        $consulta = "SELECT Num_consecutivo, CC, Idea, Fecha FROM diagnostico_idea";
         $query = $this->query($consulta);
         $this->terminate();
         $array=array();
