@@ -61,14 +61,7 @@ class diagnosticoIdeaModel extends Model {
 
     public function agregarForm($DTO){
         $this->connect();
-        foreach($form as $clave => $valor){
-            if($valor==""){
-                $form[$clave]="NULL";
-            }else{
-                $form[$clave]="'".$valor."'";
-            }
-        }
-
+        
         $insert = "INSERT INTO `diagnostico_idea` (`Asesor`, Fecha, `CC`, `Posicion`,`Idea`,`Motivacion`, `Elecion`, `Productos`, `Personal_requerido`, `Grupo_empresarial`, `Equipo_caracteristicas`, `Criterios_contratacion`, `Mercado_objetivo`, `Mercado_objetivo_ubica`, `Competidores`, `Factor_diferenciador`, `Condiciones_venta`, `Ubicacion_negocio`, `Ubicacion_influencia`, `Estrategia_precios`, `Canales_distribucion`, `Promocion_negocio`, `Costo_operacion`, `Fuentes_financiacion`, `Tiempo_retorno_inversion`, `Como_estimo_precio`, `Costo_producto`, `Asuntos_finanza`, `Desarrollo_producto`, `Tecnologia_requerida`, `Infraestructura_requerida`, `Regulaciones_operacion`, `Tipo_persona`) VALUES ($DTO->Asesor, $DTO->Fecha, $DTO->Posicion, $DTO->idea, $DTO->Motivacion, $DTO->Elecion, $DTO->Productos, $DTO->Personal_requerido, $DTO->Grupo_empresarial, $DTO->Equipo_caracteristicas, $DTO->Criterios_contratacion, $DTO->Mercado_objetivo, $DTO->Mercado_objetivo_ubica, $DTO->Competidores, $DTO->Factor_diferenciador, $DTO->Condiciones_venta, $DTO->Ubicacion_negocio, $DTO->Ubicacion_influencia, $DTO->Estrategia_precios, $DTO->Canales_distribucion, $DTO->Promocion_negocio, $DTO->Costo_operacion, $DTO->Fuentes_financiacion, $DTO->Tiempo_retorno_inversion, $DTO->Como_estimo_precio, $DTO->Costo_producto, $DTO->Asuntos_finanza, $DTO->Desarrollo_producto, $DTO->Tecnologia_requerida, $DTO->Infraestructura_requerida, $DTO->Regulaciones_operacion, $DTO->Tipo_persona)";
 
         $this->query($insert);
