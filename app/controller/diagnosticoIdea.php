@@ -86,9 +86,13 @@
             $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
             //ACA SE AGREGAN LAS DIFICULTADES
             $arrayDTO = array();
+            $j = 1;
             for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
-                $DTO = new DificultadDTO ($id, $i, $form['aspectos-mejorar-'.$i]);
-                array_push($arrayDTO,$DTO);
+                if($form['aspectos-mejorar-'.$i]!=null){
+                    $DTO = new DificultadDTO ($id, $j, $form['aspectos-mejorar-'.$i]);
+                    array_push($arrayDTO,$DTO);
+                    $j++;
+                }                
             }
             if(sizeof($arrayDTO)>0)$this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
             echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php';</script>";
