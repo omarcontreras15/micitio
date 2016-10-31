@@ -32,45 +32,171 @@
             $this->showView($this->view);    
             
         }
-
-
+        
+        
         public function guardarPaso1Idea($form){
             $_SESSION['diagnosticoIdeaDTO'] = new DiagnosticoIdeaDTO($form['Asesor'],$form['CC'],$form['Posicion']);
         }
 
         public function guardarPaso2Idea($form){
+            if($form['Idea']===null){
+                $idea="NULL";
+            }else{
+                $idea=$form['Idea'];
+            }
+            if($form['Motivacion']===null){
+                $motivacion="NULL";
+            }else{
+                $motivacion=$form['Motivacion'];
+            }
+            if($form['Elecion']===null){
+                $elecion="NULL";
+            }else{
+                $elecion=$form['Elecion'];
+            }
+            if($form['Productos']===null){
+                $productos="NULL";
+            }else{
+                $productos=$form['Productos'];
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso2($form['Idea'],$form['Motivacion'],$form['Elecion'],$form['Productos']);
+            $this->diagnosticoIdeaDTO->paso2($idea, $motivacion, $elecion, $productos);
+            echo $this->diagnosticoIdeaDTO->Idea;
         }
 
         public function guardarPaso3Idea($form){
+            if($form['Personal_requerido']===null){
+                $personal="NULL";
+            }else{
+                $personal=$form['Personal_requerido'];
+            }
+            if($form['Grupo_empresarial']===null){
+                $grupo="NULL";
+            }else{
+                $grupo=$form['Grupo_empresarial'];
+            }
+            if($form['Equipo_caracteristicas']===null){
+                $equipo="NULL";
+            }else{
+                $equipo=$form['Equipo_caracteristicas'];
+            }
+            if($form['Criterios_contratacion']===null){
+                $criterios="NULL";
+            }else{
+                $criterios=$form['Criterios_contratacion'];
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso3($form['Personal_requerido'], $form['Grupo_empresarial'], $form['Equipo_caracteristicas'], $form['Criterios_contratacion']);
+            $this->diagnosticoIdeaDTO->paso3($personal, $grupo, $equipo, $criterios);
         }
 
         public function guardarPaso4Idea($form){
+            $mercado=$form['Mercado_objetivo'];
+            $mercadoubica=$form['Mercado_objetivo_ubica'];
+            $competidores=$form['Competidores'];
+            $factor=$form['Factor_diferenciador'];
+            $condiciones=$form['Condiciones_venta'];
+            $ubicacion=$form['Ubicacion_negocio'];
+            $ubicainfluencia=$form['Ubicacion_influencia'];
+            if($mercado===null){
+                $mercado="NULL";
+            }
+            if($mercadoubica===null){
+                $mercadoubica="NULL";
+            }
+            if($competidores===null){
+                $competidores="NULL";
+            }
+            if($factor===null){
+                $factor="NULL";
+            }
+            if($condiciones===null){
+                $condiciones="NULL";
+            }
+            if($ubicacion===null){
+                $ubicacion="NULL";
+            }
+            if($ubicainfluencia===null){
+                $ubicainfluencia="NULL";
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso4($form['Mercado_objetivo'], $form['Mercado_objetivo_ubica'], $form['Competidores'], $form['Factor_diferenciador'], $form['Condiciones_venta'], $form['Ubicacion_negocio'], $form['Ubicacion_influencia']);
+            $this->diagnosticoIdeaDTO->paso4($mercado, $mercadoubica, $competidores, $factor, $condiciones, $ubicacion, $ubicainfluencia);
         }
 
         public function guardarPaso5Idea($form){
+            $estrategia=$form['Estrategia_precios'];
+            $canales=$form['Canales_distribucion'];
+            $promocion=$form['Promocion_negocio'];
+            if($form['Estrategia_precios']===null){
+                $estrategia="NULL";
+            }
+            if($form['Canales_distribucion']===null){
+                $canales="NULL";
+            }
+            if($form['Promocion_negocio']===null){
+                $promocion="NULL";
+            }
+            $this->ponerNulo($form);
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso5($form['Estrategia_precios'], $form['Canales_distribucion'], $form['Promocion_negocio']);
+            $this->diagnosticoIdeaDTO->paso5($estrategia, $canales, $promocion);
         }
 
         public function guardarPaso6Idea($form){
+            $costo=$form['Costo_operacion'];
+            $fuentes=$form['Fuentes_financiacion'];
+            $tiempo=$form['Tiempo_retorno_inversion'];
+            $como=$form['Como_estimo_precio'];
+            $costoprod= $form['Costo_producto'];
+            $asuntos=$form['Asuntos_finanza'];
+            if($form['Costo_operacion']===null){
+                $costo="NULL";
+            }
+            if($form['Fuentes_financiacion']===null){
+                $fuentes="NULL";
+            }
+            if($form['Tiempo_retorno_inversion']===null){
+                $tiempo="NULL";
+            }
+            if($form['Como_estimo_precio']===null){
+                $como="NULL";
+            }
+            if( $form['Costo_producto']===null){
+                $costoprod="NULL";
+            }
+            if($form['Asuntos_finanza']===null){
+                $asuntos="NULL";
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso6($form['Costo_operacion'], $form['Fuentes_financiacion'], $form['Tiempo_retorno_inversion'], $form['Como_estimo_precio'], $form['Costo_producto'], $form['Asuntos_finanza']);
+            $this->diagnosticoIdeaDTO->paso6($costo, $fuentes, $tiempo, $como, $costoprod, $asuntos);
         }
 
         public function guardarPaso7Idea($form){
+            $desarrollo=$form['Desarrollo_producto'];
+            $tecnol=$form['Tecnologia_requerida'];
+            $infra=$form['Infraestructura_requerida'];
+            if($form['Desarrollo_producto']===null){
+                $desarrollo="NULL";
+            }
+            if($form['Tecnologia_requerida']===null){
+                $tecnol="NULL";
+            }
+            if($form['Infraestructura_requerida']===null){
+                $infra="NULL";
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso7($form['Desarrollo_producto'], $form['Tecnologia_requerida'], $form['Infraestructura_requerida']);
+            $this->diagnosticoIdeaDTO->paso7($desarrollo, $tecnol, $infra);
         }
 
         public function guardarPaso8Idea($form){
+            $regu=$form['Regulaciones_operacion'];
+            $tipo=$form['Tipo_persona'];
+            if($form['Regulaciones_operacion']===null){
+                $regu="NULL";
+            }
+            if($form['Tipo_persona']===null){
+                $tipo="NULL";
+            }
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $this->diagnosticoIdeaDTO->paso8($form['Regulaciones_operacion'], $form['Tipo_persona']);
+            $this->diagnosticoIdeaDTO->paso8($regu, $tipo);
         }
 
         public function agregarFormDiagnosticoIdea($form){
@@ -78,9 +204,9 @@
             $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
             //ACA SE AGREGAN LAS DIFICULTADES
             $arrayDTO = array();
-            for($i = 1; i <= $form['cant-aspectos-mejorar']; $i++){
-                $DTO = new DificultadDTO ($id, $i, $form['aspectos-mejorar-'.$i]);
-                array_push($arrayDTO,$DTO);
+            for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
+                //$DTO = new DificultadDTO ($id, $i, $form['aspectos-mejorar-1']);
+                //array_push($arrayDTO,$DTO);
             }
             $this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
             echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n $id.'); window.location='index.php';</script>";
