@@ -120,13 +120,18 @@
                                 <button href="#step-7" type="button" class="btn btn-default btn-circle" disabled>7</button>
                                 <p>Paso 7</p>
                             </div>
+                            <div class="stepwizard-step" >
+                                <button href="#step-8" type="button" class="btn btn-default btn-circle" disabled>8</button>
+                                <p>Paso 8</p>
+                            </div>
                             
                         </div>
                     </div>
                     <hr>
                     <form role="form" method="post" action="index.php" style="margin-right:50px">
                         <input type="hidden" name="mode" value="procesar-add-diag-idea">
-                        <input type="hidden" name="Asesor" value="{{ASESOR}}">
+                        <input type="hidden" name="asesor" value="{{ASESOR}}">
+                        <input type="hidden" name="id_empresa" value="{{id_empresa}}">
                         <div class="row setup-content" id="step-1" >
                             <div class="col-xs-12">
                                 <div class="col-md-12">
@@ -147,7 +152,7 @@
 
 
                                             <div class="col-md-3"><label>Posicion en la empresa:</label></div>
-                                            <div class="col-md-3"><select class="form-control" name="Posicion" disabled>
+                                            <div class="col-md-3"><select class="form-control" name="posicion_empresa">
                                                 <option value="dueño">Legal</option>
                                                 <option value="dueño">Dueño</option>
                                                 <option value="socio">Socio</option>
@@ -164,7 +169,7 @@
                                         <br> 
                                         <div class="row">
                                             <div class="col-md-2"><label>Tiempo de operación:</label></div>
-                                            <div class="col-md-4"><input type="text" name="Telefono" class="form-control" min="0"></div>
+                                            <div class="col-md-4"><input type="text" name="tiempo_operacion" class="form-control" min="0"></div>
                                             <div class="col-md-2"><label>¿Cuáles son sus productos y/o servicios?</label></div>
                                             <div class="col-md-4"><textarea type="text-area" rows="3" class="form-control" name="productos" disabled>{{emp_servicios}}</textarea></div>
                                         </div>
@@ -1238,15 +1243,34 @@
                                                     <textarea class="form-control" rows="2" name="productos/servicios" form="form1" placeholder="Ingrese la información"></textarea>
                                                 </tr>
                                             </table>
-                                            
-                                        
-                                        <hr>
+                                            <br>
                                         <h3 style="color:#579526">ASPECTOS ADICIONALES</h3>
                                         <hr>
+                                        <textarea class="form-control" rows="2" name="productos/servicios" form="form1" placeholder="Ingrese la información"></textarea>   
                                             
-                                        <textarea class="form-control" rows="2" name="productos/servicios" form="form1" placeholder="Ingrese la información"></textarea>    
-                                            
-                                        <hr>
+                                        <br>
+                                       <br>
+                                       <br>
+                                        </div> 
+                                    </div>
+
+                                    <!-- -->
+                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
+                                    
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="row setup-content" id="step-8">
+                            <div class="col-xs-12">
+                                <div class="col-md-12">
+                                    <!-- -->
+                                   
+                                    <div class="row">
+                                        <div class="col-md-12">
                                         <h3 style="color:#579526">RESUMEN DE ASPECTOS A MEJORAR</h3>
                                         <hr>
                                         <label>Liste en orden de prioridad los aspectos a mejorar, estos formarán parte del Plan de Acción/mejoramiento.</label>
