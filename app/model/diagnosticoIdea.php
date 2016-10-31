@@ -81,6 +81,7 @@ class diagnosticoIdeaModel extends Model {
         return $id;
     }
 
+    //retorna los datos del diagnostico que se consulta segun su numero consecutivo
     public function consultarForm($consecutivo){
         $this->connect();
         $consulta = "SELECT * FROM diagnostico_idea WHERE Num_consecutivo = ".$consecutivo;
@@ -91,9 +92,10 @@ class diagnosticoIdeaModel extends Model {
     }
 
 
+    //retorna una lista con los datos de los diagnosticos para la tabla de seleccionar diagnostico a consultar
     public function consultarDiagIdea(){
         $this->connect();
-        $consulta = "SELECT Num_consecutivo, Nombres, Apellidos, CC, Idea, Fecha FROM diagnostico_idea";
+        $consulta = "SELECT d.Num_consecutivo, c.cl_nombre, c.cl_apellido, d.CC, d.Idea, d.Fecha FROM diagnostico_idea d, cliente c, contacto p WHERE d.CC = p.cl_cedula AND p.cl_cedula = c.cl_cedula";
         $query = $this->query($consulta);
         $this->terminate();
         $array=array();

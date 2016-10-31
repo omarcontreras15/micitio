@@ -125,7 +125,11 @@
             foreach($row as $clave=>$valor){
                $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
             }
-             $this->showView($this->view);  
+            $client = $this->diagnosticoIdeaModel->consultarDatosEmprendedor($row['CC']);
+            foreach($client as $clave=>$valor){
+               $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+            }
+            $this->showView($this->view);  
 
         }
 
@@ -240,7 +244,7 @@
            foreach($array as $element) {
                 $temp = $elementotabla;
                 $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{NOMBRE}}", $element['Nombres']." ".$element['Apellidos']);
+                $temp = $this->renderView($temp, "{{NOMBRE}}", $element['cl_nombre']." ".$element['cl_apellido']);
                 $temp = $this->renderView($temp, "{{CC}}", $element['CC']);
                 $temp = $this->renderView($temp, "{{IDEA}}", $element['Idea']);
                 $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
@@ -248,7 +252,7 @@
             }
             $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
            }else{
-               echo "<h2>No Existen Diagnosticos</h2>";
+               $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existe Ningun Diagnóstico</h2>");
            }
             $this->showView($this->view);    
 
@@ -257,10 +261,10 @@
 
         public function seleccionarEmprendedor(){
             $ventana = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/tabla-contactos.html");
-            $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
+            $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Diagnostico Idea");
             $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
             $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-            $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
+            $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Agrega un diagnostico de idea de negocio");
             $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el emprendedor que va a realizar el diagnóstico.");
             $array = $this->diagnosticoIdeaModel->consultarEmprendedor();
             $sizeArray = sizeof($array);
