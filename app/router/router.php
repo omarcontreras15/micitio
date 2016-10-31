@@ -99,10 +99,7 @@
                     case "login":
                        $this->user->login($_POST["username"], $_POST["password"]);
                         break;
-                    case "procesar-add-diag-idea":
-                     $this->diagnosticoIdea->agregarFormDiagnosticoIdea($_POST);
-                        break;
-
+                    
                     case "consultar-cc-diag-idea":
                      $this->diagnosticoIdea->consultarCcDiagIdea($_POST["cc"]);
                         break;
@@ -110,7 +107,44 @@
                     case "procesar-edit-diag-idea":
                     $this->diagnosticoIdea->editarFormDiagnosticoIdea($_POST);
                         break;
-                           
+
+                    case "paso1-idea":
+                    $this->diagnosticoIdea->guardarPaso1Idea($_POST);
+                    break;
+
+                    case "paso2-idea":
+                    $this->diagnosticoIdea->guardarPaso2Idea($_POST);
+                    break;
+
+                    case "paso3-idea":
+                    $this->diagnosticoIdea->guardarPaso3Idea($_POST);
+                    break;
+
+                    case "paso4-idea":
+                    $this->diagnosticoIdea->guardarPaso4Idea($_POST);
+                    break;
+
+                    case "paso5-idea":
+                    $this->diagnosticoIdea->guardarPaso5Idea($_POST);
+                    break;
+
+                    case "paso6-idea":
+                    $this->diagnosticoIdea->guardarPaso6Idea($_POST);
+                    break;
+
+                    case "paso7-idea":
+                    $this->diagnosticoIdea->guardarPaso7Idea($_POST);
+                    break;
+
+                    case "paso8-idea":
+                    $this->diagnosticoIdea->guardarPaso8Idea($_POST);
+                    break;
+
+                    case "paso9-idea":
+                    $this->diagnosticoIdea->agregarFormDiagnosticoIdea($_POST);
+                    break;
+
+
                 default:
                           
                       header("Location:index.php");

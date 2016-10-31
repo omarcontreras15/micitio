@@ -38,7 +38,27 @@ class diagnosticoIdeaModel extends Model {
         $this->terminate();
     }
 
-    public function agregarForm($form){
+    public function setDificultad ($num_consecutivo, $numero, $descripcion) {
+        $this->connect();
+            echo $this->serial;
+            echo "aca";
+            $this->query("INSERT INTO lista_dificultades (num_consecutivo, numero, descripcion) 
+                             values ($num_consecutivo, $numero, $descripcion");
+            $this->terminate();
+
+    }
+
+
+
+    public function agregarDificultades ($arrayDTO) {
+        for($i = 0; $i < count($arrayDTO); $i++){
+            $DTO = $arrayDTO[$i];
+            $this->setDificultad($DTO->num_consecutivo, $DTO->$numero, $DTO->descripcion);
+        }
+    }
+
+
+    public function agregarForm($DTO){
         $this->connect();
         foreach($form as $clave => $valor){
             if($valor==""){
@@ -48,7 +68,7 @@ class diagnosticoIdeaModel extends Model {
             }
         }
 
-        $insert = "INSERT INTO `diagnostico_idea` (`Num_consecutivo`, `Asesor`, `Nombres`, `Apellidos`, `CC`, `Posicion`, `Telefono`, `Celular`, `Idea`, `Motivacion`, `Elecion`, `Productos`, `Personal_requerido`, `Grupo_empresarial`, `Equipo_caracteristicas`, `Criterios_contratacion`, `Mercado_objetivo`, `Mercado_objetivo_ubica`, `Competidores`, `Factor_diferenciador`, `Condiciones_venta`, `Ubicacion_negocio`, `Ubicacion_influencia`, `Estrategia_precios`, `Canales_distribucion`, `Promocion_negocio`, `Costo_operacion`, `Fuentes_financiacion`, `Tiempo_retorno_inversion`, `Como_estimo_precio`, `Costo_producto`, `Asuntos_finanza`, `Desarrollo_producto`, `Tecnologia_requerida`, `Infraestructura_requerida`, `Regulaciones_operacion`, `Tipo_persona`, `Aspectos_mejorar`) VALUES (NULL,".$form['Asesor'].", ".$form['Nombres'].", ".$form['Apellidos'].", ".$form['CC'].", ".$form['Posicion'].", ".$form['Telefono'].", ".$form['Celular'].", ".$form['Idea'].", ".$form['Motivacion'].", ".$form['Elecion'].", ".$form['Productos'].", ".$form['Personal_requerido'].", ".$form['Grupo_empresarial'].", ".$form['Equipo_caracteristicas'].", ".$form['Criterios_contratacion'].", ".$form['Mercado_objetivo'].",".$form['Mercado_objetivo_ubica'].", ".$form['Competidores'].", ".$form['Factor_diferenciador'].", ".$form['Condiciones_venta'].", ".$form['Ubicacion_negocio'].", ".$form['Ubicacion_influencia'].", ".$form['Estrategia_precios'].",".$form['Canales_distribucion'].",".$form['Promocion_negocio'].", ".$form['Costo_operacion'].", ".$form['Fuentes_financiacion'].", ".$form['Tiempo_retorno_inversion'].", ".$form['Como_estimo_precio'].", ".$form['Costo_producto'].", ".$form['Asuntos_finanza'].", ".$form['Desarrollo_producto'].", ".$form['Tecnologia_requerida'].", ".$form['Infraestructura_requerida'].", ".$form['Regulaciones_operacion'].",".$form['Tipo_persona'].", ".$form['Aspectos_mejorar'].")";
+        $insert = "INSERT INTO `diagnostico_idea` (`Asesor`, Fecha, `CC`, `Posicion`,`Idea`,`Motivacion`, `Elecion`, `Productos`, `Personal_requerido`, `Grupo_empresarial`, `Equipo_caracteristicas`, `Criterios_contratacion`, `Mercado_objetivo`, `Mercado_objetivo_ubica`, `Competidores`, `Factor_diferenciador`, `Condiciones_venta`, `Ubicacion_negocio`, `Ubicacion_influencia`, `Estrategia_precios`, `Canales_distribucion`, `Promocion_negocio`, `Costo_operacion`, `Fuentes_financiacion`, `Tiempo_retorno_inversion`, `Como_estimo_precio`, `Costo_producto`, `Asuntos_finanza`, `Desarrollo_producto`, `Tecnologia_requerida`, `Infraestructura_requerida`, `Regulaciones_operacion`, `Tipo_persona`) VALUES ($DTO->Asesor, $DTO->Fecha, $DTO->Posicion, $DTO->idea, $DTO->Motivacion, $DTO->Elecion, $DTO->Productos, $DTO->Personal_requerido, $DTO->Grupo_empresarial, $DTO->Equipo_caracteristicas, $DTO->Criterios_contratacion, $DTO->Mercado_objetivo, $DTO->Mercado_objetivo_ubica, $DTO->Competidores, $DTO->Factor_diferenciador, $DTO->Condiciones_venta, $DTO->Ubicacion_negocio, $DTO->Ubicacion_influencia, $DTO->Estrategia_precios, $DTO->Canales_distribucion, $DTO->Promocion_negocio, $DTO->Costo_operacion, $DTO->Fuentes_financiacion, $DTO->Tiempo_retorno_inversion, $DTO->Como_estimo_precio, $DTO->Costo_producto, $DTO->Asuntos_finanza, $DTO->Desarrollo_producto, $DTO->Tecnologia_requerida, $DTO->Infraestructura_requerida, $DTO->Regulaciones_operacion, $DTO->Tipo_persona)";
 
         $this->query($insert);
         $consulta="SELECT * FROM diagnostico_idea order by Num_consecutivo desc LIMIT 1";

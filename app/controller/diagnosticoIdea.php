@@ -2,18 +2,21 @@
 
     include_once "./app/controller/controller.php";
     include_once "./app/model/diagnosticoIdea.php";
+    include_once "./app/model/DTO/diagnosticoIdeaDTO.php";
     
     class DiagnosticoIdea extends Controller {
 
         private $diagnosticoIdeaModel;
         private $view;
         private $menu;
+        private $diagnosticoIdeaDTO;
             
 
         public function __construct() {
             $this->diagnosticoIdeaModel= new DiagnosticoIdeaModel();
             $this->view = $this->getTemplate("./app/views/index.html");
             $this->menu= $this->getTemplate("./app/views/components/menu-login.html");
+            
         }
         
         public function agregarDiagnosticoIdea($cc){
@@ -30,9 +33,50 @@
             
         }
 
+
+        public function guardarPaso1Idea($form){
+            $this->diagnosticoIdeaDTO = new DiagnosticoIdeaDTO($form['Asesor'],$form['CC'],$form['Posicion']);
+        }
+
+        public function guardarPaso2Idea($form){
+            foreach($form as $clave => $valor){
+                if($valor===null){
+                    $form[$clave]="NULO";
+                }
+            }
+            $this->diagnosticoIdeaDTO->paso2($form['Idea'],$form['Motivacion'],$form['Elecion'],$form['Productos']);
+        }
+
+        public function guardarPaso3Idea($form){
+            
+        }
+
+        public function guardarPaso4Idea($form){
+            
+        }
+
+        public function guardarPaso5Idea($form){
+            
+        }
+
+        public function guardarPaso6Idea($form){
+            
+        }
+
+        public function guardarPaso7Idea($form){
+            
+        }
+
+        public function guardarPaso8Idea($form){
+            
+        }
+
         public function agregarFormDiagnosticoIdea($form){
-            $id=$this->diagnosticoIdeaModel->agregarForm($form);
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."'); window.location='index.php';</script>";
+            //$diagnosticoIdeaDTO = new DiagnosticoIdeaDTO($form['Fecha'], $form['Asesor'], $form['CC']);
+            $id=$this->diagnosticoIdeaModel->agregarForm($diagnosticoIdeaDTO);
+            //ACA SE AGREGAN LAS DIFICULTADES
+
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n $id.'); window.location='index.php';</script>";
         }
 
         public function editarFormDiagnosticoIdea($form){
