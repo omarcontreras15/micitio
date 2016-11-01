@@ -129,6 +129,13 @@
             foreach($client as $clave=>$valor){
                $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
             }
+            
+            $dificultad = $this->diagnosticoIdeaModel->consultarDificultad($row['Num_consecutivo']);
+            $aspectos = "";
+            for($i = 0; $i < sizeof($dificultad); $i++){
+                $aspectos.= $dificultad[$i]['numero']."-".$dificultad[$i]['descripcion']."<br>";
+            }
+            $this->view = $this->renderView($this->view, "{{Aspectos_mejorar}}", $aspectos);
             $this->showView($this->view);  
 
         }
@@ -221,17 +228,12 @@
             $this->view = $this->renderView($this->view,"{{Infraestructura_requerida}}" , $row['Infraestructura_requerida']);
             $this->view = $this->renderView($this->view,"{{Regulaciones_operacion}}" , $row['Regulaciones_operacion']);
             $this->view = $this->renderView($this->view,"{{Tipo_persona}}" , $row['Tipo_persona']);
-            $this->view = $this->renderView($this->view,"{{Aspectos_mejorar}}" , $row['Aspectos_mejorar']);
 
             //datos del cliente
             $client = $this->diagnosticoIdeaModel->consultarDatosEmprendedor($row['CC']);
             foreach($client as $clave=>$valor){
                $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
             }
-
-
-
-
             $this->showView($this->view);
         }
 
