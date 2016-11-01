@@ -247,7 +247,6 @@ class DiagnosticoEmpresaModel extends Model {
         $row=mysqli_fetch_array($this->query($consulta));
         $id= $row["id_diagnostico_emp"];
 
-
         $insert2 = "INSERT INTO `diagxpuntos` (`Codigo_empresa`, `Codigo_puntos`) VALUES ";
 
         for($i=1 ; $i<=34 ; $i++){
@@ -255,34 +254,22 @@ class DiagnosticoEmpresaModel extends Model {
           if(isset($form["$i"])){
               $insert2.= " ('".$id."',".$form["$i"]."),";
           }
-
         }
         $insert2 = trim($insert2,',');
         $insert2 = $insert2.";";
-
-        echo $insert2;
-
         $this->query($insert2);
-
-
         $insert3= "INSERT INTO `diagxempresa` (`emp_nit`, `id_diagnostico_emp`) VALUES (".$form['id_empresa'].",'".$id."');";
         $this->query($insert3);
-
         $insert4 ="INSERT INTO `lista_dificultades_e` (`id_diagnostico_emp`,`numero`,`descripcion`) VALUES ";
-
         for($j=1; $j<= $cant_aspectos ; $j++){
 
             $insert4.="(".$form['id_empresa'].",'".$j."',".$form['aspectos-mejorar-'.$j]."),";
 
         }
-
         $insert4 = trim($insert4,',');
-        echo $insert4;
         $this->query($insert4);
-
         $this->terminate();
-
-        return "123";
+          return $id;
 
     }
 

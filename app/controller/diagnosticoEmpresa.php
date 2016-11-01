@@ -36,7 +36,9 @@ class DiagnosticoEmpresa extends Controller {
 
         $id=$this->diagnosticoEmpresaModel->agregarForm($form);
         if($id!=""){
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."'); </script>";
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."');
+                ;window.location='index.php';
+             </script>";
         }else{
              echo "<script>alert('Error al registrar el diagnostico de la idea, intente más tarde');</script>";
         }
