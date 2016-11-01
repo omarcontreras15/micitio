@@ -39,23 +39,251 @@ class DiagnosticoEmpresaModel extends Model {
     }
 
     public function agregarForm($form){
-        $this->connect();
+       
+       $cant_aspectos = $form['cant-aspectos-mejorar'];
+        
         foreach($form as $clave => $valor){
+
             if($valor==""){
                 $form[$clave]="NULL";
-            }else{
+            }
+                        
+            else{
                 $form[$clave]="'".$valor."'";
             }
+
+            
         }
 
-        $insert = "INSERT INTO `diagnostico_idea` (`Num_consecutivo`, `Asesor`, `Nombres`, `Apellidos`, `CC`, `Posicion`, `Telefono`, `Celular`, `Idea`, `Motivacion`, `Elecion`, `Productos`, `Personal_requerido`, `Grupo_empresarial`, `Equipo_caracteristicas`, `Criterios_contratacion`, `Mercado_objetivo`, `Mercado_objetivo_ubica`, `Competidores`, `Factor_diferenciador`, `Condiciones_venta`, `Ubicacion_negocio`, `Ubicacion_influencia`, `Estrategia_precios`, `Canales_distribucion`, `Promocion_negocio`, `Costo_operacion`, `Fuentes_financiacion`, `Tiempo_retorno_inversion`, `Como_estimo_precio`, `Costo_producto`, `Asuntos_finanza`, `Desarrollo_producto`, `Tecnologia_requerida`, `Infraestructura_requerida`, `Regulaciones_operacion`, `Tipo_persona`, `Aspectos_mejorar`) VALUES (NULL,".$form['Asesor'].", ".$form['Nombres'].", ".$form['Apellidos'].", ".$form['CC'].", ".$form['Posicion'].", ".$form['Telefono'].", ".$form['Celular'].", ".$form['Idea'].", ".$form['Motivacion'].", ".$form['Elecion'].", ".$form['Productos'].", ".$form['Personal_requerido'].", ".$form['Grupo_empresarial'].", ".$form['Equipo_caracteristicas'].", ".$form['Criterios_contratacion'].", ".$form['Mercado_objetivo'].",".$form['Mercado_objetivo_ubica'].", ".$form['Competidores'].", ".$form['Factor_diferenciador'].", ".$form['Condiciones_venta'].", ".$form['Ubicacion_negocio'].", ".$form['Ubicacion_influencia'].", ".$form['Estrategia_precios'].",".$form['Canales_distribucion'].",".$form['Promocion_negocio'].", ".$form['Costo_operacion'].", ".$form['Fuentes_financiacion'].", ".$form['Tiempo_retorno_inversion'].", ".$form['Como_estimo_precio'].", ".$form['Costo_producto'].", ".$form['Asuntos_finanza'].", ".$form['Desarrollo_producto'].", ".$form['Tecnologia_requerida'].", ".$form['Infraestructura_requerida'].", ".$form['Regulaciones_operacion'].",".$form['Tipo_persona'].", ".$form['Aspectos_mejorar'].")";
+
+
+
+         $this->connect();        
+
+        $insert = "INSERT INTO `diagnostico_empresa` (
+            `asesor`, 
+            `posicion_empresa`, 
+            `tiempo_operacion`, 
+            `sector`, 
+            `planes_largoplazo`, 
+            `mision`, 
+            `vision`, 
+            `objetivos`, 
+            `estrategias`, 
+            `plan_accion`, 
+            `valores`, 
+            `nombre_objetivos`, 
+            `recursos`, 
+            `debilidades`, 
+            `oportunidades`, 
+            `obstaculos`, 
+            `ventaja_cliente`, 
+            `ventaja_empresa`, 
+            `tipo_planes`, 
+            `tiempo_planeacion`, 
+            `participacion_empleados`, 
+            `empleados_conocen`, 
+            `estrategias_crecimiento`, 
+            `organigrama`, 
+            `procesos_documentados`, 
+            `procesos_evaluacion`, 
+            `procesos_automatizar`, 
+            `max_colaboradores`, 
+            `clima_laboral`, 
+            `motivacion_empleados`, 
+            `toma_desiciones`, 
+            `en_concenso`, 
+            `define_acciones`, 
+            `sistema_control`, 
+            `comparar_planeado_eje`, 
+            `clave_desempenio`, 
+            `seguimiento_indicadores`, 
+            `contrata_direc_personal`, 
+            `combina_forma_contratar`, 
+            `procesos_establecidos`, 
+            `recompensas_establecidas`, 
+            `num_empleados`, 
+            `empleados_necesarios`, 
+            `depto_mercadeo_ventas`, 
+            `msj_marketing_claro`, 
+            `dedica_tiempo_marketing`, 
+            `delega_tiempo`, 
+            `plan_mercadeo`, 
+            `implementa_plan`, 
+            `cronograma_marketing`, 
+            `perfil_cliente`, 
+            `clasificacion_cliente`, 
+            `web_ventas`, 
+            `tecnologia_seguimiento`, 
+            `sistema_compatibilidad`, 
+            `contabilidad_aldia`, 
+            `aplica_normas_contabilidad`, 
+            `facturacion_ultimoanio`, 
+            `planificacion_financiera_formal`, 
+            `margen_rentabilidad`, 
+            `margen_rentabilidad_pos`, 
+            `nivel_endeudamiento`, 
+            `ingresos_cumplen_objetivos`, 
+            `suficiente_capital`, 
+            `flujo_caja_positivo`, 
+            `costo_producto`, 
+            `presupuesto_estable`, 
+            `desiciones_analisis`, 
+            `porcentaje_capacidad`, 
+            `normas_tecnicas_sector`, 
+            `estado_maquinaria`, 
+            `programa_produccion`, 
+            `corresponde_demanda_mercado`, 
+            `produccion_planes`, 
+            `pontrola_calidad_producto`, 
+            `problemas_abastecimiento`, 
+            `Adquisicion_maquinaria`, 
+            `Planes_contingencia_maprima`, 
+            `Inventarios_periodicos`, 
+            `Seguimiento_inventarios`, 
+            `eficiente_dist_trabajo`, 
+            `paises_importado_expor`, 
+            `mercados_importado_expor`, 
+            `metas_importado_expor`, 
+            `estrategia_marketing`, 
+            `ventas_esperadas`, 
+            `margen_ventas`, 
+            `capital_presupuestado`, 
+            `aspectos_adicionales`)  VALUES (
+
+            ".$form['asesor'].", 
+            ".$form['posicion_empresa'].", 
+            ".$form['tiempo_operacion'].",
+            ".$form['sector'].",
+            ".$form['planes_largoplazo'].",
+            ".$form['mision'].",
+            ".$form['vision'].",
+            ".$form['objetivos'].",
+            ".$form['estrategias'].",
+            ".$form['plan_accion'].",
+            ".$form['valores'].",
+            ".$form['nombre_objetivos'].", 
+            ".$form['recursos'].", 
+            ".$form['debilidades'].", 
+            ".$form['oportunidades'].", 
+            ".$form['obstaculos'].", 
+            ".$form['ventaja_cliente'].", 
+            ".$form['ventaja_empresa'].", 
+            ".$form['tipo_planes'].", 
+            ".$form['tiempo_planeacion'].", 
+            ".$form['participacion_empleados'].", 
+            ".$form['empleados_conocen'].", 
+            ".$form['estrategias_crecimiento'].", 
+            ".$form['organigrama'].", 
+            ".$form['procesos_documentados'].", 
+            ".$form['procesos_evaluacion'].", 
+            ".$form['procesos_automatizar'].", 
+            ".$form['max_colaboradores'].", 
+            ".$form['clima_laboral'].", 
+            ".$form['motivacion_empleados'].", 
+            ".$form['toma_desiciones'].", 
+            ".$form['en_concenso'].", 
+            ".$form['define_acciones'].", 
+            ".$form['sistema_control'].", 
+            ".$form['comparar_planeado_eje'].", 
+            ".$form['clave_desempenio'].", 
+            ".$form['seguimiento_indicadores'].", 
+            ".$form['contrata_direc_personal'].", 
+            ".$form['combina_forma_contratar'].", 
+            ".$form['procesos_establecidos'].", 
+            ".$form['recompensas_establecidas'].", 
+            ".$form['num_empleados'].", 
+            ".$form['empleados_necesarios'].", 
+            ".$form['depto_mercadeo_ventas'].", 
+            ".$form['msj_marketing_claro'].", 
+            ".$form['dedica_tiempo_marketing'].", 
+            ".$form['delega_tiempo'].", 
+            ".$form['plan_mercadeo'].", 
+            ".$form['implementa_plan'].", 
+            ".$form['cronograma_marketing'].", 
+            ".$form['perfil_cliente'].", 
+            ".$form['clasificacion_cliente'].", 
+            ".$form['web_ventas'].", 
+            ".$form['tecnologia_seguimiento'].", 
+            ".$form['sistema_compatibilidad'].", 
+            ".$form['contabilidad_aldia'].", 
+            ".$form['aplica_normas_contabilidad'].", 
+            ".$form['facturacion_ultimoanio'].", 
+            ".$form['planificacion_financiera_formal'].", 
+            ".$form['margen_rentabilidad'].", 
+            ".$form['margen_rentabilidad_pos'].", 
+            ".$form['nivel_endeudamiento'].", 
+            ".$form['ingresos_cumplen_objetivos'].", 
+            ".$form['suficiente_capital'].", 
+            ".$form['flujo_caja_positivo'].", 
+            ".$form['costo_producto'].", 
+            ".$form['presupuesto_estable'].", 
+            ".$form['desiciones_analisis'].", 
+            ".$form['porcentaje_capacidad'].", 
+            ".$form['normas_tecnicas_sector'].", 
+            ".$form['estado_maquinaria'].", 
+            ".$form['programa_produccion'].", 
+            ".$form['corresponde_demanda_mercado'].",
+            ".$form['produccion_planes'].", 
+            ".$form['pontrola_calidad_producto'].", 
+            ".$form['problemas_abastecimiento'].", 
+            ".$form['Adquisicion_maquinaria'].", 
+            ".$form['Planes_contingencia_maprima'].", 
+            ".$form['Inventarios_periodicos'].", 
+            ".$form['Seguimiento_inventarios'].", 
+            ".$form['eficiente_dist_trabajo'].", 
+            ".$form['paises_importado_expor'].", 
+            ".$form['mercados_importado_expor'].", 
+            ".$form['metas_importado_expor'].", 
+            ".$form['estrategia_marketing'].", 
+            ".$form['ventas_esperadas'].", 
+            ".$form['margen_ventas'].", 
+            ".$form['capital_presupuestado'].", 
+            ".$form['aspectos_adicionales'].")";
 
         $this->query($insert);
-        $consulta="SELECT * FROM diagnostico_idea order by Num_consecutivo desc LIMIT 1";
+
+        $consulta="SELECT * FROM diagnostico_empresa order by id_diagnostico_emp desc LIMIT 1";
         $row=mysqli_fetch_array($this->query($consulta));
-        $id= $row["Num_consecutivo"];
+        $id= $row["id_diagnostico_emp"];
+
+
+        $insert2 = "INSERT INTO `diagxpuntos` (`Codigo_empresa`, `Codigo_puntos`) VALUES ";
+
+        for($i=1 ; $i<=34 ; $i++){
+
+          if(isset($form["$i"])){
+              $insert2.= " ('".$id."',".$form["$i"]."),";
+          }
+
+        }
+        $insert2 = trim($insert2,',');
+        $insert2 = $insert2.";";
+
+        echo $insert2;
+
+        $this->query($insert2);
+
+
+        $insert3= "INSERT INTO `diagxempresa` (`emp_nit`, `id_diagnostico_emp`) VALUES (".$form['id_empresa'].",'".$id."');";
+        $this->query($insert3);
+
+        $insert4 ="INSERT INTO `lista_dificultades_e` (`id_diagnostico_emp`,`numero`,`descripcion`) VALUES ";
+
+        for($j=1; $j<= $cant_aspectos ; $j++){
+
+            $insert4.="(".$form['id_empresa'].",'".$j."',".$form['aspectos-mejorar-'.$j]."),";
+
+        }
+
+        $insert4 = trim($insert4,',');
+        echo $insert4;
+        $this->query($insert4);
+
         $this->terminate();
-        return $id;
+
+        return "123";
+
     }
 
     public function consultarForm($consecutivo){

@@ -2,6 +2,7 @@
 
 include_once "./app/controller/controller.php";
 include_once "./app/model/diagnosticoEmpresa.php";
+include_once "./app/model/DTO/diagnosticoEmpresaDTO.php";
 
 class DiagnosticoEmpresa extends Controller {
 
@@ -32,9 +33,10 @@ class DiagnosticoEmpresa extends Controller {
     }
 
     public function agregarFormDiagnosticoEmpresa($form){
+
         $id=$this->diagnosticoEmpresaModel->agregarForm($form);
         if($id!=""){
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."'); window.location='index.php';</script>";
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."'); </script>";
         }else{
              echo "<script>alert('Error al registrar el diagnostico de la idea, intente más tarde');</script>";
         }

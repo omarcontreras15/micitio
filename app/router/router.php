@@ -144,6 +144,10 @@
                     $this->diagnosticoIdea->agregarFormDiagnosticoIdea($_POST);
                     break;
 
+                    case "procesar-add-diag-empresa":
+                    $this->diagnosticoEmpresa->agregarFormDiagnosticoEmpresa($_POST);
+                    break;
+
 
                 default:
                           
