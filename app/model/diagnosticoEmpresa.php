@@ -58,9 +58,10 @@ class DiagnosticoEmpresaModel extends Model {
 
 
 
-         $this->connect();        
+         $this->connect();      
 
         $insert = "INSERT INTO `diagnostico_empresa` (
+            nit_empresa,
             `asesor`, 
             `posicion_empresa`, 
             `tiempo_operacion`, 
@@ -150,7 +151,7 @@ class DiagnosticoEmpresaModel extends Model {
             `margen_ventas`, 
             `capital_presupuestado`, 
             `aspectos_adicionales`)  VALUES (
-
+            ".$form['id_empresa'].",
             ".$form['asesor'].", 
             ".$form['posicion_empresa'].", 
             ".$form['tiempo_operacion'].",
@@ -285,7 +286,7 @@ class DiagnosticoEmpresaModel extends Model {
 
     public function consultarDiagEmpresa(){
         $this->connect();
-        $consulta = "SELECT Num_consecutivo, Fecha, Idea FROM diagnostico_idea";
+        $consulta = "SELECT id_diagnostico_emp, fecha, sector, nit_empresa FROM diagnostico_empresa";
         $query = $this->query($consulta);
         $this->terminate();
         $array=array();
