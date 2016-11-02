@@ -475,24 +475,69 @@
                                     <hr>
                                     <!-- -->
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Liste en orden de prioridad las dificultades encontradas en el diagnostico, esto con e fin de comprementar y perfeccionar la información y hacer los ajustes necesarios para continuar con le plan de negocios.</label>
-                                            <textarea class="form-control" rows="3" name="Aspectos_mejorar" placeholder="Escriba aquí.." >{{Aspectos_mejorar}}</textarea>
-                                        </div> </div>
 
-                                    <!-- -->
-                                    <br>
-                                    <button onclick="comprobarConexion()" class="btn btn-primary btn-lg pull-right" type="submit">Guardar</button>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Liste en orden de prioridad las dificultades encontradas en el diagnostico, esto con el fin de comprementar y perfeccionar la información y hacer los ajustes necesarios para continuar con le plan de negocios.</label>
+							<div class="table-responsive">
+								<div class="iconos-add-delete">
+									<span>Añadir aspecto </span><img id="agregar-aspectos-mejorar" src="./public/images/add.png" />
+									<span>&nbsp&nbsp&nbsp Eliminar aspecto </span><img id="eliminar-aspectos-mejorar" src="./public/images/delete.png"
+									/>
+								</div>
+								<table class="table table-bordered">
+									<input id="cant-aspectos-mejorar" type="hidden" name="cant-aspectos-mejorar" value="">
+									<thead>
+										<tr>
+											<th>N°</th>
+											<th>Aspectos a mejorar</th>
+										</tr>
+									</thead>
+									<tbody id="aspectos-mejorar">
+
+                                    </tbody>
+								</table>
+							</div>
+
+							<br>
+							<button onclick="comprobarConexion()" class="btn btn-primary btn-lg pull-right" type="submit" id="button-form-paso9-idea">Guardar</button>
 
 
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>    
-                    </form>
-                </div>
-                </div>
+							<br>
+							<br>
+							<br>
+							<br>
+						</div>
+					</div>
+				</div>
+            </div>
+            </div>
+	</form>
+</div>
+</div>
+
+    <script>
+    $(document).ready(function () {
+        var tablaAspectosMejorar="";
+        var contFilasAspectos=0;
+	 jQuery.get('./app/views/DiagnosticoIdea/componentes/aspectos-mejorar.html', function(data){
+            tablaAspectosMejorar=data;
+     });
+	 //agrego el evento al icono de agregar aspecto
+	$("#agregar-aspectos-mejorar").on("click", function(){
+		  contFilasAspectos++;
+		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
+		  $("#aspectos-mejorar").append(html);
+          $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
+	 });
+	  //eliminar el evento al icono de agregar aspecto
+	 $("#eliminar-aspectos-mejorar").on("click", function(){
+		//verifico que el numero de filas a borrar sean superior a 0
+		  if(contFilasAspectos>0){
+			  $("#aspectos-mejorar tr:last-child").remove();
+			  contFilasAspectos--;
+               $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
+		  }
+	 });
+  });
+</script>

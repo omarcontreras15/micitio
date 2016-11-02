@@ -4,9 +4,9 @@ class Model {
     private $connection;
 
     public function connect(){
-        $server="localhost";
-        $user="root";
-        $pass="";
+        $server="1151256";
+        $user="1151256";
+        $pass="1151256";
         $bd="1151256";
         $this->connection = mysqli_connect($server,$user,$pass,$bd) or  die(("Error " . mysqli_error($this->connection)));
     }

@@ -81,10 +81,7 @@
             $this->diagnosticoIdeaDTO->paso8($form['Regulaciones_operacion'], $form['Tipo_persona']);
         }
 
-        public function agregarFormDiagnosticoIdea($form){
-            $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
-            $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
-            //ACA SE AGREGAN LAS DIFICULTADES
+        public function agregarDificultad($form) {
             $arrayDTO = array();
             $j = 1;
             for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
@@ -95,11 +92,21 @@
                 }                
             }
             if(sizeof($arrayDTO)>0)$this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
+        }
+
+
+
+        public function agregarFormDiagnosticoIdea($form){
+            $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
+            $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
+            //ACA SE AGREGAN LAS DIFICULTADES
+            $this->agregarDificultad($form);
             echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php';</script>";
         }
 
         public function editarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaModel->editarForm($form);
+            $this->agregarDificultad($form);
             echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');window.location='index.php';</script>";   
         }
 
@@ -113,8 +120,11 @@
             $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
             $this->view = $this->renderView($this->view,"{{Num_consecutivo}}" ,$num_consecutivo);
             $this->llenarForm($row);
+            //falta llenar dificultades
 
         }
+
+
 
          public function consultarForm($num_consecutivo){
             $row = $this->diagnosticoIdeaModel->consultarForm($num_consecutivo);
