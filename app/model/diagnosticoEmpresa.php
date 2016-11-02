@@ -43,16 +43,12 @@ class DiagnosticoEmpresaModel extends Model {
        $cant_aspectos = $form['cant-aspectos-mejorar'];
         
         foreach($form as $clave => $valor){
-
             if($valor==""){
                 $form[$clave]="NULL";
-            }
-                        
+            }                        
             else{
                 $form[$clave]="'".$valor."'";
-            }
-
-            
+            }           
         }
 
 
