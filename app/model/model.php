@@ -4,7 +4,7 @@ class Model {
     private $connection;
 
     public function connect(){
-        $server="1151256";
+        $server="sandbox2.ufps.edu.co";
         $user="1151256";
         $pass="1151256";
         $bd="1151256";
