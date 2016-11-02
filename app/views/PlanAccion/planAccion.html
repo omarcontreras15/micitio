@@ -289,7 +289,6 @@
 			
 	 //agregar evento de clic al boton de guardar soluciones 
 	 $("#boton-soluciones2").on("click",function(){ 
-		var cont=0;
 		$("#tablas-objetivos-tareas").empty();
 		array=new Array();
 		entro=false;
@@ -310,7 +309,7 @@
 				$("#tablas-objetivos-tareas").append(tablas);
 
 				//agrego el evento al icono de agregar tarea de cada una de las tablas de objetivos
-				$("#"+cont+"-agregar-tarea").on("click", function(){
+				$("#"+i+"-agregar-tarea").on("click", function(){
 					//obtengo la id del icono agregar
 					var id=$(this).attr("id");
 					//obtengo el numero de la tabla objetivo asociado al icono 
@@ -331,8 +330,9 @@
 			
 									});
 					//agrego el evento al icono de eliminar tarea de cada una de las tablas de objetivos
-				$("#"+cont+"-eliminar-tarea").on("click", function(){
+				$("#"+i+"-eliminar-tarea").on("click", function(){
 					//obtengo la id del icono elimar
+						console.log("hola");
 					var id=$(this).attr("id");
 					//obtengo el numero de la tabla objetivo asociado al icono 
 					var num=parseInt(id.substring(0,id.indexOf("-")));
