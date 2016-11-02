@@ -3,8 +3,6 @@
 
 class DiagnosticoEmpresaDTO{
 
-
-
         public $asesor;
         public $mision;
 
@@ -12,10 +10,6 @@ class DiagnosticoEmpresaDTO{
             $this->asesor = $asesor;
             $this->mision = $mision;
         }
-
-
-
-
 
 
 

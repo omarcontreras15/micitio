@@ -50,6 +50,14 @@
                         }
                         break;
 
+                        case "consultar-diagnostico-empresa":
+                        if (!isset($_SESSION['user_id'])) {
+                            $this->user->inicioSesion();
+                        }else{
+                            $this->diagnosticoEmpresa->ventanaConsultarDiag();
+                        }
+                        break;
+
                           case "agregar-diagnostico-empresa":
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();

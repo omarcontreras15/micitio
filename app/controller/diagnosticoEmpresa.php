@@ -183,29 +183,31 @@ class DiagnosticoEmpresa extends Controller {
 
     }
     public function ventanaConsultarDiag(){
-        $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");        
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Idea");
+        $ventana = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/consultar-empresa.html");        
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Diagnostico Empresa");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-        $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la idea");
+        $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Consulta el diagnostico de la empresa");
         $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea consultar.");
         $array = $this->diagnosticoEmpresaModel->consultarDiagEmpresa();
         $sizeArray = sizeof($array);
         $option = "";
-        $elementotabla = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/tabla-empresa.html");
+        $elementotabla = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/tabla-consulta.html");
 
         if($sizeArray>0){
             foreach ($array as $element){
                 $temp = $elementotabla;
-                $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{NIT}}", $element['Codigo_empresa']);
+                $temp = $this->renderView($temp, "{{NUMC}}", $element['id_diagnostico_emp']);
+                $temp = $this->renderView($temp, "{{NIT}}", $element['nit_empresa']);
+                $temp = $this->renderView($temp, "{{FECHA}}", $element['fecha']);
+                $temp = $this->renderView($temp, "{{SECTOR}}", $element['sector']);
                 //ESTOS DATOS SE SACAN DE LA BASE DE DATOS DEL PROYECTO NUMERO UNO
-                $temp = $this->renderView($temp, "{{EMPRESA}}", $element['Nombre_empresa']);
-                $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $element['razon_social']);
-                $temp = $this->renderView($temp, "{{PRODUCTOS}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{SECTOR}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{CONTACTO}}", $element['Nombres']." ".$element['Apellidos']);
-                $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
+                $empresadata = $this->diagnosticoEmpresaModel->consultarEmpresaNit($element['nit_empresa']);
+                $temp = $this->renderView($temp, "{{EMPRESA}}", $empresadata['emp_nombre']);
+                $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $empresadata['emp_razons']);
+                $temp = $this->renderView($temp, "{{PRODUCTOS}}", $empresadata['emp_servicios']);
+                $contact = $this->diagnosticoEmpresaModel->consultarDatosCliente($element['nit_empresa']);
+                $temp = $this->renderView($temp, "{{CONTACTO}}", $contact['cl_nombre']." ".$contact['cl_apellido']);
                 $option .= $temp;
             }
             $this->view = $this->renderView($this->view, "{{OPTION}}", $option);
