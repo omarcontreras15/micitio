@@ -57,7 +57,7 @@ class DiagnosticoEmpresaModel extends Model {
          $this->connect();      
 
         $insert = "INSERT INTO `diagnostico_empresa` (
-            nit_empresa,
+            `nit_empresa`,
             `asesor`, 
             `posicion_empresa`, 
             `tiempo_operacion`, 
@@ -237,7 +237,6 @@ class DiagnosticoEmpresaModel extends Model {
             ".$form['margen_ventas'].", 
             ".$form['capital_presupuestado'].", 
             ".$form['aspectos_adicionales'].")";
-
         $this->query($insert);
 
         $consulta="SELECT * FROM diagnostico_empresa order by id_diagnostico_emp desc LIMIT 1";
@@ -255,8 +254,6 @@ class DiagnosticoEmpresaModel extends Model {
         $insert2 = trim($insert2,',');
         $insert2 = $insert2.";";
         $this->query($insert2);
-        $insert3= "INSERT INTO `diagxempresa` (`emp_nit`, `id_diagnostico_emp`) VALUES (".$form['id_empresa'].",'".$id."');";
-        $this->query($insert3);
         $insert4 ="INSERT INTO `lista_dificultades_e` (`id_diagnostico_emp`,`numero`,`descripcion`) VALUES ";
         for($j=1; $j<= $cant_aspectos ; $j++){
 
