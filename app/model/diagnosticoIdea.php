@@ -124,7 +124,7 @@ class diagnosticoIdeaModel extends Model {
 
     public function consultarDificultad($num){
         $this->connect();
-        $consulta = "SELECT l.numero, l.descripcion FROM lista_dificultades l, diagnostico_idea d WHERE l.num_consecutivo = d.Num_consecutivo and d.Num_consecutivo = $num";
+        $consulta = "SELECT l.numero, l.descripcion FROM lista_dificultades l, diagnostico_idea d WHERE l.num_consecutivo = d.Num_consecutivo and d.Num_consecutivo = $num ORDER BY l.numero DESC ";
         $query = $this->query($consulta);
         $this->terminate();
         $array = array();

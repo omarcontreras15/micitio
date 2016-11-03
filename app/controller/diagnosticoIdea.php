@@ -81,28 +81,27 @@
             $this->diagnosticoIdeaDTO->paso8($form['Regulaciones_operacion'], $form['Tipo_persona']);
         }
 
-        public function agregarDificultad($form) {
-            $arrayDTO = array();
-            $j = 1;
-            for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
-                if($form['aspectos-mejorar-'.$i]!=null){
-                    $DTO = new DificultadDTO ($id, $j, $form['aspectos-mejorar-'.$i]);
-                    array_push($arrayDTO,$DTO);
-                    $j++;
-                }                
-            }
-            if(sizeof($arrayDTO)>0)$this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
-        }
-
-
-
+    
         public function agregarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
             $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
             //ACA SE AGREGAN LAS DIFICULTADES
-            $this->agregarDificultad($form);
+            $this->agregarDificultad($form,$id);
             echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php';</script>";
         }
+
+            public function agregarDificultad($form, $id) {
+            $arrayDTO = array();
+            for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
+                if($form['aspectos-mejorar-'.$i]!=null){
+                    $DTO = new DificultadDTO ($id,$i,$form['aspectos-mejorar-'.$i]);
+                    array_push($arrayDTO,$DTO);
+                }                
+            }
+            if(sizeof($arrayDTO)>0)
+            $this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
+        }
+
 
         public function editarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaModel->editarForm($form);
