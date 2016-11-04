@@ -120,8 +120,7 @@
             $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
             $this->view = $this->renderView($this->view,"{{Num_consecutivo}}" ,$num_consecutivo);
             $this->llenarForm($row);
-            //falta llenar dificultades
-
+    
         }
 
 
