@@ -25,11 +25,13 @@ class DiagnosticoEmpresa extends Controller {
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->diagnosticoEmpresaModel->consultarNombreAsesor());
         $this->view = $this->renderView($this->view, "{{id_empresa}}", $nit);
-        $array = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($nit);
+        $array = $this->diagnosticoEmpresaModel->consultarEmpresaNit($nit);
         foreach($array as $clave=>$valor){
             $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
            
         }
+
+        
         $this->showView($this->view);    
     }
 
@@ -64,7 +66,8 @@ class DiagnosticoEmpresa extends Controller {
 
 
     public function editarForm($num_consecutivo){
-        $row = $this->diagnosticoIdeaModel->consultarForm($num_consecutivo);
+       
+        $row = $this->diagnosticoEmpresaaModel->consultarForm($num_consecutivo);
         $form= $this->getTemplate("./app/views/DiagnosticoIdea/editarDIdea.html");
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
         $this->view = $this->renderView($this->view, "{{TITULO}}", "Editar Diagnostico Idea");
@@ -75,14 +78,22 @@ class DiagnosticoEmpresa extends Controller {
     }
 
     public function consultarForm($num_consecutivo){
-        $row = $this->diagnosticoIdeaModel->consultarForm($num_consecutivo);
-        $form= $this->getTemplate("./app/views/DiagnosticoIdea/consultarDIdea.html");        
+        $row = $this->diagnosticoEmpresaModel->consultarForm($num_consecutivo);
+        $form= $this->getTemplate("./app/views/DiagnosticoEmpresa/consultarDEmpresa.html");        
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
-        $this->view = $this->renderView($this->view, "{{TITULO}}", "Consultar Diagnostico Idea");
+        $this->view = $this->renderView($this->view, "{{TITULO}}", "Consultar Diagnostico Empresa");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         foreach($row as $clave=>$valor){
             $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
         }
+        
+        $arrayPuntos = $this->diagnosticoEmpresaModel->consultarPuntosProblematicos($num_consecutivo);
+        $cadenaPuntos ="";
+
+         while ($fila = mysqli_fetch_array($arrayPuntos)){
+            $cadenaPuntos.="<p>".$fila['Nombre']."</p>";
+         }
+        $this->view = $this->renderView($this->view, "{{puntos_problematicos}}", $cadenaPuntos);
         $this->showView($this->view);  
 
     }
