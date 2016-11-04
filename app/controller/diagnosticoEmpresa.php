@@ -215,10 +215,6 @@ class DiagnosticoEmpresa extends Controller {
             echo "<h2>No Existen Diagnósticos</h2>";
         }
         $this->showView($this->view);
-
-
-        $this->showView($this->view);    
-
     }
 
     public function consultarDiagIdea($cc, $tipo_operacion){
