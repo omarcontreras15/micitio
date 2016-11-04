@@ -104,7 +104,11 @@
                         }else{
                             $this->diagnosticoEmpresa->agregarDiagnosticoEmpresa($_GET["id"]);
                         }
-                        break;                        
+                        break; 
+
+                        case "consultarDEmpresa":
+                            $this->diagnosticoEmpresa->mostrarConsulta();
+                            break;                       
                                       
                 default:
                       header("Location:index.php");
