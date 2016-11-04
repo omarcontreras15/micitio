@@ -32,6 +32,16 @@ class DiagnosticoEmpresa extends Controller {
         $this->showView($this->view);    
     }
 
+
+    public function mostrarConsulta(){
+        $form = $this->getTemplate("./app/views/DiagnosticoEmpresa/consultarDEmpresa.html");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Diagnostico Empresa");
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+        $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
+        $this->showView($this->view); 
+
+    }
+
     public function agregarFormDiagnosticoEmpresa($form){
 
         $id=$this->diagnosticoEmpresaModel->agregarForm($form);
