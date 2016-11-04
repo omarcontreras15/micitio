@@ -84,7 +84,7 @@
 
                         case "seleccionar-consultar-diagnostico-empresa":
                         if($_GET['id']=="0"){
-                            $this->diagnosticoEmpresa->seleccionarEmpresa();
+                            $this->diagnosticoEmpresa->ventanaConsultarDiag();
                         }else{
                             $this->diagnosticoEmpresa->consultarForm($_GET['id']);
                         }
