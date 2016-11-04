@@ -269,7 +269,7 @@ class DiagnosticoEmpresaModel extends Model {
 
     public function consultarForm($consecutivo){
         $this->connect();
-        $consulta = "SELECT * FROM diagnostico_idea WHERE Num_consecutivo = ".$consecutivo;
+        $consulta = "SELECT * FROM diagnostico_empresa WHERE id_diagnostico_emp = ".$consecutivo;
         $query = $this->query($consulta);
         $this->terminate();
         $row= mysqli_fetch_array($query);
@@ -316,12 +316,24 @@ class DiagnosticoEmpresaModel extends Model {
 
     public function consultarDatosCliente($nit){
         $this->connect();
-        $consulta = "SELECT c.cl_nombre, c.cl_apellido FROM cliente c, contacto p WHERE c.cl_cedula = p.cl_cedula AND                           p.emp_nit =$nit";
+        $consulta = "SELECT c.cl_nombre, c.cl_apellido FROM cliente c, contacto p WHERE c.cl_cedula = p.cl_cedula AND   p.emp_nit =$nit";
         $query = $this->query($consulta);
         $this->terminate();
-        $row = mysqli_fetch_array($query);
-        return $row; 
+        $row = mysqli_fetch_array();
+        return $query; 
 
+
+    }
+
+    public function consultarPuntosProblematicos($nit){
+        $consulta= "SELECT p.Nombre
+                        FROM puntos_problematicos p
+                            JOIN diagxpuntos d
+                                WHERE (d.Codigo_puntos = p.Codigo) AND (d.Codigo_empresa=".$nit.")";
+        $this->connect();
+        $query = $this->query($consulta);
+        $this->terminate();
+        return $query;
 
     }
 
