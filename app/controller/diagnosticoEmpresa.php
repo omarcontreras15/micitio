@@ -202,12 +202,12 @@ class DiagnosticoEmpresa extends Controller {
                 $temp = $this->renderView($temp, "{{FECHA}}", $element['fecha']);
                 $temp = $this->renderView($temp, "{{SECTOR}}", $element['sector']);
                 //ESTOS DATOS SE SACAN DE LA BASE DE DATOS DEL PROYECTO NUMERO UNO
-                /*$empresadata = $this->diagnosticoEmpresaModel->consultarEmpresaNit($element['nit_empresa']);
+                $empresadata = $this->diagnosticoEmpresaModel->consultarEmpresaNit($element['nit_empresa']);
                 $temp = $this->renderView($temp, "{{EMPRESA}}", $empresadata['emp_nombre']);
                 $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $empresadata['emp_razons']);
                 $temp = $this->renderView($temp, "{{PRODUCTOS}}", $empresadata['emp_servicios']);
                 $contact = $this->diagnosticoEmpresaModel->consultarDatosCliente($element['nit_empresa']);
-                $temp = $this->renderView($temp, "{{CONTACTO}}", $contact['cl_nombre']." ".$contact['cl_apellido']);*/
+                $temp = $this->renderView($temp, "{{CONTACTO}}", $contact['cl_nombre']." ".$contact['cl_apellido']);
                 $option .= $temp;
             }
             $this->view = $this->renderView($this->view, "{{OPTION}}", $option);
