@@ -91,9 +91,25 @@ class DiagnosticoEmpresa extends Controller {
         $cadenaPuntos ="";
 
          while ($fila = mysqli_fetch_array($arrayPuntos)){
-            $cadenaPuntos.="<p>".$fila['Nombre']."</p>";
+            $cadenaPuntos.="<li><p>".$fila['Nombre']."</p></li>";
          }
         $this->view = $this->renderView($this->view, "{{puntos_problematicos}}", $cadenaPuntos);
+
+        $arrayEmpresa = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($row['nit_empresa']);
+        
+        foreach($arrayEmpresa as $clave=>$valor){
+            $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+        }
+        
+        $arrayAspectos = $this->diagnosticoEmpresaModel->consultarAspectosMejorar($num_consecutivo);
+
+        $cadenaAspectos ="";
+
+         while ($fila2 = mysqli_fetch_array($arrayAspectos)){
+            $cadenaAspectos.="<li><p>".$fila2['descripcion']."</p></li>";
+         }
+         $this->view = $this->renderView($this->view, "{{Aspectos}}", $cadenaAspectos);
+
         $this->showView($this->view);  
 
     }

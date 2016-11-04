@@ -257,7 +257,7 @@ class DiagnosticoEmpresaModel extends Model {
         $insert4 ="INSERT INTO `lista_dificultades_e` (`id_diagnostico_emp`,`numero`,`descripcion`) VALUES ";
         for($j=1; $j<= $cant_aspectos ; $j++){
 
-            $insert4.="(".$form['id_empresa'].",'".$j."',".$form['aspectos-mejorar-'.$j]."),";
+            $insert4.="(".$id.",'".$j."',".$form['aspectos-mejorar-'.$j]."),";
 
         }
         $insert4 = trim($insert4,',');
@@ -336,8 +336,13 @@ class DiagnosticoEmpresaModel extends Model {
         return $query;
 
     }
- 
 
+    public function consultarAspectosMejorar($nit){
+        $this->connect();
+        $result=$this->query("SELECT descripcion 
+                                from lista_dificultades_e where (id_diagnostico_emp=".$nit.");");
+        $this->terminate();
+        return $result;
+    }
 }
-
 ?>

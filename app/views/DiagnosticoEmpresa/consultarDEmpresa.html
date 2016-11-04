@@ -49,10 +49,10 @@
 				<br>
 				<div>
 					<div class="row">
-						<div class="col-md-6"><strong>Nro. CONSECUTIVO: </strong> 01-000{{Num_consecutivo}}</div>
-						<div class="col-md-6" align="right"><strong>FECHA:</strong> {{Fecha}}</div>
+						<div class="col-md-6"><strong>Nro. CONSECUTIVO: </strong> 01-000{{id_diagnostico_emp}}</div>
+						<div class="col-md-6" align="right"><strong>FECHA:</strong> {{fecha}}</div>
 						<div class="col-md-12">&nbsp</div>
-						<div class="col-md-12"><strong>ASESOR: </strong>{{Asesor}}</div>
+						<div class="col-md-12"><strong>ASESOR: </strong>{{asesor}}</div>
 					</div>
 				</div>
 				<br>
@@ -77,7 +77,7 @@
 						</div>
 						<div class="col-md-3"><label>Posicion en la empresa:</label></div>
 						<div class="col-md-3">
-							<p>{{posicion}} </p>
+							<p>{{posicion_empresa}} </p>
 						</div>
 					</div>
 					<div class="row">
@@ -530,9 +530,10 @@
 								</td>
 							</tr>
 						</table>
-
+					<ol>
 						{{puntos_problematicos}}
-									
+					</ol>
+								
 				</fieldset><br><br></div>
 			<div id="check9-div">
 				<fieldset class="contentStyle">
@@ -851,13 +852,10 @@
 			<div id="check13-div">
 				<fieldset class="contentStyle">
 					<legend class="titleStyle">ASPECTOS A MEJORAR</legend>
-					<div class="row">
-						<div class="col-md-12">
-							<br><label>Liste en orden de prioridad las dificultades encontradas en el diagnostico, esto con e fin de comprementar y perfeccionar la información y hacer los ajustes necesarios para continuar con le plan de negocios.</label>
-							<br>
-							<p> {{Aspectos}} </p>
-						</div>
-					</div>
+							<ol>
+							{{Aspectos}}
+							</ol>
+					
 				</fieldset><br>
 			</div>
 		</div>
