@@ -321,10 +321,8 @@ class DiagnosticoEmpresaModel extends Model {
         $consulta = "SELECT c.cl_nombre, c.cl_apellido FROM cliente c, contacto p WHERE c.cl_cedula = p.cl_cedula AND   p.emp_nit =$nit";
         $query = $this->query($consulta);
         $this->terminate();
-        $row = mysqli_fetch_array();
-        return $query; 
-
-
+        $row = mysqli_fetch_array($query);
+        return $row; 
     }
 
     public function consultarPuntosProblematicos($nit){
