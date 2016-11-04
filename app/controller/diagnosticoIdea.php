@@ -142,7 +142,7 @@
             $dificultad = $this->diagnosticoIdeaModel->consultarDificultad($row['Num_consecutivo']);
             $aspectos = "";
             for($i = 0; $i < sizeof($dificultad); $i++){
-                $aspectos.= $dificultad[$i]['numero']."-".$dificultad[$i]['descripcion']."<br>";
+                $aspectos.= "<li>".$dificultad[$i]['descripcion']."</li>";
             }
             $this->view = $this->renderView($this->view, "{{Aspectos}}", $aspectos);
             $this->showView($this->view);  
