@@ -28,6 +28,7 @@ class DiagnosticoEmpresa extends Controller {
         $array = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($nit);
         foreach($array as $clave=>$valor){
             $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
+           
         }
         $this->showView($this->view);    
     }
@@ -212,7 +213,7 @@ class DiagnosticoEmpresa extends Controller {
                 $temp = $this->renderView($temp, "{{FECHA}}", $element['fecha']);
                 $temp = $this->renderView($temp, "{{SECTOR}}", $element['sector']);
                 //ESTOS DATOS SE SACAN DE LA BASE DE DATOS DEL PROYECTO NUMERO UNO
-                $empresadata = $this->diagnosticoEmpresaModel->consultarEmpresaNit($element['nit_empresa']);
+                $empresadata = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($element['nit_empresa']);
                 $temp = $this->renderView($temp, "{{EMPRESA}}", $empresadata['emp_nombre']);
                 $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $empresadata['emp_razons']);
                 $temp = $this->renderView($temp, "{{PRODUCTOS}}", $empresadata['emp_servicios']);

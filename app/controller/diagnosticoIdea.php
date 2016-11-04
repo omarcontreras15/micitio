@@ -154,7 +154,7 @@
         //llena el form para editar y para consultar diagnostico
         public function llenarForm($row){
             $tabla="";
-            $plantilla=$this->menu= $this->getTemplate("./app/views/DiagnosticoIdea/componentes/aspectos-mejorar.html");
+            $plantilla=$this->menu= $this->getTemplate("./app/views/components/aspectos-mejorar.html");
 
             $this->view = $this->renderView($this->view,"{{Asesor}}" , $row['Asesor']);
             $this->view = $this->renderView($this->view,"{{Fecha}}" , $row['Fecha']);

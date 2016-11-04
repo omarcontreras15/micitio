@@ -302,15 +302,17 @@ class DiagnosticoEmpresaModel extends Model {
     }
 
 
-    public function consultarEmpresaNit($nit){
+      public function consultarDatosEmpresa($nit){
         $this->connect();
-        $consulta = "SELECT emp_nombre, emp_razons, emp_servicios, emp_telefono, emp_celular FROM empresa
-                                        WHERE emp_nit = $nit";
+        $consulta = "SELECT e.emp_nombre, e.emp_razons, e.emp_servicios, e.emp_telefono, e.emp_celular, p.cl_nombre
+                                    FROM empresa e, contacto c, cliente p
+                                        WHERE e.emp_nit = c.emp_nit
+                                            AND c.cl_cedula = p.cl_cedula
+                                            AND e.emp_nit = ".$nit;
         $query = $this->query($consulta);
         $this->terminate();
-        $row = mysqli_fetch_array($query);
+        $row= mysqli_fetch_array($query);
         return $row;
-
     }
 
 
@@ -324,10 +326,7 @@ class DiagnosticoEmpresaModel extends Model {
 
 
     }
-
-
-
-    
+ 
 
 }
 
