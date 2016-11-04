@@ -87,7 +87,7 @@
             $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
             //ACA SE AGREGAN LAS DIFICULTADES
             $this->agregarDificultad($form,$id);
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php';</script>";
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php?mode=seleccionar-consultar-diagnostico-idea&id=$id';</script>";
         }
 
             public function agregarDificultad($form, $id) {
@@ -106,7 +106,8 @@
         public function editarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaModel->editarForm($form);
             $this->agregarDificultad($form,$form['Num_consecutivo']);
-            echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');window.location='index.php';</script>";   
+            echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');
+            window.location='index.php?mode=seleccionar-consultar-diagnostico-idea&id=".$form['Num_consecutivo']."';</script>";   
         }
 
 
