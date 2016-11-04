@@ -107,8 +107,20 @@
                         break; 
 
                         case "consultarDEmpresa":
+                            if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
                             $this->diagnosticoEmpresa->mostrarConsulta();
-                            break;                       
+                        }
+                            break; 
+
+                       case "editar-diagnostico-empresa":
+                        if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                            $this->diagnosticoEmpresa->editarForm($_GET["Num_consecutivo"]);
+                        }
+                        break;                      
                                       
                 default:
                       header("Location:index.php");

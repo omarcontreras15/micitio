@@ -147,7 +147,7 @@ class DiagnosticoEmpresaModel extends Model {
             `margen_ventas`, 
             `capital_presupuestado`, 
             `aspectos_adicionales`)  VALUES (
-            ".$form['id_empresa'].",
+            ".$form['nit_empresa'].",
             ".$form['asesor'].", 
             ".$form['posicion_empresa'].", 
             ".$form['tiempo_operacion'].",
