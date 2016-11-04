@@ -70,7 +70,6 @@
 
 		//funcion ajax para enviar formulario a php
             function realizarAjax(datos,url1,id) {
-				console.log("pasa por aca");
                     $.ajax({
                         data: datos,
                         url: url1,
@@ -593,6 +592,7 @@
 	$("#agregar-aspectos-mejorar").on("click", function(){
 		  contFilasAspectos++;
 		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
+		  html=html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
 		  $("#aspectos-mejorar").append(html);
           $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
 	 });

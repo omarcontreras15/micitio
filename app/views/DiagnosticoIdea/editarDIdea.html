@@ -66,460 +66,472 @@
     <section class="title-section">
         <h1 class="title-header">
             Editar Diagnostico Idea </h1>
-        <ul class="breadcrumb breadcrumb__t"><li><a href="index.php">Inicio</a></li><li class="active">Editar Diagnostico Idea </li></ul>  
+        <ul class="breadcrumb breadcrumb__t">
+            <li><a href="index.php">Inicio</a></li>
+            <li class="active">Editar Diagnostico Idea </li>
+        </ul>
     </section>
 </div>
-<div class='container contact'>    
+<div class='container contact'>
 
     <div id="titulo">
-        <h2 ><strong>DIAGNÓSTICO DE LA IDEA<strong></h2>
+        <h2><strong>DIAGNÓSTICO DE LA IDEA<strong></h2>
             <h4><strong>Programa de Fortalecimiento Empresarial<strong></h4></div>
                 <br>
                 <hr>
 
                 <div class="row">
                     <div class="col-md-6"><strong>Nro. CONSECUTIVO: </strong> 01-000{{Num_consecutivo}}</div>
-                    <div class="col-md-6" align="right"><strong>FECHA:</strong> {{Fecha}}</div>
-                    <div class="col-md-12">&nbsp</div>
-                    <div class="col-md-12"><strong>ASESOR: </strong>{{Asesor}}</div>
+    <div class="col-md-6" align="right"><strong>FECHA:</strong> {{Fecha}}</div>
+    <div class="col-md-12">&nbsp</div>
+    <div class="col-md-12"><strong>ASESOR: </strong>{{Asesor}}</div>
 
-                </div>
+</div>
 
-                <hr>
+<hr>
 
 
-                <div class="container container-fixed" >
-                    <div class="stepwizard" >
-                        <div class="stepwizard-row setup-panel" >
-                            <div class="stepwizard-step" >
-                                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                                <p>Paso 1</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="true">2</a>
-                                <p>Paso 2</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-3" type="button" class="btn btn-default btn-circle" >3</a>
-                                <p>Paso 3</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-4" type="button" class="btn btn-default btn-circle" >4</a>
-                                <p>Paso 4</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-5" type="button" class="btn btn-default btn-circle" >5</a>
-                                <p>Paso 5</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-6" type="button" class="btn btn-default btn-circle" >6</a>
-                                <p>Paso 6</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-7" type="button" class="btn btn-default btn-circle" >7</a>
-                                <p>Paso 7</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-8" type="button" class="btn btn-default btn-circle" >8</a>
-                                <p>Paso 8</p>
-                            </div>
-                            <div class="stepwizard-step" >
-                                <a href="#step-9" type="button" class="btn btn-default btn-circle" >9</a>
-                                <p>Paso 9</p>
-                            </div>
-                        </div>
-                    </div>
+<div class="container container-fixed">
+    <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                <p>Paso 1</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
+                <p>Paso 2</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
+                <p>Paso 3</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-4" type="button" class="btn btn-default btn-circle">4</a>
+                <p>Paso 4</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-5" type="button" class="btn btn-default btn-circle">5</a>
+                <p>Paso 5</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-6" type="button" class="btn btn-default btn-circle">6</a>
+                <p>Paso 6</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-7" type="button" class="btn btn-default btn-circle">7</a>
+                <p>Paso 7</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-8" type="button" class="btn btn-default btn-circle">8</a>
+                <p>Paso 8</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#step-9" type="button" class="btn btn-default btn-circle">9</a>
+                <p>Paso 9</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <form role="form" method="post" action="index.php" style="margin-right:50px">
+        <input type="hidden" name="mode" value="procesar-edit-diag-idea">
+        <input type="hidden" name="Asesor" value="{{Asesor}}">
+        <input type="hidden" name="Num_consecutivo" value="{{Num_consecutivo}}">
+        <div class="row setup-content" id="step-1">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+
+
+                    <h3 style="color:#579526">INFORMACIÓN DEL SOLICITANTE</h3>
                     <hr>
-
-                    <form role="form" method="post" action="index.php" style="margin-right:50px">
-                        <input type="hidden" name="mode" value="procesar-edit-diag-idea">
-                        <input type="hidden" name="Asesor" value="{{Asesor}}">
-                        <input type="hidden" name="Num_consecutivo" value="{{Num_consecutivo}}">
-                        <div class="row setup-content" id="step-1" >
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
+                    <br>
+                    <div class="form-group">
 
 
-                                    <h3 style="color:#579526">INFORMACIÓN DEL SOLICITANTE</h3>
-                                    <hr>
-                                    <br>
-                                    <div class="form-group">
+                        <div class="row">
+
+                            <div class="col-md-2"><label>Nombres:</label></div>
+                            <div class="col-md-4"><input type="text" class="form-control" name="Nombres" value="{{cl_nombre}}" required disabled></div>
+                            <div class="col-md-2"><label>Apellidos:</label></div>
+                            <div class="col-md-4"><input type="text" class="form-control" name="Apellidos" value="{{cl_apellido}}" required disabled></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2"><label>CC:</label></div>
+                            <div class="col-md-4"><input type="number" name="CC" class="form-control" min="0" value="{{CC}}" required disabled></div>
 
 
-                                        <div class="row">
-
-                                            <div class="col-md-2"><label>Nombres:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Nombres" value="{{cl_nombre}}" required disabled></div>
-                                            <div class="col-md-2"><label>Apellidos:</label></div>
-                                            <div class="col-md-4"><input type="text" class="form-control" name="Apellidos" value="{{cl_apellido}}" required disabled></div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-2"><label>CC:</label></div>
-                                            <div class="col-md-4" ><input type="number" name="CC" class="form-control" min="0" value="{{CC}}" required disabled></div>
-
-
-                                            <div class="col-md-3"><label>Posicion que asumira en la empresa:</label></div>
-                                            <div class="col-md-3"><select class="form-control" name="Posicion" disabled>
+                            <div class="col-md-3"><label>Posicion que asumira en la empresa:</label></div>
+                            <div class="col-md-3"><select class="form-control" name="Posicion" disabled>
                                                 <option value="dueño {{opt_dueño}}">Dueño</option>
                                                 <option value="socio {{opt_socio}}">Socio</option>
                                                 <option value="otro {{opt_otro}}">Otro</option>
                                                 </select></div>
-                                        </div>
-                                        <br> 
-                                        <div class="row">
-                                            <div class="col-md-2"><label>Numero telefonico:</label></div>
-                                            <div class="col-md-4"><input type="number" name="Telefono" class="form-control" value="{{cl_telefono}}" min="0" disabled></div>
-                                            <div class="col-md-2"><label>Celular:</label></div>
-                                            <div class="col-md-4"><input type="number" class="form-control" name="Celular" value="{{cl_celular}}" min="0" disabled></div>
-                                        </div>
-
-
-                                    </div>
-
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br><br><br><br>
-                                </div>
-                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2"><label>Numero telefonico:</label></div>
+                            <div class="col-md-4"><input type="number" name="Telefono" class="form-control" value="{{cl_telefono}}" min="0" disabled></div>
+                            <div class="col-md-2"><label>Celular:</label></div>
+                            <div class="col-md-4"><input type="number" class="form-control" name="Celular" value="{{cl_celular}}" min="0" disabled></div>
                         </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-2">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
 
-                                    <h3 style="color:#579526">DEFINA SU NEGOCIO SU IDEA</h3>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>¿Cuál es su negocio?</label>
+                    </div>
 
-                                            <br><textarea class="form-control" rows="3" name="Idea" placeholder="Ingrese la información" >{{Idea}}</textarea>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br><br><br><br>
+                </div>
+            </div>
+        </div>
 
-                                            <br><label>¿Cuál es su motivación para emprender esta idea de negocio?</label>
-                                            <br><textarea class="form-control" rows="3" name="Motivacion" placeholder="Escriba aquí.." >{{Motivacion}}</textarea> 
-                                            <br><label>¿Por qué ha elegido ésta industria/sector?</label>
+        <!-- -->
+        <div class="row setup-content" id="step-2">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
 
-                                            <br><textarea class="form-control" rows="3" name="Elecion" placeholder="Escriba aquí.." >{{Elecion}}</textarea>
+                    <h3 style="color:#579526">DEFINA SU NEGOCIO SU IDEA</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>¿Cuál es su negocio?</label>
 
-                                            <br><label>¿Cuáles son los productos o servicios que proyecta desarrollar?</label>
+                            <br><textarea class="form-control" rows="3" name="Idea" placeholder="Ingrese la información">{{Idea}}</textarea>
 
-                                            <br><textarea class="form-control" rows="3" name="Productos" placeholder="Escriba aquí.." >{{Productos}}</textarea><br>
-                                        </div> </div>
+                            <br><label>¿Cuál es su motivación para emprender esta idea de negocio?</label>
+                            <br><textarea class="form-control" rows="3" name="Motivacion" placeholder="Escriba aquí..">{{Motivacion}}</textarea>
+                            <br><label>¿Por qué ha elegido ésta industria/sector?</label>
 
+                            <br><textarea class="form-control" rows="3" name="Elecion" placeholder="Escriba aquí..">{{Elecion}}</textarea>
 
+                            <br><label>¿Cuáles son los productos o servicios que proyecta desarrollar?</label>
 
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br><br>
-                                    <br>
-                                </div>
-                            </div>
+                            <br><textarea class="form-control" rows="3" name="Productos" placeholder="Escriba aquí..">{{Productos}}</textarea><br>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-3">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">RECURSO HUMANO</h3>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>¿Cuánto personal requiere para su equipo de trabajo?</label>  
-                                            <input type="number" name="Personal_requerido" placeholder="Escriba aquí.." class="form-control" value="{{Personal_requerido}}" min="0"><br>
-                                            <label>¿Qué personas harán parte de su grupo empresarial?</label>
-                                            <textarea class="form-control" rows="3" name="Grupo_empresarial" placeholder="Escriba aquí.." >{{Grupo_empresarial}}</textarea><br>
-                                            <label>¿Cuáles son las características y perfiles de su equipo de trabajo?</label>
-                                            <textarea class="form-control" rows="3" name="Equipo_caracteristicas" placeholder="Escriba aquí.." >{{Equipo_caracteristicas}}</textarea><br>
-                                            <label>¿Qué criterios de selección tiene en cuenta para la contratación de personal?</label>
-                                            <textarea class="form-control" rows="3" name="Criterios_contratacion" placeholder="Escriba aquí.." >{{Criterios_contratacion}}</textarea><br>
-                                        </div> </div>
 
-                                    <!-- -->
-                                    <br>
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br><br>
-                                    <br>
-                                </div>
-                            </div>
+
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br><br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+
+        <!-- -->
+        <div class="row setup-content" id="step-3">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">RECURSO HUMANO</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>¿Cuánto personal requiere para su equipo de trabajo?</label>
+                            <input type="number" name="Personal_requerido" placeholder="Escriba aquí.." class="form-control" value="{{Personal_requerido}}"
+                                min="0"><br>
+                            <label>¿Qué personas harán parte de su grupo empresarial?</label>
+                            <textarea class="form-control" rows="3" name="Grupo_empresarial" placeholder="Escriba aquí..">{{Grupo_empresarial}}</textarea><br>
+                            <label>¿Cuáles son las características y perfiles de su equipo de trabajo?</label>
+                            <textarea class="form-control" rows="3" name="Equipo_caracteristicas" placeholder="Escriba aquí..">{{Equipo_caracteristicas}}</textarea><br>
+                            <label>¿Qué criterios de selección tiene en cuenta para la contratación de personal?</label>
+                            <textarea class="form-control" rows="3" name="Criterios_contratacion" placeholder="Escriba aquí..">{{Criterios_contratacion}}</textarea><br>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-4">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">ANALISIS DE MERCADO</h3>
-                                    <hr>
+                    <!-- -->
+                    <br>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br><br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>¿Cuál es su mercado objetivo?</label>
-                                            <textarea class="form-control" rows="3" name="Mercado_objetivo" placeholder="Escriba aquí.." >{{Mercado_objetivo}}</textarea><br>
+        <!-- -->
+        <div class="row setup-content" id="step-4">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">ANALISIS DE MERCADO</h3>
+                    <hr>
 
-                                            <label>¿Dónde esta ubicado su mercado objetivo?</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>¿Cuál es su mercado objetivo?</label>
+                            <textarea class="form-control" rows="3" name="Mercado_objetivo" placeholder="Escriba aquí..">{{Mercado_objetivo}}</textarea><br>
 
-                                            <textarea class="form-control" rows="3" name="Mercado_objetivo_ubica" placeholder="Escriba aquí..">{{Mercado_objetivo_ubica}}</textarea><br>
-                                            <label>¿Quiénes son los principales competidores de la industria y dónde están situados?</label>
-                                            <textarea class="form-control" rows="3" name="Competidores" placeholder="Escriba aquí..">{{Competidores}}</textarea><br>
-                                            <label>¿Cuál factor diferenciador posee su producto o servicio?</label>        
-                                            <textarea class="form-control" rows="3" name="Factor_diferenciador" placeholder="Escriba aquí..">{{Factor_diferenciador}}</textarea><br>
+                            <label>¿Dónde esta ubicado su mercado objetivo?</label>
 
-                                            <label>Cuáles son las condiciones con las que esta dispuesto a negociar?</label>
+                            <textarea class="form-control" rows="3" name="Mercado_objetivo_ubica" placeholder="Escriba aquí..">{{Mercado_objetivo_ubica}}</textarea><br>
+                            <label>¿Quiénes son los principales competidores de la industria y dónde están situados?</label>
+                            <textarea class="form-control" rows="3" name="Competidores" placeholder="Escriba aquí..">{{Competidores}}</textarea><br>
+                            <label>¿Cuál factor diferenciador posee su producto o servicio?</label>
+                            <textarea class="form-control" rows="3" name="Factor_diferenciador" placeholder="Escriba aquí..">{{Factor_diferenciador}}</textarea><br>
 
-                                            <select class="form-control" name="Condiciones_venta">
+                            <label>Cuáles son las condiciones con las que esta dispuesto a negociar?</label>
+
+                            <select class="form-control" name="Condiciones_venta">
                                                 <option value="Venta de contado{{opt_contado}}">Venta de contado</option>
                                                 <option value="Venta a credito{{opt_credito}}">Venta a credito</option>
                                                 <option value="Consignacion{{opt_consignacion}}">Consignación</option>
                                             </select><br>
 
-                                            <label>¿Cuál es la ubicación actual o propuesta para su negocio?</label>
+                            <label>¿Cuál es la ubicación actual o propuesta para su negocio?</label>
 
-                                            <textarea class="form-control" rows="3" name="Ubicacion_negocio" placeholder="Escriba aquí..">{{Ubicacion_negocio}}</textarea><br>
-                                            <label>¿La ubicación influenciará su capacidad de ataer clientes?</label>
-                                            <input type="radio" name="Ubicacion_influencia" value="si{{opt_si}}" >Si
-                                            <input type="radio" name="Ubicacion_influencia" value="no{{opt_no}}" >No
-                                            <p></p>
-                                        </div> </div>
-
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
+                            <textarea class="form-control" rows="3" name="Ubicacion_negocio" placeholder="Escriba aquí..">{{Ubicacion_negocio}}</textarea><br>
+                            <label>¿La ubicación influenciará su capacidad de ataer clientes?</label>
+                            <input type="radio" name="Ubicacion_influencia" value="si{{opt_si}}">Si
+                            <input type="radio" name="Ubicacion_influencia" value="no{{opt_no}}">No
+                            <p></p>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-5">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">ESTRATEGIA DE VENTAS</h3>
-                                    <hr>
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
 
-                                    <div class="row">
-                                        <div class="col-md-12">
+        <!-- -->
+        <div class="row setup-content" id="step-5">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">ESTRATEGIA DE VENTAS</h3>
+                    <hr>
 
-                                            <label>¿Cuál será su estrategia de precios?</label>
+                    <div class="row">
+                        <div class="col-md-12">
 
-
-                                            <textarea class="form-control" rows="3" name="Estrategia_precios" placeholder="Escriba aquí.." >{{Estrategia_precios}}</textarea><br>
-
-
-                                            <label>¿Cuáles serán sus canales de distribución?</label>
-
-
-                                            <textarea class="form-control" rows="3" name="Canales_distribucion" placeholder="Escriba aquí..">{{Canales_distribucion}}</textarea><br>
-
-
-                                            <label>¿Cómo piensa promocionar su negocio? ¿Ha desarrollado un plan de mercadeo?</label>
+                            <label>¿Cuál será su estrategia de precios?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Promocion_negocio" placeholder="Escriba aquí..">{{Promocion_negocio}}</textarea><br> 
-                                        </div> </div>
+                            <textarea class="form-control" rows="3" name="Estrategia_precios" placeholder="Escriba aquí..">{{Estrategia_precios}}</textarea><br>
 
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
+
+                            <label>¿Cuáles serán sus canales de distribución?</label>
+
+
+                            <textarea class="form-control" rows="3" name="Canales_distribucion" placeholder="Escriba aquí..">{{Canales_distribucion}}</textarea><br>
+
+
+                            <label>¿Cómo piensa promocionar su negocio? ¿Ha desarrollado un plan de mercadeo?</label>
+
+
+                            <textarea class="form-control" rows="3" name="Promocion_negocio" placeholder="Escriba aquí..">{{Promocion_negocio}}</textarea><br>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-6">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">ANALISIS ECONOMICO Y FINANCIERO</h3>
-                                    <hr>
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>¿Cuál es el costo de iniciar y operar su negocio?</label>
+        <!-- -->
+        <div class="row setup-content" id="step-6">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">ANALISIS ECONOMICO Y FINANCIERO</h3>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>¿Cuál es el costo de iniciar y operar su negocio?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Costo_operacion" placeholder="Escriba aquí.." >{{Costo_operacion}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Costo_operacion" placeholder="Escriba aquí..">{{Costo_operacion}}</textarea><br>
 
 
-                                            <label>¿Cuál o cuales son las fuentes de financiación para iniciar su empresa?</label>
+                            <label>¿Cuál o cuales son las fuentes de financiación para iniciar su empresa?</label>
 
 
-                                            <select class="form-control" name="Fuentes_financiacion">
+                            <select class="form-control" name="Fuentes_financiacion">
                                                 <option value="Recursos propios{{opt_recursos}}">Recursos propios</option>
                                                 <option value="Credito con entidades financieras{{opt_entidades}}">Crédito con entidades financieras</option>
                                                 <option value="Otro{{opt_otrafuente}}">otro</option>
                                             </select><br>
 
 
-                                            <label>¿En cuánto tiempo ha estimado el retorno de su inversión?</label>
+                            <label>¿En cuánto tiempo ha estimado el retorno de su inversión?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Tiempo_retorno_inversion" placeholder="Escriba aquí..">{{Tiempo_retorno_inversion}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Tiempo_retorno_inversion" placeholder="Escriba aquí..">{{Tiempo_retorno_inversion}}</textarea><br>
 
 
-                                            <label>¿Cómo se estimó el precio de venta de sus productos/servicios?</label>
+                            <label>¿Cómo se estimó el precio de venta de sus productos/servicios?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Como_estimo_precio" placeholder="Escriba aquí..">{{Como_estimo_precio}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Como_estimo_precio" placeholder="Escriba aquí..">{{Como_estimo_precio}}</textarea><br>
 
 
-                                            <label>¿Cuál es el costo de realizar su producto/servicio?</label>
+                            <label>¿Cuál es el costo de realizar su producto/servicio?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Costo_producto" placeholder="Escriba aquí..">{{Costo_producto}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Costo_producto" placeholder="Escriba aquí..">{{Costo_producto}}</textarea><br>
 
 
-                                            <label>Describa cualquier otro asunto relacionado a las finanzas de su empresa.</label>
+                            <label>Describa cualquier otro asunto relacionado a las finanzas de su empresa.</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Asuntos_finanza" placeholder="Escriba aquí..">{{Asuntos_finanza}}</textarea><br> 
-                                        </div> </div>
-
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
+                            <textarea class="form-control" rows="3" name="Asuntos_finanza" placeholder="Escriba aquí..">{{Asuntos_finanza}}</textarea><br>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-7">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">ANALISIS TECNICO</h3>
-                                    <hr>
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
 
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Describa el proceso para desarrollar su producto/servicio</label>
-
-
-                                            <textarea class="form-control" rows="3" name="Desarrollo_producto" placeholder="Escriba aquí..">{{Desarrollo_producto}}</textarea><br>
-
-
-                                            <label>¿Cuáles equipos o tecnología requiere para llevar a cabo su producto/servicio?</label>
-
-
-                                            <textarea class="form-control" rows="3" name="Tecnologia_requerida" placeholder="Escriba aquí.." >{{Tecnologia_requerida}}</textarea><br>
+        <!-- -->
+        <div class="row setup-content" id="step-7">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">ANALISIS TECNICO</h3>
+                    <hr>
 
 
-                                            <label>¿Qúé infraestructura requiere para llevar a cabo su producto/servicio?</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Describa el proceso para desarrollar su producto/servicio</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Infraestructura_requerida" placeholder="Escriba aquí.." >{{Infraestructura_requerida}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Desarrollo_producto" placeholder="Escriba aquí..">{{Desarrollo_producto}}</textarea><br>
 
-                                        </div> </div>
 
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
+                            <label>¿Cuáles equipos o tecnología requiere para llevar a cabo su producto/servicio?</label>
+
+
+                            <textarea class="form-control" rows="3" name="Tecnologia_requerida" placeholder="Escriba aquí..">{{Tecnologia_requerida}}</textarea><br>
+
+
+                            <label>¿Qúé infraestructura requiere para llevar a cabo su producto/servicio?</label>
+
+
+                            <textarea class="form-control" rows="3" name="Infraestructura_requerida" placeholder="Escriba aquí..">{{Infraestructura_requerida}}</textarea><br>
+
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-8">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <!-- -->
-                                    <h3 style="color:#579526">ANALISIS LEGAL</h3>
-                                    <hr>
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>¿Qué regulaciones requiere su empresa para su operación?</label>
+        <!-- -->
+        <div class="row setup-content" id="step-8">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <!-- -->
+                    <h3 style="color:#579526">ANALISIS LEGAL</h3>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>¿Qué regulaciones requiere su empresa para su operación?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Regulaciones_operacion" placeholder="Escriba aquí..">{{Regulaciones_operacion}}</textarea><br>
+                            <textarea class="form-control" rows="3" name="Regulaciones_operacion" placeholder="Escriba aquí..">{{Regulaciones_operacion}}</textarea><br>
 
 
-                                            <label>¿Qué tipo de persona jurídica tendrá la empresa?</label>
+                            <label>¿Qué tipo de persona jurídica tendrá la empresa?</label>
 
 
-                                            <textarea class="form-control" rows="3" name="Tipo_persona" placeholder="Escriba aquí.." >{{Tipo_persona}}</textarea><br>  
-                                        </div> </div>
-
-                                    <!-- -->
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Guardar y continuar</button>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            </div>
+                            <textarea class="form-control" rows="3" name="Tipo_persona" placeholder="Escriba aquí..">{{Tipo_persona}}</textarea><br>
                         </div>
-                        <!-- -->
+                    </div>
 
-                        <!-- -->
-                        <div class="row setup-content" id="step-9">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <h3 style="color:#579526">RESUMEN DE ASPECTOS A MEJORAR</h3>
-                                    <hr>
-                                    <!-- -->
+                    <!-- -->
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+
+        <!-- -->
+        <div class="row setup-content" id="step-9">
+            <div class="col-xs-12">
+                <div class="col-md-12">
+                    <h3 style="color:#579526">RESUMEN DE ASPECTOS A MEJORAR</h3>
+                    <hr>
+                    <!-- -->
 
 
-					<div class="row">
-						<div class="col-md-12">
-							<label>Liste en orden de prioridad las dificultades encontradas en el diagnostico, esto con el fin de comprementar y perfeccionar la información y hacer los ajustes necesarios para continuar con le plan de negocios.</label>
-							<div class="table-responsive">
-								<div class="iconos-add-delete">
-									<span>Añadir aspecto </span><img id="agregar-aspectos-mejorar" src="./public/images/add.png" />
-									<span>&nbsp&nbsp&nbsp Eliminar aspecto </span><img id="eliminar-aspectos-mejorar" src="./public/images/delete.png"
-									/>
-								</div>
-								<table class="table table-bordered">
-									<input id="cant-aspectos-mejorar" type="hidden" name="cant-aspectos-mejorar" value="">
-									<thead>
-										<tr>
-											<th>N°</th>
-											<th>Aspectos a mejorar</th>
-										</tr>
-									</thead>
-									<tbody id="aspectos-mejorar">
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Liste en orden de prioridad las dificultades encontradas en el diagnostico, esto con el fin de comprementar y perfeccionar la información y hacer los ajustes necesarios para continuar con le plan de negocios.</label>
+                            <div class="table-responsive">
+                                <div class="iconos-add-delete">
+                                    <span>Añadir aspecto </span><img id="agregar-aspectos-mejorar" src="./public/images/add.png"
+                                    />
+                                    <span>&nbsp&nbsp&nbsp Eliminar aspecto </span><img id="eliminar-aspectos-mejorar" src="./public/images/delete.png"
+                                    />
+                                </div>
+                                <table class="table table-bordered">
+                                    <input id="cant-aspectos-mejorar" type="hidden" name="cant-aspectos-mejorar" value="{{CANT_ASPECTOS_MEJORAR}}">
+                                    <thead>
+                                        <tr>
+                                            <th>N°</th>
+                                            <th>Aspectos a mejorar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aspectos-mejorar">
+                                    {{TABLA_ASPECTOS_MEJORAR}}
                                     </tbody>
-								</table>
-							</div>
+                                </table>
+                            </div>
 
-							<br>
-							<button onclick="comprobarConexion()" class="btn btn-primary btn-lg pull-right" type="submit" id="button-form-paso9-idea">Guardar</button>
+                            <br>
+                            <button onclick="comprobarConexion()" class="btn btn-primary btn-lg pull-right" type="submit" id="button-form-paso9-idea">Guardar</button>
 
 
-							<br>
-							<br>
-							<br>
-							<br>
-						</div>
-					</div>
-				</div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-	</form>
+        </div>
+    </form>
 </div>
 </div>
 
-    <script>
+<script>
     $(document).ready(function () {
         var tablaAspectosMejorar="";
-        var contFilasAspectos=0;
+        var contFilasAspectos=$("#cant-aspectos-mejorar").attr("value");
 	 jQuery.get('./app/views/DiagnosticoIdea/componentes/aspectos-mejorar.html', function(data){
             tablaAspectosMejorar=data;
      });
@@ -527,6 +539,7 @@
 	$("#agregar-aspectos-mejorar").on("click", function(){
 		  contFilasAspectos++;
 		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
+          html= html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
 		  $("#aspectos-mejorar").append(html);
           $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
 	 });

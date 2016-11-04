@@ -81,33 +81,33 @@
             $this->diagnosticoIdeaDTO->paso8($form['Regulaciones_operacion'], $form['Tipo_persona']);
         }
 
-        public function agregarDificultad($form) {
-            $arrayDTO = array();
-            $j = 1;
-            for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
-                if($form['aspectos-mejorar-'.$i]!=null){
-                    $DTO = new DificultadDTO ($id, $j, $form['aspectos-mejorar-'.$i]);
-                    array_push($arrayDTO,$DTO);
-                    $j++;
-                }                
-            }
-            if(sizeof($arrayDTO)>0)$this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
-        }
-
-
-
+    
         public function agregarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaDTO = $_SESSION['diagnosticoIdeaDTO'];
             $id=$this->diagnosticoIdeaModel->agregarForm($this->diagnosticoIdeaDTO);
             //ACA SE AGREGAN LAS DIFICULTADES
-            $this->agregarDificultad($form);
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php';</script>";
+            $this->agregarDificultad($form,$id);
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: $id \\n '); window.location='index.php?mode=seleccionar-consultar-diagnostico-idea&id=$id';</script>";
         }
+
+            public function agregarDificultad($form, $id) {
+            $arrayDTO = array();
+            for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
+                if($form['aspectos-mejorar-'.$i]!=null){
+                    $DTO = new DificultadDTO ($id,$i,$form['aspectos-mejorar-'.$i]);
+                    array_push($arrayDTO,$DTO);
+                }                
+            }
+            if(sizeof($arrayDTO)>0)
+            $this->diagnosticoIdeaModel->agregarDificultades($arrayDTO);
+        }
+
 
         public function editarFormDiagnosticoIdea($form){
             $this->diagnosticoIdeaModel->editarForm($form);
-            $this->agregarDificultad($form);
-            echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');window.location='index.php';</script>";   
+            $this->agregarDificultad($form,$form['Num_consecutivo']);
+            echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');
+            window.location='index.php?mode=seleccionar-consultar-diagnostico-idea&id=".$form['Num_consecutivo']."';</script>";   
         }
 
 
@@ -143,7 +143,7 @@
             $dificultad = $this->diagnosticoIdeaModel->consultarDificultad($row['Num_consecutivo']);
             $aspectos = "";
             for($i = 0; $i < sizeof($dificultad); $i++){
-                $aspectos.= $dificultad[$i]['numero']."-".$dificultad[$i]['descripcion']."<br>";
+                $aspectos.= "<li>".$dificultad[$i]['descripcion']."</li>";
             }
             $this->view = $this->renderView($this->view, "{{Aspectos}}", $aspectos);
             $this->showView($this->view);  
@@ -153,6 +153,9 @@
 
         //llena el form para editar y para consultar diagnostico
         public function llenarForm($row){
+            $tabla="";
+            $plantilla=$this->menu= $this->getTemplate("./app/views/DiagnosticoIdea/componentes/aspectos-mejorar.html");
+
             $this->view = $this->renderView($this->view,"{{Asesor}}" , $row['Asesor']);
             $this->view = $this->renderView($this->view,"{{Fecha}}" , $row['Fecha']);
             $this->view = $this->renderView($this->view,"{{CC}}" , $row['CC']);
@@ -244,6 +247,18 @@
             foreach($client as $clave=>$valor){
                $this->view = $this->renderView($this->view, "{{".$clave."}}", $valor);
             }
+            //agregar los aspectos a mejorar de forma dinamica a editar idea
+           $array=$this->diagnosticoIdeaModel->consultarDificultad($row['Num_consecutivo']);
+           $cont=0;
+           foreach($array as $element){
+               $temp=$this->renderView($plantilla,"{{NUM_ASPECTOS_MEJORAR}}",$element['numero']);
+               $temp=$this->renderView($temp,"{{DESCRIPCION_ASPECTOS_MEJORAR}}",$element['descripcion']);
+               $tabla.=$temp;
+               $cont++;
+           }
+           
+            $this->view=$this->renderView($this->view,"{{CANT_ASPECTOS_MEJORAR}}",$cont);
+            $this->view=$this->renderView($this->view,"{{TABLA_ASPECTOS_MEJORAR}}",$tabla);
             $this->showView($this->view);
         }
 

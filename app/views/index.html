@@ -106,7 +106,7 @@
             });
          $('#example tfoot th').each( function () {
                 var title = $(this).text();
-                $(this).html( '<input type="text" placeholder="Buscar por '+title+'" />' );
+                $(this).html( '<div align="center"> <input type="text" class="form-control" placeholder="Buscar por '+title+'" /></div>' );
          } );
 
          table.columns().every( function () {
