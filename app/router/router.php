@@ -180,6 +180,9 @@
                     $this->diagnosticoEmpresa->agregarFormDiagnosticoEmpresa($_POST);
                     break;
 
+                    case "procesar-edit-diag-empresa":
+                    $this->diagnosticoEmpresa->editarFormDiagnosticoEmpresa($_POST);
+                    break;
 
                 default:
                           

@@ -49,19 +49,18 @@ class DiagnosticoEmpresa extends Controller {
         
         $id=$this->diagnosticoEmpresaModel->agregarForm($form);
         if($id!=""){
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la idea es: \\n 01-000".$id."');
+            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la Empresa es: \\n 01-000".$id."');
             ;window.location='index.php';
             </script>";
         }else{
-            echo "<script>alert('Error al registrar el diagnostico de la idea, intente más tarde');</script>";
+            echo "<script>alert('Error al registrar el diagnostico de la Empresa, intente más tarde');</script>";
         }
         
     }
     
-    public function editarFormDiagnosticoIdea($form){
-        $query= $this->diagnosticoIdeaModel->editarForm($form);
-        echo $query;
-        echo "<script>alert('Diagnostico de la idea actualizado exitosamente.');window.location='index.php';</script>";
+    public function editarFormDiagnosticoEmpresa($form){
+        $query= $this->diagnosticoEmpresaModel->editarForm($form);
+       // echo "<script>alert('Diagnostico de la Empresa actualizado exitosamente.');window.location='index.php';</script>";
     }
     
     
@@ -73,12 +72,12 @@ class DiagnosticoEmpresa extends Controller {
         
         $form = $this->renderView($form, "{{ASESOR}}", $this->diagnosticoEmpresaModel->consultarNombreAsesor());
         $form = $this->renderView($form, "{{nit_empresa}}", $row["nit_empresa"]);
+        $form = $this->renderView($form,"{{id_diagnostico_emp}}", $num_consecutivo);
         $array = $this->diagnosticoEmpresaModel->consultarDatosEmpresa($row["nit_empresa"]);
         foreach($array as $clave=>$valor){
             $form = $this->renderView($form, "{{".$clave."}}", $valor);
             
         }
-        
         $this->llenarForm($row,$form);
     }
     
@@ -90,26 +89,65 @@ class DiagnosticoEmpresa extends Controller {
                 case "Si":
                 $form = $this->renderView($form,"{{".$clave."_Si}}" , "checked");
                 $form = $this->renderView($form,"{{".$clave."_No}}" , "");
-                $this->view = $this->renderView($this->view,"{{".$clave."_Masomenos}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_Masomenos}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_Parcialmente}}" , "");
+
                 break;
             
-                case "Mas o Menos":
+                case "Mas o menos":
                 $form = $this->renderView($form,"{{".$clave."_Si}}" , "");
-                $this->view = $this->renderView($form,"{{".$clave."_No}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_No}}" , "");
                 $form = $this->renderView($form,"{{".$clave."_Masomenos}}" , "checked");
-                
+                $form = $this->renderView($form,"{{".$clave."_Parcialmente}}" , "");
+
                 break;
             
                 case "No":
                 $form = $this->renderView($form,"{{".$clave."_Si}}" , "");
                 $form = $this->renderView($form,"{{".$clave."_No}}" , "checked");
                 $form = $this->renderView($form,"{{".$clave."_Masomenos}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_Parcialmente}}" , "");
                 
+                break;
+
+                case "Parcialmente":
+                $form = $this->renderView($form,"{{".$clave."_Si}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_No}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_Masomenos}}" , "");
+                $form = $this->renderView($form,"{{".$clave."_Parcialmente}}" ,"checked");
+
+                break;
+        }
+        $form=$this->renderView($form,"{{".$clave."}}",$element);
+
+        switch ($clave) {
+            case "posicion_empresa":
+                $form=$this->renderView($form,"{{posicion_empresa_".$element."}}","selected='selected'");
+                break;
+
+            case "sector":
+                $form=$this->renderView($form,"{{sector_".$element."}}","selected='selected'");
+                break;
+            
+            case "tipo_planes":
+                $form=$this->renderView($form,"{{tipo_planes_".$element."}}","selected='selected'");
+                break;
+
+            case "web_ventas":
+                 $form=$this->renderView($form,"{{web_ventas__".$element."}}","selected='selected'");
+                break;
+
+            case "nivel_endeudamiento":
+                 $form=$this->renderView($form,"{{nivel_endeudamiento_".$element."}}","selected='selected'");
+                break;
+
+            case "estado_maquinaria":
+                 $form=$this->renderView($form,"{{estado_maquinaria_".$element."}}","selected='selected'");
                 break;
         }
 }
 
- //agregar los aspectos a mejorar de forma dinamica a editar idea
+ //agregar los aspectos a mejorar de forma dinamica a editar Empresa
            $tabla="";
            $plantilla=$this->menu= $this->getTemplate("./app/views/components/aspectos-mejorar.html");
            $dificultades=$this->diagnosticoEmpresaModel->consultarAspectosMejorar($row['id_diagnostico_emp']);
@@ -123,6 +161,17 @@ class DiagnosticoEmpresa extends Controller {
            
             $form=$this->renderView($form,"{{CANT_ASPECTOS_MEJORAR}}",$cont);
             $form=$this->renderView($form,"{{TABLA_ASPECTOS_MEJORAR}}",$tabla);
+
+    //insertamos los puntos problematicos en la edicion los checkbox
+        $puntosProblematicos=$this->diagnosticoEmpresaModel->consultarPuntosProblematicos($row['id_diagnostico_emp']);
+    
+        foreach ($puntosProblematicos as $element) {
+            $form=$this->renderView($form,"{{PUNTOS_PROBLEMATICOS_".$element["Codigo"]."}}","checked");
+        }
+        for ($i=0; $i<=30; $i++) { 
+             $form=$this->renderView($form,"{{PUNTOS_PROBLEMATICOS_".$i."}}","");
+        }
+    //
 
     //incluir el contenido a la plantilla del index
             $this->view = $this->renderView($this->view, "{{CONTENT}}", $form);
@@ -171,10 +220,10 @@ public function consultarForm($num_consecutivo){
 
 public function ventanaEditarDiag(){
     $ventana = $this->getTemplate("./app/views/components/ventana-consultar.html");
-    $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Diagnostico Idea");
+    $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Diagnostico Empresa");
     $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
     $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-    $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Editar diagnostico de la idea");
+    $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Editar diagnostico de la Empresa");
     $this->view = $this->renderView($this->view, "{{PLACEHOLDER}}", "Ingrese el numero de la cedula");
     $this->view = $this->renderView($this->view, "{{TIPO_OPERACION}}", "EDITAR");
     $this->showView($this->view);

@@ -97,7 +97,9 @@ rbutton.checked=(rbutton.checked)?false:true;
         <br>
             <hr>
                 <div class="row">
-                    <div class="col-md-12"><strong><br>ASESOR: </strong>{{ASESOR}}</div>
+					<br>
+					<div class="col-md-12"><strong>Nro. CONSECUTIVO: </strong> 01-000{{id_diagnostico_emp}}</div>
+                    <div class="col-md-12"><strong>ASESOR: </strong>{{ASESOR}}</div>
 	<div class="col-md-12"><strong>FECHA:</strong> <span id="dia"></span>/<span id="mes">
                         </span>/<span id="anio"></span></div>
 </div>
@@ -142,9 +144,10 @@ rbutton.checked=(rbutton.checked)?false:true;
 	</div>
 	<hr>
 	<form role="form" method="post" action="index.php" style="margin-right:50px">
-		<input type="hidden" name="mode" value="procesar-add-diag-empresa">
+		<input type="hidden" name="mode" value="procesar-edit-diag-empresa">
 		<input type="hidden" name="asesor" value="{{ASESOR}}">
 		<input type="hidden" name="nit_empresa" value="{{nit_empresa}}">
+		<input type="hidden" name="id_diagnostico_emp" value="{{id_diagnostico_emp}}">
 		<div class="row setup-content" id="step-1">
 			<div class="col-xs-12">
 				<div class="col-md-12">
@@ -182,7 +185,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 						<br>
 						<div class="row">
 							<div class="col-md-2"><label>Tiempo de operación:</label></div>
-							<div class="col-md-4"><input type="text" name="tiempo_operacion" class="form-control" min="0">{{tiempo_operacion}}</div>
+							<div class="col-md-4"><input type="text" name="tiempo_operacion" class="form-control" value="{{tiempo_operacion}}"></div>
 							<div class="col-md-2"><label>¿Cuáles son sus productos y/o servicios?</label></div>
 							<div class="col-md-4"><textarea type="text-area" rows="3" class="form-control" name="productos" disabled>{{emp_servicios}}</textarea></div>
 						</div>
@@ -590,7 +593,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 									<label>5. Cuántas personas laboran en la empresa:</label>
 								</td>
 								<td>
-									<input name="num_empleados" style="text-aling:rigth" class="form-control" type="number" placeholder="Ingrese el campo" />
+									<input name="num_empleados" style="text-aling:rigth" class="form-control" type="number" placeholder="Ingrese el campo" value="{{num_empleados}}" />
 								</td>
 							</tr>
 							<tr>
@@ -699,11 +702,11 @@ rbutton.checked=(rbutton.checked)?false:true;
 									<label>8. La página web hace parte del ciclo de ventas.</label>
 								</td>
 								<td>
-									<select class="form-control" id="exampleSelect1" name="web_ventas">
-                                                      <option {{web_ventas_Si}} >Si</option>
-                                                      <option {{web_ventas_Masomenos}} >Mas o menos</option>
-                                                      <option {{web_ventas_No}} >No</option>
-                                                      <option {{web_ventas_No tiene web}} >No tiene Web</option>
+									<select class="form-control" name="web_ventas">
+                                                      <option {{web_ventas__Si}} >Si</option>
+                                                      <option {{web_ventas__Mas o menos}} >Mas o menos</option>
+                                                      <option {{web_ventas__No}} >No</option>
+                                                      <option {{web_ventas__No tiene web}} >No tiene Web</option>
                                                     </select>
 								</td>
 							</tr>
@@ -1137,7 +1140,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 										</ol>
 									</td>
 									<td>
-										<input type="number" name="porcentaje_capacidad" value"{{porcentaje_capacidad}}" class="form-control" placeholder="%">
+										<input type="number" name="porcentaje_capacidad" value="{{porcentaje_capacidad}}" class="form-control" placeholder="%">
 									</td>
 								</tr>
 								</tr>
