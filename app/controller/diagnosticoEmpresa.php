@@ -49,9 +49,8 @@ class DiagnosticoEmpresa extends Controller {
         
         $id=$this->diagnosticoEmpresaModel->agregarForm($form);
         if($id!=""){
-            echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la Empresa es: \\n 01-000".$id."');
-            ;window.location='index.php';
-            </script>";
+           echo "<script>alert('Registro éxitoso. Su numero consecutivo del diagnostico de la Empresa es: \\n 01-000".$id."');
+        ;window.location='index.php?mode=seleccionar-consultar-diagnostico-empresa&id=".$id."';</script>";
         }else{
             echo "<script>alert('Error al registrar el diagnostico de la Empresa, intente más tarde');</script>";
         }

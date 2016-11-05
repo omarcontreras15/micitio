@@ -27,12 +27,32 @@ class DiagnosticoEmpresaModel extends Model {
         $delete="DELETE FROM `diagxpuntos` WHERE `diagxpuntos`.`Codigo_empresa`=".$form['id_diagnostico_emp'];
         $this->query($delete);
         //agregar de nuevo los aspectos a mejorar y los puntos problematicos
-        $this->insertarAdicionalesDiagnostico($form,$form['id_diagnostico_emp']);
+        $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
+        $id= $form["id_diagnostico_emp"];
+        for($i=1 ; $i<=34 ; $i++){
+            
+            if(isset($form["$i"])){
+                $insert2.= " ('".$id."',".$form["$i"]."),";
+            }
+        }
+        $insert2 = trim($insert2,',');
+        $insert2 = $insert2.";";
+        $this->query($insert2);
+        $insert4 ="INSERT INTO lista_dificultades_e (id_diagnostico_emp,numero,descripcion) VALUES ";
+        $cant_aspectos = $form['cant-aspectos-mejorar'];
+        for($j=1; $j<= $cant_aspectos ; $j++){   
+
+            //modificar para que no agregue espacios vacios
+            $insert4.="(".$id.",'".$j."','".$form['aspectos-mejorar-'.$j]."'),";   
+        }
+        $insert4 = trim($insert4,',');
+        $this->query($insert4);
         $this->terminate();
         return $query;
     }
     
     public function agregarForm($form){
+        $cant_aspectos = $form['cant-aspectos-mejorar'];
         foreach($form as $clave => $valor){
             if($valor==""){
                 $form[$clave]="NULL";
@@ -230,13 +250,26 @@ class DiagnosticoEmpresaModel extends Model {
         $consulta="SELECT * FROM diagnostico_empresa order by id_diagnostico_emp desc LIMIT 1";
         $row=mysqli_fetch_array($this->query($consulta));
         $id= $row["id_diagnostico_emp"];
-        $this->insertarAdicionalesDiagnostico($form,$id);
+        $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
+        for($i=1 ; $i<=34 ; $i++){
+            
+            if(isset($form["$i"])){
+                $insert2.= " ('".$id."',".$form["$i"]."),";
+            }
+        }
+        $insert2 = trim($insert2,',');
+        $insert2 = $insert2.";";
+        $this->query($insert2);
+        $insert4 ="INSERT INTO lista_dificultades_e (id_diagnostico_emp,numero,descripcion) VALUES ";
+        for($j=1; $j<= $cant_aspectos ; $j++){   
+            $insert4.="(".$id.",'".$j."',".$form['aspectos-mejorar-'.$j]."),";   
+        }
+        $insert4 = trim($insert4,',');
+        $this->query($insert4);
         $this->terminate();
-        return $id;
-        
+        return $id;  
     }
-    public function insertarAdicionalesDiagnostico($form,$id){
-        $cant_aspectos = $form['cant-aspectos-mejorar'];
+    public function insertarAdicionalesDiagnostico($form,$id,$cant_aspectos){
         $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
         for($i=1 ; $i<=34 ; $i++){
             

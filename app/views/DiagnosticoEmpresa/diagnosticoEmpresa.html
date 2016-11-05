@@ -1415,7 +1415,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 	$("#agregar-aspectos-mejorar").on("click", function(){
 		  contFilasAspectos++;
 		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
-		  html=html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
+          html= html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
 		  $("#aspectos-mejorar").append(html);
           $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
 	 });
