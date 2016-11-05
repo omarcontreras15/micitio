@@ -60,7 +60,12 @@ class DiagnosticoEmpresa extends Controller {
     
     public function editarFormDiagnosticoEmpresa($form){
         $query= $this->diagnosticoEmpresaModel->editarForm($form);
-       // echo "<script>alert('Diagnostico de la Empresa actualizado exitosamente.');window.location='index.php';</script>";
+        if($query){
+        echo "<script>alert('Diagnostico de la Empresa actualizado exitosamente.');window.location='index.php?mode=seleccionar-consultar-diagnostico-empresa&id=".$form['id_diagnostico_emp']."';</script>";
+        }else{
+        echo "<script>alert('Error al actualizar el diagnostico de la empresa.');window.location='index.php';</script>";
+        }
+       
     }
     
     

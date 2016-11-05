@@ -20,14 +20,19 @@ class DiagnosticoEmpresaModel extends Model {
         $update= "UPDATE diagnostico_empresa SET nit_empresa='".$form['nit_empresa']."',asesor='".$form['asesor']."',posicion_empresa='".$form['posicion_empresa']."',tiempo_operacion='".$form['tiempo_operacion']."',sector='".$form['sector']."',planes_largoplazo='".$form['planes_largoplazo']."',mision='".$form['mision']."',vision='".$form['vision']."',objetivos='".$form['objetivos']."',estrategias='".$form['estrategias']."',plan_accion='".$form['plan_accion']."',valores='".$form['valores']."',nombre_objetivos='".$form['nombre_objetivos']."',recursos='".$form['recursos']."',debilidades='".$form['debilidades']."',oportunidades='".$form['oportunidades']."',obstaculos='".$form['obstaculos']."',ventaja_cliente='".$form['ventaja_cliente']."',ventaja_empresa='".$form['ventaja_empresa']."',tipo_planes='".$form['tipo_planes']."',tiempo_planeacion='".$form['tiempo_planeacion']."',participacion_empleados='".$form['participacion_empleados']."',empleados_conocen='".$form['empleados_conocen']."',estrategias_crecimiento='".$form['estrategias_crecimiento']."',organigrama='".$form['organigrama']."',procesos_documentados='".$form['procesos_documentados']."',procesos_evaluacion='".$form['procesos_evaluacion']."',procesos_automatizar='".$form['procesos_automatizar']."',max_colaboradores='".$form['max_colaboradores']."',clima_laboral='".$form['clima_laboral']."',motivacion_empleados='".$form['motivacion_empleados']."',toma_desiciones='".$form['toma_desiciones']."',en_concenso='".$form['en_concenso']."',define_acciones='".$form['define_acciones']."',sistema_control='".$form['sistema_control']."',comparar_planeado_eje='".$form['comparar_planeado_eje']."',clave_desempenio='".$form['clave_desempenio']."',seguimiento_indicadores='".$form['seguimiento_indicadores']."',contrata_direc_personal='".$form['contrata_direc_personal']."',combina_forma_contratar='".$form['combina_forma_contratar']."',procesos_establecidos='".$form['procesos_establecidos']."',recompensas_establecidas='".$form['recompensas_establecidas']."',num_empleados='".$form['num_empleados']."',empleados_necesarios='".$form['empleados_necesarios']."',depto_mercadeo_ventas='".$form['depto_mercadeo_ventas']."',msj_marketing_claro='".$form['msj_marketing_claro']."',dedica_tiempo_marketing='".$form['dedica_tiempo_marketing']."',delega_tiempo='".$form['delega_tiempo']."',plan_mercadeo='".$form['plan_mercadeo']."',implementa_plan='".$form['implementa_plan']."',cronograma_marketing='".$form['cronograma_marketing']."',perfil_cliente='".$form['perfil_cliente']."',clasificacion_cliente='".$form['clasificacion_cliente']."',web_ventas='".$form['web_ventas']."',tecnologia_seguimiento='".$form['tecnologia_seguimiento']."',sistema_compatibilidad='".$form['sistema_compatibilidad']."',contabilidad_aldia='".$form['contabilidad_aldia']."',aplica_normas_contabilidad='".$form['aplica_normas_contabilidad']."',facturacion_ultimoanio='".$form['facturacion_ultimoanio']."',planificacion_financiera_formal='".$form['planificacion_financiera_formal']."',margen_rentabilidad='".$form['margen_rentabilidad']."',margen_rentabilidad_pos='".$form['margen_rentabilidad_pos']."',nivel_endeudamiento='".$form['nivel_endeudamiento']."',ingresos_cumplen_objetivos='".$form['ingresos_cumplen_objetivos']."',suficiente_capital='".$form['suficiente_capital']."',flujo_caja_positivo='".$form['flujo_caja_positivo']."',costo_producto='".$form['costo_producto']."',presupuesto_estable='".$form['presupuesto_estable']."',desiciones_analisis='".$form['desiciones_analisis']."',porcentaje_capacidad='".$form['porcentaje_capacidad']."',normas_tecnicas_sector='".$form['normas_tecnicas_sector']."',estado_maquinaria='".$form['estado_maquinaria']."',programa_produccion='".$form['programa_produccion']."',corresponde_demanda_mercado='".$form['corresponde_demanda_mercado']."',produccion_planes='".$form['produccion_planes']."',pontrola_calidad_producto='".$form['pontrola_calidad_producto']."',problemas_abastecimiento='".$form['problemas_abastecimiento']."',Adquisicion_maquinaria='".$form['Adquisicion_maquinaria']."',Planes_contingencia_maprima='".$form['Planes_contingencia_maprima']."',Inventarios_periodicos='".$form['Inventarios_periodicos']."',Seguimiento_inventarios='".$form['Seguimiento_inventarios']."',eficiente_dist_trabajo='".$form['eficiente_dist_trabajo']."',paises_importado_expor='".$form['paises_importado_expor']."',mercados_importado_expor='".$form['mercados_importado_expor']."',metas_importado_expor='".$form['metas_importado_expor']."',estrategia_marketing='".$form['estrategia_marketing']."',ventas_esperadas='".$form['ventas_esperadas']."',margen_ventas='".$form['margen_ventas']."',capital_presupuestado='".$form['capital_presupuestado']."',aspectos_adicionales='".$form['aspectos_adicionales']."' WHERE id_diagnostico_emp=".$form['id_diagnostico_emp'];
         
         $query = $this->query($update);
-        echo $query;
+        //borra los aspectos a mejorar del diagnostico
+        $delete="DELETE FROM `lista_dificultades_e` WHERE `lista_dificultades_e`.`id_diagnostico_emp`=".$form['id_diagnostico_emp'];
+        $this->query($delete);
+        //borra los puntos problematicos del diagnostico 
+        $delete="DELETE FROM `diagxpuntos` WHERE `diagxpuntos`.`Codigo_empresa`=".$form['id_diagnostico_emp'];
+        $this->query($delete);
+        //agregar de nuevo los aspectos a mejorar y los puntos problematicos
+        $this->insertarAdicionalesDiagnostico($form,$form['id_diagnostico_emp']);
         $this->terminate();
+        return $query;
     }
     
     public function agregarForm($form){
-        
-        $cant_aspectos = $form['cant-aspectos-mejorar'];
-        
         foreach($form as $clave => $valor){
             if($valor==""){
                 $form[$clave]="NULL";
@@ -225,9 +230,14 @@ class DiagnosticoEmpresaModel extends Model {
         $consulta="SELECT * FROM diagnostico_empresa order by id_diagnostico_emp desc LIMIT 1";
         $row=mysqli_fetch_array($this->query($consulta));
         $id= $row["id_diagnostico_emp"];
+        $this->insertarAdicionalesDiagnostico($form,$id);
+        $this->terminate();
+        return $id;
         
+    }
+    public function insertarAdicionalesDiagnostico($form,$id){
+        $cant_aspectos = $form['cant-aspectos-mejorar'];
         $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
-        
         for($i=1 ; $i<=34 ; $i++){
             
             if(isset($form["$i"])){
@@ -238,16 +248,11 @@ class DiagnosticoEmpresaModel extends Model {
         $insert2 = $insert2.";";
         $this->query($insert2);
         $insert4 ="INSERT INTO lista_dificultades_e (id_diagnostico_emp,numero,descripcion) VALUES ";
-        for($j=1; $j<= $cant_aspectos ; $j++){
-            
-            $insert4.="(".$id.",'".$j."',".$form['aspectos-mejorar-'.$j]."),";
-            
+        for($j=1; $j<= $cant_aspectos ; $j++){   
+            $insert4.="(".$id.",'".$j."','".$form['aspectos-mejorar-'.$j]."'),";   
         }
         $insert4 = trim($insert4,',');
         $this->query($insert4);
-        $this->terminate();
-        return $id;
-        
     }
     
     public function consultarForm($consecutivo){
@@ -322,7 +327,7 @@ class DiagnosticoEmpresaModel extends Model {
     public function consultarAspectosMejorar($id){
         $this->connect();
         $result=$this->query("SELECT descripcion, numero
-        from lista_dificultades_e where (id_diagnostico_emp=".$id.");");
+        from lista_dificultades_e where id_diagnostico_emp=$id ORDER BY numero ASC");
         $this->terminate();
         return $result;
     }

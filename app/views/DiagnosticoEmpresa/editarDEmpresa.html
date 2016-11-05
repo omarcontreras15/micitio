@@ -1381,7 +1381,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 									/>
 								</div>
 								<table class="table table-bordered">
-									<input id="cant-aspectos-mejorar" type="hidden" name="cant-aspectos-mejorar" value="">
+									<input id="cant-aspectos-mejorar" type="hidden" name="cant-aspectos-mejorar" value="{{CANT_ASPECTOS_MEJORAR}}">
 									<thead>
 										<tr>
 											<th>N°</th>
@@ -1410,7 +1410,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 <script>
     $(document).ready(function () {
         var tablaAspectosMejorar="";
-        var contFilasAspectos=0;
+        var contFilasAspectos=$("#cant-aspectos-mejorar").attr("value");
 	 jQuery.get('./app/views/components/aspectos-mejorar.html', function(data){
             tablaAspectosMejorar=data;
      });
@@ -1418,7 +1418,7 @@ rbutton.checked=(rbutton.checked)?false:true;
 	$("#agregar-aspectos-mejorar").on("click", function(){
 		  contFilasAspectos++;
 		  var html= tablaAspectosMejorar.replace(/{{NUM_ASPECTOS_MEJORAR}}/gi,contFilasAspectos);
-		  html=html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
+          html= html.replace(/{{DESCRIPCION_ASPECTOS_MEJORAR}}/gi,"");
 		  $("#aspectos-mejorar").append(html);
           $("#cant-aspectos-mejorar").attr("value",contFilasAspectos);
 	 });
