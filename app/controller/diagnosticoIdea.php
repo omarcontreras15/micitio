@@ -92,10 +92,12 @@
 
             public function agregarDificultad($form, $id) {
             $arrayDTO = array();
+            $j = 1;
             for($i = 1; $i <= $form['cant-aspectos-mejorar']; $i++){
                 if($form['aspectos-mejorar-'.$i]!=null){
-                    $DTO = new DificultadDTO ($id,$i,$form['aspectos-mejorar-'.$i]);
+                    $DTO = new DificultadDTO ($id,$j,$form['aspectos-mejorar-'.$i]);
                     array_push($arrayDTO,$DTO);
+                    $j++;
                 }                
             }
             if(sizeof($arrayDTO)>0)
