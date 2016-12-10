@@ -24,10 +24,10 @@ class DiagnosticoEmpresaModel extends Model {
         $delete="DELETE FROM `lista_dificultades_e` WHERE `lista_dificultades_e`.`id_diagnostico_emp`=".$form['id_diagnostico_emp'];
         $this->query($delete);
         //borra los puntos problematicos del diagnostico 
-        $delete="DELETE FROM `diagxpuntos` WHERE `diagxpuntos`.`Codigo_empresa`=".$form['id_diagnostico_emp'];
+        $delete="DELETE FROM `diagxpuntos` WHERE `diagxpuntos`.`id_diag_empresa`=".$form['id_diagnostico_emp'];
         $this->query($delete);
         //agregar de nuevo los aspectos a mejorar y los puntos problematicos
-        $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
+        $insert2 = "INSERT INTO diagxpuntos (id_diag_empresa, Codigo_puntos) VALUES ";
         $id= $form["id_diagnostico_emp"];
         for($i=1 ; $i<=34 ; $i++){
             
@@ -250,7 +250,7 @@ class DiagnosticoEmpresaModel extends Model {
         $consulta="SELECT * FROM diagnostico_empresa order by id_diagnostico_emp desc LIMIT 1";
         $row=mysqli_fetch_array($this->query($consulta));
         $id= $row["id_diagnostico_emp"];
-        $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
+        $insert2 = "INSERT INTO diagxpuntos (id_diag_empresa, Codigo_puntos) VALUES ";
         for($i=1 ; $i<=34 ; $i++){
             
             if(isset($form["$i"])){
@@ -270,7 +270,7 @@ class DiagnosticoEmpresaModel extends Model {
         return $id;  
     }
     public function insertarAdicionalesDiagnostico($form,$id,$cant_aspectos){
-        $insert2 = "INSERT INTO diagxpuntos (Codigo_empresa, Codigo_puntos) VALUES ";
+        $insert2 = "INSERT INTO diagxpuntos (id_diag_empresa, Codigo_puntos) VALUES ";
         for($i=1 ; $i<=34 ; $i++){
             
             if(isset($form["$i"])){
@@ -349,7 +349,7 @@ class DiagnosticoEmpresaModel extends Model {
     public function consultarPuntosProblematicos($id){
         $consulta= "SELECT p.Nombre, p.Codigo
         FROM puntos_problematicos p, diagxpuntos d
-        WHERE (d.Codigo_puntos = p.Codigo) AND (d.Codigo_empresa=$id)";
+        WHERE (d.Codigo_puntos = p.Codigo) AND (d.id_diag_empresa=$id)";
         $this->connect();
         $query = $this->query($consulta);
         $this->terminate();
