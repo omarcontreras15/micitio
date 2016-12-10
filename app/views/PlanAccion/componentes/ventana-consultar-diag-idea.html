@@ -1,0 +1,35 @@
+  <link href="public/css/datatables.css" type="text/css" rel="stylesheet">
+ <div class="main">
+           <form action='index.php' id="consultar_cc" method='get' class="container contact">
+              <br>
+               <h2 class="titulo-ventana-consultar">{{TITULO_VENTANA}}</h2>
+           <p style='font-weight: bold;'>{{TITULO2}}</p><br>
+           <input type='hidden' name='mode' value='seleccionar-consultar-diagnostico-idea-plan-accion'>
+           <input id="id" name="id" type="hidden" value="0">
+           <input id="tipo" name="tipo" type="hidden" value="idea">
+           	<div class="table-responsive">
+           <table id="example" class="table table-bordered table-hover">
+                <thead>
+                    <th>N°</th>
+                    <th>Nombre</th>
+                    <th>C.C.</th>
+                    <th>Idea</th>
+                    <th>Fecha</th>
+                </thead>
+                <tbody align="center">
+                {{OPTION}}
+                </tbody>
+                <tfoot>
+                    <th>N°</th>
+                    <th>Nombre</th>
+                    <th>C.C.</th>
+                    <th>Idea</th>
+                    <th>Fecha</th>
+                </tfoot>
+           </table>
+           	</div>
+           <input class="subtmit-consultar" id="consultar" type="submit" value="Agregar plan de acción">
+		    </form>	
+
+</div>
+    

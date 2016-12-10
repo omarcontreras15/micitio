@@ -89,6 +89,38 @@
                             $this->diagnosticoEmpresa->consultarForm($_GET['id']);
                         }
                         break;
+                        
+                        case "agregar-plan-accion-idea":
+                          if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                         $this->planAccion->ventanaAgregarPlanAccionIdea();   
+                        }       
+                        break;
+
+                        case "agregar-plan-accion-empresa":
+                          if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                         $this->planAccion->ventanaAgregarPlanAccionEmpresa();   
+                        }       
+                        break;
+
+                        case "seleccionar-consultar-diagnostico-idea-plan-accion":
+                        if($_GET["id"]==="0"){
+                            $this->planAccion->ventanaAgregarPlanAccionIdea();   
+                        }else{
+                             $this->planAccion->seleccionarDiagPlanAccion($_GET['id'], $_GET['tipo']);
+                        }                        
+                        break;
+
+                        case "seleccionar-consultar-diagnostico-empresa-plan-accion":
+                        if($_GET['id']=="0"){
+                            $this->planAccion->ventanaAgregarPlanAccionEmpresa();
+                        }else{    
+                             $this->planAccion->seleccionarDiagPlanAccion($_GET['id'],$_GET['tipo']);
+                        }
+                        break;
 
                         case "seleccionar-emprendedor":
                         if($_GET["id"]==="0"){
