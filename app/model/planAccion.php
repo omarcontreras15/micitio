@@ -82,5 +82,9 @@ class PlanAccionModel extends Model {
        }
         return $array;
     }
+
+    public function consultarProblemasDiagEmpresa($numConsecutivo){
+
+    }
     }
 ?>

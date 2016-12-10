@@ -101,6 +101,7 @@ class PlanAccion extends Controller{
         if($tipo=="idea"){
             $array=$this->planAccionModel->consultarProblemasDiagIdea($numConsecutivo);
         }else{
+            $array=$this->planAccionModel->consultarProblemasDiagEmpresa($numConsecutivo);
         }
         foreach ($array as $element) {
             $cont++;
