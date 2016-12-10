@@ -90,18 +90,32 @@ class PlanAccion extends Controller{
      }
 
      public function seleccionarDiagPlanAccion($numConsecutivo, $tipo){
+        $array=null;
+        $cont=0;
+        $allTablas="";
         $contenido=$this->getTemplate("./app/views/PlanAccion/planAccionModelo.html");
         $tablasProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         //PRUEBAS
-       $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",1);
-       $tablasProblemas=$this->renderView($tablasProblemas, "{{NUM_PROBLEMA}}",1);
-       $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$tablasProblemas);
+        if($tipo=="idea"){
+            $array=$this->planAccionModel->consultarProblemasDiagIdea($numConsecutivo);
+        }else{
+        }
+        foreach ($array as $element) {
+            $cont++;
+            $temp=$this->renderView($tablasProblemas, "{{NUM_PROBLEMA}}",$cont);
+            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}", $element);
+            $allTablas.=$temp;
+        }
+       $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
+       $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$allTablas);
         //
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
         $this->showView($this->view);
      }
+
+     
 }
 ?>

@@ -70,5 +70,17 @@ class PlanAccionModel extends Model {
         $row = mysqli_fetch_array($query);
         return $row;
     }
+
+    public function consultarProblemasDiagIdea($numConsecutivo){
+        $this->connect();
+        $array=array();
+        $consulta = "SELECT descripcion from lista_dificultades where num_consecutivo= $numConsecutivo";
+        $query = $this->query($consulta);
+        $this->terminate();
+       while($row = mysqli_fetch_array($query)){
+           array_unshift($array, $row['descripcion']);
+       }
+        return $array;
+    }
     }
 ?>
