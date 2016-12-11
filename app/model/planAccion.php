@@ -109,17 +109,17 @@ class PlanAccionModel extends Model {
         
         while($desc = mysqli_fetch_array($query2)){
             if($row[$desc['id']]!='Si'){
-                array_unshift($array, $desc['descripcion']);
+                array_push($array, $desc['descripcion']);
             }
             if($desc['id']=='problemas_abastecimiento' && $row[$desc['id']]=='Si'){
-                array_unshift($array, $desc['descripcion']);
+                array_push($array, $desc['descripcion']);
             }
         }
         while($punto = mysqli_fetch_array($query3)){
-            array_unshift($array, $punto['nombre']);
+            array_push($array, $punto['nombre']);
         }
         while($aspecto = mysqli_fetch_array($query4)){
-            array_unshift($array, $aspecto['descripcion']);
+            array_push($array, $aspecto['descripcion']);
         }
 
         return $array;
