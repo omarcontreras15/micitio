@@ -1,139 +1,225 @@
 <?php
-include_once "./app/controller/controller.php";
-include_once "./app/model/planAccion.php";
-class PlanAccion extends Controller{
-    private $planAccionModel;
-    private $view;
-    private $menu;
-    
-    
-    public function __construct() {
-        $this->planAccionModel= new PlanAccionModel();
-        $this->view = $this->getTemplate("./app/views/index.html");
-        $this->menu= $this->getTemplate("./app/views/components/menu-login.html");
-    }
-    
-    public function indexPlanAccion(){
-        $contenido=$this->getTemplate("./app/views/PlanAccion/planAccion.html");
-        $tablasProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
-        $this->showView($this->view);
-    }
+require_once "./app/model/model.php";
 
-
-    public function ventanaAgregarPlanAccionIdea(){
-        $ventana = $this->getTemplate("./app/views/PlanAccion/componentes/ventana-consultar-diag-idea.html");
-            $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan Acción");
-            $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-            $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-            $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Agregar Plan Acción Del Diagnostico Idea");
-            $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea realizar el plan de accion");
-            $array=$this->planAccionModel->consultarDiagIdea();
-            $sizeArray=sizeof($array);
-            $option="";
-            $elementotabla = $this->getTemplate("./app/views/DiagnosticoIdea/componentes/elemento-tabla.html");
-
-           if($sizeArray>0){
-           foreach($array as $element) {
-                $temp = $elementotabla;
-                $temp = $this->renderView($temp, "{{NUMC}}", $element['Num_consecutivo']);
-                $temp = $this->renderView($temp, "{{CC}}", $element['CC']);
-                $temp = $this->renderView($temp, "{{IDEA}}", $element['Idea']);
-                $temp = $this->renderView($temp, "{{FECHA}}", $element['Fecha']);
-                $client = $this->planAccionModel->consultarDatosEmprendedor($element['CC']);
-                $temp = $this->renderView($temp, "{{NOMBRE}}", $client['cl_nombre']." ".$client['cl_apellido']);
-                $option .= $temp;
-            }
-            $this->view=$this->renderView($this->view, "{{OPTION}}",$option);
-           }else{
-               $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existe Ningun Diagnóstico</h2>");
-           }
-            $this->showView($this->view);    
-    }
-
-     public function ventanaAgregarPlanAccionEmpresa(){
-         
-    $ventana = $this->getTemplate("./app/views/PlanAccion/componentes/ventana-consultar-diag-empresa.html");
-    $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan Accion");
-    $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-    $this->view = $this->renderView($this->view, "{{CONTENT}}", $ventana);
-    $this->view = $this->renderView($this->view, "{{TITULO_VENTANA}}", "Agregar Plan Acción Del Diagnostico Empresa");
-    $this->view = $this->renderView($this->view, "{{TITULO2}}","Seleccione el diagnostico que desea realizar el plan de accion");
-    $array = $this->planAccionModel->consultarDiagEmpresa();
-    $sizeArray = sizeof($array);
-    $option = "";
-    $elementotabla = $this->getTemplate("./app/views/DiagnosticoEmpresa/componentes/tabla-consulta.html");
+class PlanAccionModel extends Model {
     
-    if($sizeArray>0){
-        foreach ($array as $element){
-            $temp = $elementotabla;
-            $temp = $this->renderView($temp, "{{NUMC}}", $element['id_diagnostico_emp']);
-            $temp = $this->renderView($temp, "{{NIT}}", $element['nit_empresa']);
-            $temp = $this->renderView($temp, "{{FECHA}}", $element['fecha']);
-            $temp = $this->renderView($temp, "{{SECTOR}}", $element['sector']);
-            //ESTOS DATOS SE SACAN DE LA BASE DE DATOS DEL PROYECTO NUMERO UNO
-            $empresadata = $this->planAccionModel->consultarDatosEmpresa($element['nit_empresa']);
-            $temp = $this->renderView($temp, "{{EMPRESA}}", $empresadata['emp_nombre']);
-            $temp = $this->renderView($temp, "{{RAZONSOCIAL}}", $empresadata['emp_razons']);
-            $temp = $this->renderView($temp, "{{PRODUCTOS}}", $empresadata['emp_servicios']);
-            $contact = $this->planAccionModel->consultarDatosCliente($element['nit_empresa']);
-            $temp = $this->renderView($temp, "{{CONTACTO}}", $contact['cl_nombre']." ".$contact['cl_apellido']);
-            $option .= $temp;
+    //CONSULTA EL NOMBRE DEL ASESOR  QUE TIENE SESSION INICIADA
+    public function consultarNombreAsesor(){
+        $this->connect();
+        $consulta = "SELECT * FROM user WHERE id=".$_SESSION["user_id"];
+        $query = $this->query($consulta);
+        $this->terminate();
+        while($row = mysqli_fetch_array($query)){
+            return $row["nombre"];
         }
-        $this->view = $this->renderView($this->view, "{{OPTION}}", $option);
-    }else{
-        echo "<h2>No Existen Diagnósticos</h2>";
+        return "";
     }
-    $this->showView($this->view);
-     }
+    
+    //retorna una lista con los datos de los diagnosticos de idea para la tabla de seleccionar diagnostico a consultar
+    public function consultarDiagIdea(){
+        $this->connect();
+        $consulta = "SELECT Num_consecutivo, CC, Idea, Fecha FROM diagnostico_idea where Num_consecutivo not in (select diag_idea from plan_accion_idea)";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array=array();
+        while($row = mysqli_fetch_array($query)){
+            array_unshift($array,$row);
+        }
+        return $array;
+    }
+    
+    
+    //retorna una lista con los datos de los diagnosticos de emrpesa para la tabla de seleccionar diagnostico a consultar
+    public function consultarDiagEmpresa(){
+        $this->connect();
+        $consulta = "SELECT id_diagnostico_emp, fecha, sector, nit_empresa FROM diagnostico_empresa where id_diagnostico_emp not in (select diag_empresa from plan_accion_empresa)";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array=array();
+        while($row = mysqli_fetch_array($query)){
+            array_unshift($array,$row);
+        }
+        return $array;
+    }
+    
+    public function consultarDatosEmprendedor($cc){
+        $this->connect();
+        $consulta = "SELECT cl_cedula, cl_nombre, cl_apellido, cl_telefono, cl_celular, cl_cedula FROM cliente WHERE cl_cedula = ".$cc;
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row= mysqli_fetch_array($query);
+        return $row;
+    }
+    
+    public function consultarDatosEmpresa($nit){
+        $this->connect();
+        $consulta = "SELECT e.emp_nombre, e.emp_razons, e.emp_servicios, e.emp_telefono, e.emp_celular, p.cl_nombre
+        FROM empresa e, contacto c, cliente p
+        WHERE e.emp_nit = c.emp_nit
+        AND c.cl_cedula = p.cl_cedula
+        AND e.emp_nit = ".$nit;
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row= mysqli_fetch_array($query);
+        return $row;
+    }
+    
+    public function consultarDatosCliente($nit){
+        $this->connect();
+        $consulta = "SELECT c.cl_nombre, c.cl_apellido FROM cliente c, contacto p WHERE c.cl_cedula = p.cl_cedula AND   p.emp_nit =$nit";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row = mysqli_fetch_array($query);
+        return $row;
+    }
 
-     public function seleccionarDiagPlanAccion($numConsecutivo, $tipo){
-        $array=null;
-        $cont=0;
-        $allTablas="";
-        $contenido=$this->getTemplate("./app/views/PlanAccion/planAccionModelo.html");
-        $tablasProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
-        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        //PRUEBAS
+
+    //consulta los posibles problemas que se van a listar para el plan de accion de la idea seleccionada
+
+    public function consultarProblemasDiagIdea($numConsecutivo){
+        $this->connect();
+        $array=array();
+        $consulta = "SELECT descripcion from lista_dificultades where num_consecutivo= $numConsecutivo";
+        $query = $this->query($consulta);
+        $this->terminate();
+        while($row = mysqli_fetch_array($query)){
+            array_unshift($array, $row['descripcion']);
+        }
+        return $array;
+    }
+
+    
+    public function insertarPlanAccion($numConsecutivo, $obs_adicionales, $que_sucedio, $cumplio, $alcanzaron_obj, $tipo, $asesor){
+        $this->connect();
+        $insert="";
         if($tipo=="idea"){
-            $array=$this->planAccionModel->consultarProblemasDiagIdea($numConsecutivo);
+            $insert = "INSERT INTO `plan_accion_idea` (`diag_idea`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','".$form['asesor']."', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
         }else{
-            $array=$this->planAccionModel->consultarProblemasDiagEmpresa($numConsecutivo);
+            $insert = "INSERT INTO `plan_accion_empresa` (`diag_empresa`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','$asesor', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
         }
-        foreach ($array as $element) {
-            $cont++;
-            $temp=$this->renderView($tablasProblemas, "{{NUM_PROBLEMA}}",$cont);
-            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}", $element);
-            $allTablas.=$temp;
+        $query = $this->query($insert);
+        
+        //consulta ultimo id
+        $consulta="";
+        if($tipo=="idea"){
+            $consulta="SELECT id_paccion from plan_accion_idea where diag_idea=$numConsecutivo";
+        }else{
+            $consulta="SELECT id_paccion from plan_accion_empresa where diag_empresa=$numConsecutivo";
         }
-       $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
-       $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$allTablas);
-        //
-        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
-        $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
-        $this->view = $this->renderView($this->view, "{{NUM_CONSECUTIVO}}", $numConsecutivo);
-        $this->view = $this->renderView($this->view, "{{TIPO_DIAG}}", $tipo);
-        $this->showView($this->view);
-     }
+        $consulta =mysqli_fetch_array($this->query($consulta));
+        $this->terminate();
+        return $consulta['id_paccion'];
 
-     public function agregarPlanAccion($form){
+    }
+    //consulta los posibles problemas que se van a listar para el plan de accion de la empresa seleccionada
+    public function consultarProblemasDiagEmpresa($numConsecutivo){
+        $this->connect();
+        $array=array();
+        //consulta de los puntos negativos en el diagnostico
+        $consulta1 = "SELECT mision, vision, objetivos, estrategias, plan_accion, participacion_empleados, empleados_conocen, estrategias_crecimiento, organigrama, procesos_documentados, procesos_evaluacion, procesos_automatizar, max_colaboradores, clima_laboral, motivacion_empleados, define_acciones, sistema_control, comparar_planeado_eje, clave_desempenio, seguimiento_indicadores, contrata_direc_personal, combina_forma_contratar, procesos_establecidos, recompensas_establecidas, empleados_necesarios, depto_mercadeo_ventas, msj_marketing_claro, plan_mercadeo, implementa_plan, cronograma_marketing, perfil_cliente, clasificacion_cliente, web_ventas, tecnologia_seguimiento, sistema_compatibilidad, contabilidad_aldia, aplica_normas_contabilidad, planificacion_financiera_formal, margen_rentabilidad, margen_rentabilidad_pos, ingresos_cumplen_objetivos, suficiente_capital, flujo_caja_positivo, costo_producto, presupuesto_estable, desiciones_analisis, programa_produccion, corresponde_demanda_mercado, produccion_planes, pontrola_calidad_producto, problemas_abastecimiento, Adquisicion_maquinaria, Planes_contingencia_maprima, Inventarios_periodicos, Seguimiento_inventarios, eficiente_dist_trabajo FROM diagnostico_empresa WHERE id_diagnostico_emp =$numConsecutivo";
+        $query1 = $this->query($consulta1);
+        //consulta de la descripcion de cada posible punto negativo
+        $consulta2 = "SELECT id, descripcion FROM desc_problemas";
+        $query2 = $this->query($consulta2);
+        //consulta de los puntos problematicos de la empresa
+        $consulta3 = "SELECT nombre FROM puntos_problematicos p, diagxpuntos d WHERE d.id_diag_empresa = $numConsecutivo AND d.Codigo_puntos = p.Codigo";
+        $query3 = $this->query($consulta3);
+        //consulta aspectos a mejorar de la empresa
+        $consulta4 = "SELECT descripcion from lista_dificultades_e where id_diagnostico_emp = $numConsecutivo";
+        $query4 = $this->query($consulta4);
 
-            //aqui se inserta el plan de accion retorna el id de ese plan de accion que se registro
-            $id_plan_accion=$this->planAccionModel->insertarPlanAccion($form['num-consecutivo'], $form['obs_adicionales'], $form['que_sucedio'], $form['cumplio'], $form['alcanzaron_obj'], $form['tipo'], $form['asesor']);
+        $this->terminate();
+        $row = mysqli_fetch_array($query1);
+        
+        while($desc = mysqli_fetch_array($query2)){
+            if($row[$desc['id']]!='Si'){
+                array_push($array, $desc['descripcion']);
+            }
+            if($desc['id']=='problemas_abastecimiento' && $row[$desc['id']]=='Si'){
+                array_push($array, $desc['descripcion']);
+            }
+        }
+        while($punto = mysqli_fetch_array($query3)){
+            array_push($array, $punto['nombre']);
+        }
+        while($aspecto = mysqli_fetch_array($query4)){
+            array_push($array, $aspecto['descripcion']);
+        }
 
-            //aqui registra los problemas del plan de accion y retorna un array con el id de todos los problemas insertados
-            $ids_problemas=$this->planAccionModel->insertarProblemas($form, $id_plan_accion);
-            //aqui se inserta todas la tareas de cada uno de las soluciones del plan de accion 
-            $this->planAccionModel->insertarTareas($form, $id_plan_accion, $ids_problemas);
-            //aqui  se insertan todas las soluciones del plan de accion 
-            $this->planAccionModel->insertarResultados($form, $id_plan_accion);
-            //enviamos un msj de registro exitoso y redirigimos...
-            echo "<script>alert('Se ha registrado con exito el plan de accion del diagnostico de la ".$form['tipo']."\\n '); window.location='index.php?mode=agregar-plan-accion';</script>";   
-     }
-   
-     
+        return $array;
+
+    }
+    
+    public function insertarProblemas($form, $id_plan_accion){
+        $cantProblemas=$form['cant-problemas'];
+        $numConsecutivo=$form['num-consecutivo'];
+        $this->connect();
+        for ($i=1; $i <=$cantProblemas; $i++) {
+            $insert="";
+            if($form['tipo']=="idea"){
+                $insert="INSERT INTO `problema_idea` (`id_paccion`, `diag_idea`, `problema`, `causa`, `efecto`, `solucion_obj`, `fecha_reunion`, `fecha_prox_reunion`) VALUES ('".$id_plan_accion."', '".$numConsecutivo."', '".$form['problemas-'.$i]."', '".$form['causas-'.$i]."', '".$form['efectos-'.$i]."', '".$form['soluciones-'.$i]."', '".$form['fecha_reunion-'.$i]."', '".$form['fecha_prox_reunion-'.$i]."'); ";
+            }else{
+                $insert="INSERT INTO `problema_empresa` (`id_paccion`, `diag_empresa`, `problema`, `causa`, `efecto`, `solucion_obj`, `fecha_reunion`, `fecha_prox_reunion`) VALUES ('".$id_plan_accion."', '".$numConsecutivo."', '".$form['problemas-'.$i]."', '".$form['causas-'.$i]."', '".$form['efectos-'.$i]."', '".$form['soluciones-'.$i]."', '".$form['fecha_reunion-'.$i]."', '".$form['fecha_prox_reunion-'.$i]."'); ";
+            }
+            $query = $this->query($insert);
+        }
+        
+        
+        //consulta ultimo id problema
+        $array=array();
+        $consulta="";
+        if($form['tipo']=="idea"){
+            $consulta="SELECT id_problema from problema_idea where diag_idea=$numConsecutivo and id_paccion=$id_plan_accion ORDER BY id_problema ASC";
+        }else{
+            $consulta="SELECT id_problema from problema_empresa where diag_empresa=$numConsecutivo and id_paccion=$id_plan_accion ORDER BY id_problema ASC";
+        }
+        $consulta=$this->query($consulta);
+        while ($row=mysqli_fetch_array($consulta)) {
+            array_push($array,$row['id_problema']);
+        }
+        $this->terminate();
+        
+        return $array;
+    }
+    
+    public function insertarTareas($form, $id_plan_accion, $ids_problemas){
+        $cantObjectivos=$form['cant-problemas'];
+        $numConsecutivo=$form['num-consecutivo'];
+        $this->connect();
+        
+        for ($i=1; $i <=$cantObjectivos; $i++) {
+            $cantTareas=$form[$i.'-cant-tareas'];
+            for ($j=1; $j <=$cantTareas; $j++) {
+                $insert="";
+                if($form['tipo']=="idea"){
+                    $insert="INSERT INTO `tarea_idea` (`id_paccion`, `diag_idea`, `id_problema`, `tarea`, `fecha_entrega`) VALUES ($id_plan_accion, $numConsecutivo,'".$ids_problemas[$i-1]."','".$form[$i.'-tarea-'.$j]."', '".$form[$i.'-fecha_tarea-'.$j]."')";
+                }else{
+                    $insert="INSERT INTO `tarea_empresa` (`id_paccion`, `diag_empresa`, `id_problema`, `tarea`, `fecha_entrega`) VALUES ($id_plan_accion, $numConsecutivo,'".$ids_problemas[$i-1]."','".$form[$i.'-tarea-'.$j]."', '".$form[$i.'-fecha_tarea-'.$j]."')";
+                }
+                $query = $this->query($insert);
+            }
+        }
+        $this->terminate();
+    }
+    
+    public function insertarResultados($form, $id_plan_accion){
+        $cantResultados=$form['cant-resultados'];
+        $numConsecutivo=$form['num-consecutivo'];
+        
+        $this->connect();
+        
+        for ($i=1; $i <=$cantResultados; $i++) {
+            $insert="";
+            if($form['tipo']=="idea"){
+                $insert="INSERT INTO `resultado_idea` (`diag_idea`, `id_paccion`, `resultado`) VALUES ($numConsecutivo, $id_plan_accion, '".$form['resultados-plan-accion-'.$i]."')";
+            }else{
+                $insert="INSERT INTO `resultado_empresa` (`diag_empresa`, `id_paccion`, `resultado`) VALUES ($numConsecutivo, $id_plan_accion, '".$form['resultados-plan-accion-'.$i]."')";
+            }
+            $query = $this->query($insert);
+        }
+        $this->terminate();
+    }
+    
+
 }
 ?>
