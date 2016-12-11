@@ -91,10 +91,19 @@ class PlanAccionModel extends Model {
     public function consultarProblemasDiagEmpresa($numConsecutivo){
         $this->connect();
         $array=array();
+        //consulta de los puntos negativos en el diagnostico
         $consulta1 = "SELECT mision, vision, objetivos, estrategias, plan_accion, participacion_empleados, empleados_conocen, estrategias_crecimiento, organigrama, procesos_documentados, procesos_evaluacion, procesos_automatizar, max_colaboradores, clima_laboral, motivacion_empleados, define_acciones, sistema_control, comparar_planeado_eje, clave_desempenio, seguimiento_indicadores, contrata_direc_personal, combina_forma_contratar, procesos_establecidos, recompensas_establecidas, empleados_necesarios, depto_mercadeo_ventas, msj_marketing_claro, plan_mercadeo, implementa_plan, cronograma_marketing, perfil_cliente, clasificacion_cliente, web_ventas, tecnologia_seguimiento, sistema_compatibilidad, contabilidad_aldia, aplica_normas_contabilidad, planificacion_financiera_formal, margen_rentabilidad, margen_rentabilidad_pos, ingresos_cumplen_objetivos, suficiente_capital, flujo_caja_positivo, costo_producto, presupuesto_estable, desiciones_analisis, programa_produccion, corresponde_demanda_mercado, produccion_planes, pontrola_calidad_producto, problemas_abastecimiento, Adquisicion_maquinaria, Planes_contingencia_maprima, Inventarios_periodicos, Seguimiento_inventarios, eficiente_dist_trabajo FROM diagnostico_empresa WHERE id_diagnostico_emp =$numConsecutivo";
         $query1 = $this->query($consulta1);
+        //consulta de la descripcion de cada posible punto negativo
         $consulta2 = "SELECT id, descripcion FROM desc_problemas";
         $query2 = $this->query($consulta2);
+        //consulta de los puntos problematicos de la empresa
+        $consulta3 = "SELECT nombre FROM puntos_problematicos p, diagxpuntos d WHERE d.id_diag_empresa = $numConsecutivo AND d.Codigo_puntos = p.Codigo";
+        $query3 = $this->query($consulta3);
+        //consulta aspectos a mejorar de la empresa
+        $consulta4 = "SELECT descripcion from lista_dificultades_e where id_diagnostico_emp = $numConsecutivo";
+        $query4 = $this->query($consulta4);
+
         $this->terminate();
         $row = mysqli_fetch_array($query1);
         
@@ -106,6 +115,13 @@ class PlanAccionModel extends Model {
                 array_unshift($array, $desc['descripcion']);
             }
         }
+        while($punto = mysqli_fetch_array($query3)){
+            array_unshift($array, $punto['nombre']);
+        }
+        while($aspecto = mysqli_fetch_array($query4)){
+            array_unshift($array, $aspecto['descripcion']);
+        }
+
         return $array;
 
     }
