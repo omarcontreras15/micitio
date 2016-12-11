@@ -84,7 +84,7 @@ class PlanAccionModel extends Model {
     }
 
     public function consultarProblemasDiagEmpresa($numConsecutivo){
-
+        
     }
     }
 ?>

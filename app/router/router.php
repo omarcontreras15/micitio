@@ -70,7 +70,7 @@
                              if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                         $this->planAccion->agregarPlanAccion();   
+                         $this->planAccion->indexPlanAccion();   
                         }       
                         break;
                         
@@ -214,6 +214,10 @@
 
                     case "procesar-edit-diag-empresa":
                     $this->diagnosticoEmpresa->editarFormDiagnosticoEmpresa($_POST);
+                    break;
+
+                    case "agregar-plan-accion":
+                    $this->planAccion->agregarPlanAccion($_POST);
                     break;
 
                 default:

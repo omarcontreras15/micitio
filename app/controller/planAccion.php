@@ -13,7 +13,7 @@ class PlanAccion extends Controller{
         $this->menu= $this->getTemplate("./app/views/components/menu-login.html");
     }
     
-    public function agregarPlanAccion(){
+    public function indexPlanAccion(){
         $contenido=$this->getTemplate("./app/views/PlanAccion/planAccion.html");
         $tablasProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
@@ -114,9 +114,15 @@ class PlanAccion extends Controller{
         //
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
+        $this->view = $this->renderView($this->view, "{{NUM_CONSECUTIVO}}", $numConsecutivo);
+        $this->view = $this->renderView($this->view, "{{TIPO_DIAG}}", $tipo);
         $this->showView($this->view);
      }
 
+     public function agregarPlanAccion($form){
+
+         
+     }
      
 }
 ?>
