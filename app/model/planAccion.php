@@ -15,7 +15,7 @@ class PlanAccionModel extends Model {
         return "";
     }
     
-//retorna una lista con los datos de los diagnosticos para la tabla de seleccionar diagnostico a consultar
+//retorna una lista con los datos de los diagnosticos de idea para la tabla de seleccionar diagnostico a consultar
     public function consultarDiagIdea(){
         $this->connect();
         $consulta = "SELECT Num_consecutivo, CC, Idea, Fecha FROM diagnostico_idea where Num_consecutivo not in (select diag_idea from plan_accion_idea)";
@@ -28,6 +28,8 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
+
+//retorna una lista con los datos de los diagnosticos de emrpesa para la tabla de seleccionar diagnostico a consultar 
      public function consultarDiagEmpresa(){
         $this->connect();
         $consulta = "SELECT id_diagnostico_emp, fecha, sector, nit_empresa FROM diagnostico_empresa where id_diagnostico_emp not in (select diag_empresa from plan_accion_empresa)";
