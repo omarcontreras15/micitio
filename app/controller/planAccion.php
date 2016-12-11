@@ -119,10 +119,21 @@ class PlanAccion extends Controller{
         $this->showView($this->view);
      }
 
-     public function agregarPlanAccion($form){
+     public function agregarPlanAccionIdea($form){
 
-         
+            //aqui se inserta el plan de accion retorna el id de ese plan de accion que se registro
+            $id_plan_accion=$this->planAccionModel->insertarPlanAccion($form['num-consecutivo'], $form['obs_adicionales'], $form['que_sucedio'], $form['cumplio'], $form['alcanzaron_obj']);
+
+            //aqui registra los problemas del plan de accion y retorna un array con el id de todos los problemas insertados
+            $ids_problemas=$this->planAccionModel->insertarProblemas($form, $id_plan_accion);
+            //aqui se inserta todas la tareas de cada uno de las soluciones del plan de accion 
+            $this->planAccionModel->insertarTareas($form, $id_plan_accion, $ids_problemas);
+            //aqui  se insertan todas las soluciones del plan de accion 
+            $this->planAccionModel->insertarResultados($form, $id_plan_accion);
+            //enviamos un msj de registro exitoso y redirigimos...
+            echo "<script>alert('Se ha registrado con exito el plan de accion del diagnostico de la ".$form['tipo']."\\n '); window.location='index.php?mode=agregar-plan-accion';</script>";   
      }
+   
      
 }
 ?>

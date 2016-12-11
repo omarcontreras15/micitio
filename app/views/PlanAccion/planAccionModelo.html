@@ -128,7 +128,7 @@
 <form role="form"  action="index.php"  method="POST" style="margin-right:50px">
 	<input type="hidden" name="mode" value="agregar-plan-accion">
 	<input type="hidden" name="tipo" value="{{TIPO_DIAG}}">
-	<input type="hidden" name="Asesor" value="{{ASESOR}}">
+	<input type="hidden" name="asesor" value="{{ASESOR}}">
 	<input type="hidden" name="num-consecutivo" value="{{NUM_CONSECUTIVO}}">
 	<div class="row setup-content" id="step-1">
 		<div class="col-xs-12">
@@ -229,35 +229,16 @@
 					<input type="radio" name="cumplio" value="no" checked><br>
 					<label>Se alcanzaron los objetivos propuestos?</label><br>
 					<label>Si</label>
-					<input type="radio" name="alcanzo" value="si">
+					<input type="radio" name="alcanzaron_obj" value="si">
 					<label>No</label>
-					<input type="radio" name="alcanzo" value="no" checked><br>
+					<input type="radio" name="alcanzaron_obj" value="no" checked><br>
 					<label>¿ Qué sucedió?</label><br>
-					<textarea class="form-control" rows="3" name="productos/servicios" placeholder="Ingrese la información"></textarea><br>
+					<textarea class="form-control" rows="3" name="que_sucedio" placeholder="Ingrese la información"></textarea><br>
 
-					<div class="table-responsive">
-						<table class="table table">
-							<tr>
-								<td><label>Cliente:</label></td>
-								<td><label>Fecha:</label>
-									<input type="date" class="form-control">
-								</td>
-							</tr>
-							<tr>
-								<td><label>Asesor:</label></td>
-								<td><label>Fecha:</label>
-									<input type="date" class="form-control">
-								</td>
-							</tr>
-							<td><label>Coordinador/Director:</label></td>
-							<td><label>Fecha:</label>
-								<input type="date" class="form-control">
-							</td>
-						</table>
-					</div>
+					
 					<br>
 					<label>Observaciones adicionales:</label>
-					<textarea class="form-control" rows="3" name="observaciones/adicionales" placeholder="Ingrese la información"></textarea><br>
+					<textarea class="form-control" rows="3" name="obs_adicionales" placeholder="Ingrese la información"></textarea><br>
 				</div>
 				<button onclick="comprobarConexion()" class="btn btn-primary btn-lg pull-right" type="submit">Guardar</button>
 				<br><br>

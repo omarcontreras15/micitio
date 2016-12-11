@@ -217,7 +217,7 @@
                     break;
 
                     case "agregar-plan-accion":
-                    $this->planAccion->agregarPlanAccion($_POST);
+                            $this->planAccion->agregarPlanAccion($_POST);             
                     break;
 
                 default:
