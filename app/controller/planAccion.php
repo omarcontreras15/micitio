@@ -119,10 +119,10 @@ class PlanAccion extends Controller{
         $this->showView($this->view);
      }
 
-     public function agregarPlanAccionIdea($form){
+     public function agregarPlanAccion($form){
 
             //aqui se inserta el plan de accion retorna el id de ese plan de accion que se registro
-            $id_plan_accion=$this->planAccionModel->insertarPlanAccion($form['num-consecutivo'], $form['obs_adicionales'], $form['que_sucedio'], $form['cumplio'], $form['alcanzaron_obj']);
+            $id_plan_accion=$this->planAccionModel->insertarPlanAccion($form['num-consecutivo'], $form['obs_adicionales'], $form['que_sucedio'], $form['cumplio'], $form['alcanzaron_obj'], $form['tipo'], $form['asesor']);
 
             //aqui registra los problemas del plan de accion y retorna un array con el id de todos los problemas insertados
             $ids_problemas=$this->planAccionModel->insertarProblemas($form, $id_plan_accion);
