@@ -93,7 +93,7 @@ class PlanAccionModel extends Model {
         $this->connect();
         $insert="";
         if($tipo=="idea"){
-            $insert = "INSERT INTO `plan_accion_idea` (`diag_idea`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','".$form['asesor']."', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
+            $insert = "INSERT INTO `plan_accion_idea` (`diag_idea`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','$asesor', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
         }else{
             $insert = "INSERT INTO `plan_accion_empresa` (`diag_empresa`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','$asesor', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
         }
