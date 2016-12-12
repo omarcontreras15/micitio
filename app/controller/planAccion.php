@@ -84,7 +84,7 @@ class PlanAccion extends Controller{
         }
         $this->view = $this->renderView($this->view, "{{OPTION}}", $option);
     }else{
-        echo "<h2>No Existen Diagnósticos</h2>";
+       $this->view=$this->renderView($this->view, "{{OPTION}}", "<h2>No Existe Ningun Diagnóstico</h2>");
     }
     $this->showView($this->view);
      }
