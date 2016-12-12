@@ -16,9 +16,15 @@ class PlanAccionModel extends Model {
     }
     
     //retorna una lista con los datos de los diagnosticos de idea para la tabla de seleccionar diagnostico a consultar
-    public function consultarDiagIdea(){
+    public function consultarDiagIdea($accion){
+        $consulta="";
         $this->connect();
+        if($accion=="agregar")
         $consulta = "SELECT Num_consecutivo, CC, Idea, Fecha FROM diagnostico_idea where Num_consecutivo not in (select diag_idea from plan_accion_idea)";
+        else
+        $consulta = "SELECT Num_consecutivo, CC, Idea, Fecha FROM diagnostico_idea where Num_consecutivo in (select diag_idea from plan_accion_idea)";
+
+
         $query = $this->query($consulta);
         $this->terminate();
         $array=array();
@@ -29,10 +35,15 @@ class PlanAccionModel extends Model {
     }
     
     
-    //retorna una lista con los datos de los diagnosticos de emrpesa para la tabla de seleccionar diagnostico a consultar
-    public function consultarDiagEmpresa(){
+    //retorna una lista con los datos de los diagnosticos de empresa sin plan de accion en agregar y en consultar con plan de accion para la tabla de seleccionar diagnostico a consultar
+    public function consultarDiagEmpresa($accion){
+        $consulta="";
         $this->connect();
+        if($accion=="agregar")
         $consulta = "SELECT id_diagnostico_emp, fecha, sector, nit_empresa FROM diagnostico_empresa where id_diagnostico_emp not in (select diag_empresa from plan_accion_empresa)";
+        else
+        $consulta = "SELECT id_diagnostico_emp, fecha, sector, nit_empresa FROM diagnostico_empresa where id_diagnostico_emp  in (select diag_empresa from plan_accion_empresa)";
+
         $query = $this->query($consulta);
         $this->terminate();
         $array=array();
@@ -42,6 +53,7 @@ class PlanAccionModel extends Model {
         return $array;
     }
     
+
     public function consultarDatosEmprendedor($cc){
         $this->connect();
         $consulta = "SELECT cl_cedula, cl_nombre, cl_apellido, cl_telefono, cl_celular, cl_cedula FROM cliente WHERE cl_cedula = ".$cc;
