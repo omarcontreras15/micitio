@@ -175,6 +175,28 @@ class PlanAccion extends Controller{
         //enviamos un msj de registro exitoso y redirigimos...
         echo "<script>alert('Se ha registrado con exito el plan de accion del diagnostico de la ".$form['tipo']."\\n '); window.location='index.php?mode=agregar-plan-accion';</script>";
     }
+
+
+    public function seguimientoPlanAccion(){
+
+        $array=null;
+        $cont=0;
+        $allTablas="";
+        $contenido=$this->getTemplate("./app/views/PlanAccion/seguimientoPlanAccion.html");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+        //PRUEBAS
+               
+        $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
+        $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$allTablas);
+        //
+        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
+        $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
+        $this->view = $this->renderView($this->view, "{{NUM_CONSECUTIVO}}", "1");
+        $this->view = $this->renderView($this->view, "{{TIPO_DIAG}}", "Idea");
+        $this->showView($this->view);
+
+    }
     
     public function consultarPlanAccion($numConsecutivo, $tipo){
         $tablasProblemas="";
