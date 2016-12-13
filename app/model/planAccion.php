@@ -299,5 +299,29 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
+    public function consultarResultadosIdea ($id_diagnostico) {
+        $this->connect();
+        $consulta = "SELECT id_resultado, resultado FROM resultado_idea WHERE diag_idea = $id_diagnostico";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
+    public function consultarResultadosEmpresa ($id_diagnostico) {
+        $this->connect();
+        $consulta = "SELECT id_resultado, resultado FROM resultado_empresa WHERE diag_empresa = $id_diagnostico";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
 }
 ?>
