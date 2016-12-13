@@ -153,7 +153,7 @@
                         if($_GET["id"]==="0"){
                             $this->planAccion->ventanaPlanAccionIdea("consultar");   
                         }else{
-                              //aqui va el codigo para elegir un plan de accion para poderlo consultar
+                              $this->planAccion->consultarPlanAccion($_GET["id"],"idea");
                         }                        
                         break;
 
@@ -161,7 +161,7 @@
                         if($_GET['id']=="0"){
                             $this->planAccion->ventanaPlanAccionEmpresa("consultar");
                         }else{    
-                            //aqui va el codigo para elegir un plan de accion para poderlo consultar
+                            $this->planAccion->consultarPlanAccion($_GET["id"],"empresa");
                         }
                         break;
                         //

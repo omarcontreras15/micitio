@@ -95,9 +95,8 @@
 			luego establezca objetivos, Plantee acciones de mejora y Proyecte el impacto deseado con el empresario/emprendedor, acuerde
 			la ejecución del plan y haga seguimiento.
 			<p>
-				<br>
-				<p class="sin-negrita"><strong>AREA: </strong>{{Area}}</p>
-				<br></div>
+				<br><br>
+	</div>
 </div>
 
 <hr>
@@ -125,7 +124,7 @@
 </div>
 <hr>
 
-<form role="form"  action="index.php"  method="POST" style="margin-right:50px">
+<form role="form" action="index.php" method="POST" style="margin-right:50px">
 	<input type="hidden" name="mode" value="agregar-plan-accion">
 	<input type="hidden" name="tipo" value="{{TIPO_DIAG}}">
 	<input type="hidden" name="asesor" value="{{ASESOR}}">
@@ -137,20 +136,20 @@
 				<hr>
 				<br>
 				<div class="form-group">
-				<div id="tablas-problemas" class="table-responsive">
-					<div class="iconos-add-delete">
-						<input type="hidden" id="cant-problemas" name="cant-problemas" value="{{CANT_PROBLEMAS}}"/>
-						<span>Añadir problema </span><img id="agregar-problemas" src="./public/images/add.png"/>
-						<span>&nbsp&nbsp&nbsp Eliminar problema </span><img id="eliminar-problemas" src="./public/images/delete.png"/>
-					</div><br>
-					<!-- tablas objetivos -->
-					
-					{{TABLAS_PROBLEMAS}}
-					
-				</div>
+					<div id="tablas-problemas" class="table-responsive">
+						<div class="iconos-add-delete">
+							<input type="hidden" id="cant-problemas" name="cant-problemas" value="{{CANT_PROBLEMAS}}" />
+							<span>Añadir problema </span><img id="agregar-problemas" src="./public/images/add.png" />
+							<span>&nbsp&nbsp&nbsp Eliminar problema </span><img id="eliminar-problemas" src="./public/images/delete.png" />
+						</div><br>
+						<!-- tablas objetivos -->
+
+						{{TABLAS_PROBLEMAS}}
+
+					</div>
 				</div>
 
-				<button  id="boton-soluciones" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
+				<button id="boton-soluciones" class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
 				<br><br><br>
 			</div>
 		</div>
@@ -166,7 +165,7 @@
 				<div id="tablas-objetivos-tareas" class="form-group">
 					<!-- Aqui van las tablas de los objetivos 
 					que se insertaran de forma dinamica mediante javascript -->
-					
+
 				</div>
 				<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
 				<br><br>
@@ -187,11 +186,12 @@
 						en ventas, activos, rentabilidad, formalizado, acceso a crédito, etc.).</p><br>
 					<!-- Cuarta tabla -->
 					<div class="table-responsive">
-						<input type="hidden" id="cant-resultados" name="cant-resultados" value="1"/>
-							<div class="iconos-add-delete">
-						<span>Añadir resultado </span><img id="agregar-resultados-plan-accion" src="./public/images/add.png"/>
-						<span>&nbsp&nbsp&nbsp Eliminar resultado </span><img id="eliminar-resultados-plan-accion"src="./public/images/delete.png"/>
-					</div>
+						<input type="hidden" id="cant-resultados" name="cant-resultados" value="1" />
+						<div class="iconos-add-delete">
+							<span>Añadir resultado </span><img id="agregar-resultados-plan-accion" src="./public/images/add.png" />
+							<span>&nbsp&nbsp&nbsp Eliminar resultado </span><img id="eliminar-resultados-plan-accion" src="./public/images/delete.png"
+							/>
+						</div>
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -235,7 +235,7 @@
 					<label>¿ Qué sucedió?</label><br>
 					<textarea class="form-control" rows="3" name="que_sucedio" placeholder="Ingrese la información"></textarea><br>
 
-					
+
 					<br>
 					<label>Observaciones adicionales:</label>
 					<textarea class="form-control" rows="3" name="obs_adicionales" placeholder="Ingrese la información"></textarea><br>

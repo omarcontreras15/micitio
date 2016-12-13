@@ -291,7 +291,7 @@ class PlanAccionModel extends Model {
         $this->terminate();
         $array = array();
         while ($row = mysqli_fetch_array($query)) {
-            array_push($array,$row);
+            array_push($array,$row['resultado']);
         }
         return $array;
     }
