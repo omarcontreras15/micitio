@@ -233,5 +233,71 @@ class PlanAccionModel extends Model {
     }
     
 
+    public function consultarPlanAccionIdea ($id) {
+        $this->connect();
+        $consulta = "SELECT id_paccion, asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_idea WHERE diag_idea = $id";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row=mysqli_fetch_array($query);
+        return $row;
+    }
+
+    public function consultarPlanAccionEmpresa ($id) {
+        $this->connect();
+        $consulta = "SELECT asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_empresa WHERE diag_empresa = $id";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $row=mysqli_fetch_array($query);
+        return $row;
+    }
+
+    public function consultarProblemasIdea ($id) {
+        $this->connect();
+        $consulta = "SELECT id_problema, estado, problema, causa, efecto, solucion_obj, fecha_reunion, fecha_prox_reunion FROM problema_idea WHERE diag_idea = $id ORDER BY id_problema ASC";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
+    public function consultarProblemasEmpresa ($id) {
+        $this->connect();
+        $consulta = "SELECT id_problema, estado, problema, causa, efecto, solucion_obj, fecha_reunion, fecha_prox_reunion FROM problema_idea WHERE diag_empresa = $id ORDER BY id_problema ASC";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
+    public function consultarTareasIdea ($id_diagnostico, $id_problema) {
+        $this->connect();
+        $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
+    public function consultarTareasEmpresa ($id_diagnostico, $id_problema) {
+        $this->connect();
+        $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
+        $query = $this->query($consulta);
+        $this->terminate();
+        $array = array();
+        while ($row = mysqli_fetch_array($query)) {
+            array_push($array,$row);
+        }
+        return $array;
+    }
+
 }
 ?>
