@@ -360,9 +360,9 @@ class PlanAccion extends Controller{
         $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problema-editar.html");
         $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html");
         $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-tarea.html");
-        $plantillaResultado=$this->getTemplate("./app/views/componentes/aspectos-mejorar.html.html");
+        $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-resultados.html");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Plan De Acción");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Plan De Acción");
         $contenido=$this->renderView($contenido, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
         $contenido=$this->renderView($contenido, "{{TIPO}}", $tipo);
         
