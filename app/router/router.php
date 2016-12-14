@@ -290,6 +290,10 @@
                             $this->planAccion->agregarPlanAccion($_POST);             
                     break;
 
+                    case "editar-plan-accion":
+                        $this->planAccion->actualizarPlanAccion($_POST);
+                    break;
+
                 default:
                           
                       header("Location:index.php");

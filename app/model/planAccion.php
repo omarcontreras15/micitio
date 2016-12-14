@@ -109,8 +109,7 @@ class PlanAccionModel extends Model {
         }else{
             $insert = "INSERT INTO `plan_accion_empresa` (`diag_empresa`, `obs_adicionales`,`asesor`, `que_sucedio`, `cumplio`, `alcanzaron_obj`) VALUES ($numConsecutivo, '$obs_adicionales','$asesor', '$que_sucedio', '$cumplio', '$alcanzaron_obj')";
         }
-        $query = $this->query($insert);
-        
+        $query = $this->query($insert);        
         //consulta ultimo id
         $consulta="";
         if($tipo=="idea"){
@@ -121,8 +120,22 @@ class PlanAccionModel extends Model {
         $consulta =mysqli_fetch_array($this->query($consulta));
         $this->terminate();
         return $consulta['id_paccion'];
-
     }
+
+    
+    public function actualizarPlanAccion ($id, $obs_adicionales, $que_sucedio, $cumplio, $alcanzaron_obj, $tipo, $asesor) {
+        if($tipo == 'idea'){
+            $consulta = "UPDATE plan_accion_idea SET obs_adicionales = $obs_adicionales, asesor = $asesor, que_sucedio = $que_sucedio, cumplio = $cumplio WHERE diag_idea = $id";
+        }else{
+            $consulta = "UPDATE plan_accion_empresa SET obs_adicionales = $obs_adicionales, asesor = $asesor, que_sucedio = $que_sucedio, cumplio = $cumplio WHERE diag_empresa = $id";
+        }
+        $this->connect();        
+        $query = $this->query($consulta);
+        $this->terminate();
+    }
+
+
+
     //consulta los posibles problemas que se van a listar para el plan de accion de la empresa seleccionada
     public function consultarProblemasDiagEmpresa($numConsecutivo){
         $this->connect();
@@ -232,7 +245,7 @@ class PlanAccionModel extends Model {
         $this->terminate();
     }
     
-
+    
     public function consultarPlanAccion ($tipo, $id) {
         if($tipo == 'idea'){
             $consulta = "SELECT id_paccion, asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_idea WHERE diag_idea = $id";
@@ -244,17 +257,6 @@ class PlanAccionModel extends Model {
         $row=mysqli_fetch_array($query);
         $this->terminate();
         return $row;
-    }
-
-    public function eliminarPlanAccion ($tipo, $id) {
-        if($tipo == 'idea'){
-            $consulta = "DELETE FROM plan_accion_idea WHERE diag_idea = $id";
-        }else{
-            $consulta = "DELETE FROM plan_accion_empresa WHERE diag_empresa = $id";
-        }
-        $this->connect();        
-        $query = $this->query($consulta);
-        $this->terminate();
     }
 
     
@@ -302,11 +304,11 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
-    public function eliminarTarea ($tipo, $id_diagnostico, $id_problema) {
+    public function eliminarTarea ($tipo, $id_diagnostico) {
         if($tipo == 'idea'){
-            $consulta = "DELETE FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
+            $consulta = "DELETE FROM tarea_idea WHERE diag_idea = $id_diagnostico";
         }else{
-            $consulta = "DELETE FROM tarea_empresa WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
+            $consulta = "DELETE FROM tarea_empresa WHERE diag_empresa = $id_diagnostico";
         }
         $this->connect();        
         $query = $this->query($consulta);
@@ -330,16 +332,16 @@ class PlanAccionModel extends Model {
     }
 
 
-    public function eliminarResultado ($tipo, $id_diagnostico) {
+   /* public function eliminarResultado ($tipo, $id_diagnostico) {
         if($tipo == 'idea'){
             $consulta = "DELETE FROM resultado_idea WHERE diag_idea = $id_diagnostico";    
-        }else{
+        }else
             $consulta = "DELETE FROM resultado_empresa WHERE diag_empresa = $id_diagnostico";
         }
         $this->connect();
         $query = $this->query($consulta);
         $this->terminate();
-    }
+    }*/
 
 
 }

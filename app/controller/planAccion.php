@@ -369,11 +369,20 @@ class PlanAccion extends Controller{
         $filaPlan=$this->planAccionModel->consultarPlanAccion($tipo,$numConsecutivo);
         $contenido=$this->renderView($contenido, "{{ASESOR}}",$filaPlan['asesor']);
         $contenido=$this->renderView($contenido, "{{FECHA_REGISTRO}}",$filaPlan['fecha_registro']);
-        $contenido=$this->renderView($contenido, "{{CUMPLIO}}",$filaPlan['cumplio']);
-        $contenido=$this->renderView($contenido, "{{ALCANZARON_OBJ}}",$filaPlan['alcanzaron_obj']);
         $contenido=$this->renderView($contenido, "{{QUE_SUCEDIO}}",$filaPlan['que_sucedio']);
         $contenido=$this->renderView($contenido, "{{OBS_ADICIONALES}}",$filaPlan['obs_adicionales']);
         
+        if($filaPlan['cumplio']=='si'){
+            $contenido=$this->renderView($contenido, "{{cumplio_si}}", 'checked');
+        }else{
+            $contenido=$this->renderView($contenido, "{{cumplio_no}}", 'checked');
+        }
+
+        if($filaPlan['alcanzaron_obj']=='si'){
+            $contenido=$this->renderView($contenido, "{{obj_si}}", 'checked');
+        }else{
+            $contenido=$this->renderView($contenido, "{{obj_no}}", 'checked');
+        }
         
         $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
         $cont=0;
@@ -421,6 +430,11 @@ class PlanAccion extends Controller{
         $contenido=$this->renderView($contenido, "{{FILAS_RESULTADOS}}",$tablasResultados);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->showView($this->view);
+    }
+
+    public function actualizarPlanAccion ($form) {
+
+       $this->planAccionModel->eliminarTarea();
     }
     
     
