@@ -242,7 +242,7 @@ class PlanAccion extends Controller{
                 $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{FECHA_TAREA}}", "FECHA TAREA");
                 $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{EVIDENCIA_TAREA}}", "EVIDENCIA TAREA");
 
-                $estadoTarea="AMARILLO";
+                $estadoTarea="ROJO";
 
                if($estadoTarea=="ROJO"){
                    $estadoTarea="<img src="."public/images/roja.png".">";
