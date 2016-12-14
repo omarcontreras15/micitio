@@ -234,24 +234,24 @@ class PlanAccionModel extends Model {
     
 
     public function consultarPlanAccion ($tipo, $id) {
-        if($tipo = 'idea'){
+        if($tipo == 'idea'){
             $consulta = "SELECT id_paccion, asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_idea WHERE diag_idea = $id";
         }else{
-            $consulta = "SELECT asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_empresa WHERE diag_empresa = $id";
+            $consulta = "SELECT id_paccion, asesor, obs_adicionales, que_sucedio, cumplio, alcanzaron_obj, fecha_registro FROM plan_accion_empresa WHERE diag_empresa = $id";
         }
         $this->connect();        
         $query = $this->query($consulta);
-        $this->terminate();
         $row=mysqli_fetch_array($query);
+         $this->terminate();
         return $row;
     }
 
     
     public function consultarProblema ($tipo, $id) {
-        if($tipo = 'idea'){
+        if($tipo == 'idea'){
             $consulta = "SELECT id_problema, estado, problema, causa, efecto, solucion_obj, fecha_reunion, fecha_prox_reunion FROM problema_idea WHERE diag_idea = $id ORDER BY id_problema ASC";
         }else{
-            $consulta = "SELECT id_problema, estado, problema, causa, efecto, solucion_obj, fecha_reunion, fecha_prox_reunion FROM problema_idea WHERE diag_empresa = $id ORDER BY id_problema ASC";
+            $consulta = "SELECT id_problema, estado, problema, causa, efecto, solucion_obj, fecha_reunion, fecha_prox_reunion FROM problema_empresa WHERE diag_empresa = $id ORDER BY id_problema ASC";
         }
         $this->connect();        
         $query = $this->query($consulta);
@@ -265,10 +265,10 @@ class PlanAccionModel extends Model {
 
 
     public function consultarTarea ($tipo, $id_diagnostico, $id_problema) {
-        if($tipo = 'idea'){
+        if($tipo == 'idea'){
             $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
         }else{
-            $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
+            $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_empresa WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
         }
         $this->connect();        
         $query = $this->query($consulta);
@@ -281,7 +281,7 @@ class PlanAccionModel extends Model {
     }
 
     public function consultarResultado ($tipo, $id_diagnostico) {
-        if($tipo = 'idea'){
+        if($tipo == 'idea'){
             $consulta = "SELECT id_resultado, resultado FROM resultado_idea WHERE diag_idea = $id_diagnostico";    
         }else{
             $consulta = "SELECT id_resultado, resultado FROM resultado_empresa WHERE diag_empresa = $id_diagnostico";
