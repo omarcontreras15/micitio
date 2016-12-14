@@ -148,6 +148,9 @@ class PlanAccion extends Controller{
             $cont++;
             $temp=$this->renderView($tablasProblemas, "{{NUM_PROBLEMA}}",$cont);
             $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}", $element);
+            $temp=$this->renderView($temp, "{{CAUSAS}}", "");
+            $temp=$this->renderView($temp, "{{EFECTOS}}", "");
+            $temp=$this->renderView($temp, "{{SOLUCIONES}}", "");
             $allTablas.=$temp;
         }
         $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
@@ -348,9 +351,75 @@ class PlanAccion extends Controller{
 
 
 
-    public function editarPlanAccion ($tipo, $id) {
-        $this->consultarPlanAccion($id, $tipo);
+    public function editarPlanAccion ($tipo, $numConsecutivo) {
+        $tablasProblemas="";
+        $tablasObj="";
+        $tablasResultados="";
+        
+        $contenido=$this->getTemplate("./app/views/PlanAccion/editarPlanAccion.html");
+        $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
+        $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html");
+        $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-tarea.html");
+        $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-resultados.html");
+        $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Plan De Acción");
+        $contenido=$this->renderView($contenido, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
+        $contenido=$this->renderView($contenido, "{{TIPO}}", $tipo);
+        
+        $filaPlan=$this->planAccionModel->consultarPlanAccion($tipo,$numConsecutivo);
+        $contenido=$this->renderView($contenido, "{{ASESOR}}",$filaPlan['asesor']);
+        $contenido=$this->renderView($contenido, "{{FECHA_REGISTRO}}",$filaPlan['fecha_registro']);
+        $contenido=$this->renderView($contenido, "{{CUMPLIO}}",$filaPlan['cumplio']);
+        $contenido=$this->renderView($contenido, "{{ALCANZARON_OBJ}}",$filaPlan['alcanzaron_obj']);
+        $contenido=$this->renderView($contenido, "{{QUE_SUCEDIO}}",$filaPlan['que_sucedio']);
+        $contenido=$this->renderView($contenido, "{{OBS_ADICIONALES}}",$filaPlan['obs_adicionales']);
+        
+        
+        $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
+        $cont=1;
+        foreach ($arrayProblemas as $value) {
+            $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
+            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}",$value['problema']);
+            $temp=$this->renderView($temp, "{{CAUSAS}}",$value['causa']);
+            $temp=$this->renderView($temp, "{{EFECTOS}}",$value['efecto']);
+            $temp=$this->renderView($temp, "{{SOLUCIONES}}",$value['solucion_obj']);
+            $tablasProblemas.=$temp;
+            
+            $temp=$this->renderView($plantillaObj, "{{NUMERO_OBJETIVO}}",$cont);
+            $temp=$this->renderView($temp, "{{OBJETIVO}}",$value['solucion_obj']);
+            $temp=$this->renderView($temp, "{{FECHA_REUNION}}",$value['fecha_reunion']);
+            $temp=$this->renderView($temp, "{{FECHA_PROX_REUNION}}",$value['fecha_prox_reunion']);
 
+            $arrayTareas=$this->planAccionModel->consultarTarea($tipo, $numConsecutivo, $value['id_problema']);
+            $tareas="";
+            $cont2=1;
+            foreach ($arrayTareas as $value2) {
+             $temp2=$this->renderView($plantillaTarea, "{{NUMERO_TAREA}}",$cont2);
+             $temp2=$this->renderView($temp2, "{{TAREA}}",$value2['tarea']);
+             $temp2=$this->renderView($temp2, "{{FECHA_TAREA}}",$value2['fecha_entrega']);
+             $tareas.=$temp2;
+             $cont2++;
+            }
+            $temp=$this->renderView($temp, "{{TABLA_TAREA}}",$tareas);
+            $tablasObj.=$temp;
+            $cont++;
+        }
+
+        $arrayResultado=$this->planAccionModel->consultarResultado($tipo, $numConsecutivo);
+
+        $cont=1;
+        foreach ($arrayResultado as  $value) {
+            $tempResultados=$this->renderView($plantillaResultado, "{{NUM_RESULTADO}}",$cont);
+            $tempResultados=$this->renderView($tempResultados, "{{RESULTADO}}",$value);
+            $tablasResultados.=$tempResultados;
+            $cont++;
+        }
+        
+        $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$tablasProblemas);
+        $contenido=$this->renderView($contenido, "{{TABLAS_OBJETIVOS_PROBLEMAS}}",$tablasObj);
+        $contenido=$this->renderView($contenido, "{{FILAS_RESULTADOS}}",$tablasResultados);
+        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
+        $this->showView($this->view);
     }
     
     

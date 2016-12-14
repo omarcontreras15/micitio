@@ -242,8 +242,19 @@ class PlanAccionModel extends Model {
         $this->connect();        
         $query = $this->query($consulta);
         $row=mysqli_fetch_array($query);
-         $this->terminate();
+        $this->terminate();
         return $row;
+    }
+
+    public function eliminarPlanAccion ($tipo, $id) {
+        if($tipo == 'idea'){
+            $consulta = "DELETE FROM plan_accion_idea WHERE diag_idea = $id";
+        }else{
+            $consulta = "DELETE FROM plan_accion_empresa WHERE diag_empresa = $id";
+        }
+        $this->connect();        
+        $query = $this->query($consulta);
+        $this->terminate();
     }
 
     
@@ -263,6 +274,17 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
+    public function eliminarProblema ($tipo, $id) {
+        if($tipo == 'idea'){
+            $consulta = "DELETE FROM problema_idea WHERE diag_idea = $id ORDER BY id_problema ASC";
+        }else{
+            $consulta = "DELETE FROM problema_empresa WHERE diag_empresa = $id ORDER BY id_problema ASC";
+        }
+        $this->connect();        
+        $query = $this->query($consulta);
+        $this->terminate();
+    }
+
 
     public function consultarTarea ($tipo, $id_diagnostico, $id_problema) {
         if($tipo == 'idea'){
@@ -280,6 +302,17 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
+    public function eliminarTarea ($tipo, $id_diagnostico, $id_problema) {
+        if($tipo == 'idea'){
+            $consulta = "DELETE FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
+        }else{
+            $consulta = "DELETE FROM tarea_empresa WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
+        }
+        $this->connect();        
+        $query = $this->query($consulta);
+        $this->terminate();
+    }
+
     public function consultarResultado ($tipo, $id_diagnostico) {
         if($tipo == 'idea'){
             $consulta = "SELECT id_resultado, resultado FROM resultado_idea WHERE diag_idea = $id_diagnostico";    
@@ -294,6 +327,18 @@ class PlanAccionModel extends Model {
             array_push($array,$row['resultado']);
         }
         return $array;
+    }
+
+
+    public function eliminarResultado ($tipo, $id_diagnostico) {
+        if($tipo == 'idea'){
+            $consulta = "DELETE FROM resultado_idea WHERE diag_idea = $id_diagnostico";    
+        }else{
+            $consulta = "DELETE FROM resultado_empresa WHERE diag_empresa = $id_diagnostico";
+        }
+        $this->connect();
+        $query = $this->query($consulta);
+        $this->terminate();
     }
 
 
