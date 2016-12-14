@@ -148,6 +148,9 @@ class PlanAccion extends Controller{
             $cont++;
             $temp=$this->renderView($tablasProblemas, "{{NUM_PROBLEMA}}",$cont);
             $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}", $element);
+            $temp=$this->renderView($temp, "{{CAUSAS}}", "");
+            $temp=$this->renderView($temp, "{{EFECTOS}}", "");
+            $temp=$this->renderView($temp, "{{SOLUCIONES}}", "");
             $allTablas.=$temp;
         }
         $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
@@ -382,12 +385,12 @@ class PlanAccion extends Controller{
         $tablasResultados="";
         
         $contenido=$this->getTemplate("./app/views/PlanAccion/editarPlanAccion.html");
-        $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-problemas.html");
-        $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-objetivos.html");
-        $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-tareas.html");
+        $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
+        $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html");
+        $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-tarea.html");
         $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-resultados.html");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Plan De Acción");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Plan De Acción");
         $contenido=$this->renderView($contenido, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
         $contenido=$this->renderView($contenido, "{{TIPO}}", $tipo);
         
@@ -404,7 +407,7 @@ class PlanAccion extends Controller{
         $cont=1;
         foreach ($arrayProblemas as $value) {
             $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
-            $temp=$this->renderView($temp, "{{PROBLEMAS}}",$value['problema']);
+            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}",$value['problema']);
             $temp=$this->renderView($temp, "{{CAUSAS}}",$value['causa']);
             $temp=$this->renderView($temp, "{{EFECTOS}}",$value['efecto']);
             $temp=$this->renderView($temp, "{{SOLUCIONES}}",$value['solucion_obj']);
@@ -445,7 +448,6 @@ class PlanAccion extends Controller{
         $contenido=$this->renderView($contenido, "{{FILAS_RESULTADOS}}",$tablasResultados);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->showView($this->view);
-
     }
     
     
