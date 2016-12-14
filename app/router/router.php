@@ -138,8 +138,8 @@
                              $this->planAccion->seleccionarDiagPlanAccion($_GET['id'],$_GET['tipo']);
                         }
                         break;
-                        //
-
+                        
+                        
                         //consultar plan accion
                         case "consultar-plan-accion-idea":
                           if(!isset($_SESSION["user_id"])){
@@ -157,19 +157,45 @@
                         }       
                         break;
 
-                        case "seleccionar-consultar-diagnostico-idea-plan-accion":
-                        if($_GET["id"]==="0"){
-                            $this->planAccion->ventanaPlanAccionIdea("consultar");   
+
+                        case "editar-plan-accion-idea":
+                        if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
                         }else{
-                              $this->planAccion->consultarPlanAccion($_GET["id"],"idea");
-                        }                        
+                            $this->planAccion->editarPlanAccion("idea",$_GET['Num_consecutivo']);
+                        }
+                        break;
+
+                        case "editar-plan-accion-empresa":
+                        if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                            $this->planAccion->editarPlanAccion("empresa",$_GET['Num_consecutivo']);
+                        }
+                        break;
+                        
+
+                        case "seleccionar-consultar-diagnostico-idea-plan-accion":
+                        if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                            if($_GET["id"]==="0"){
+                                $this->planAccion->ventanaPlanAccionIdea("consultar");   
+                            }else{
+                                $this->planAccion->consultarPlanAccion($_GET["id"],"idea");
+                            }     
+                        }                   
                         break;
 
                         case "seleccionar-consultar-diagnostico-empresa-plan-accion":
-                        if($_GET['id']=="0"){
-                            $this->planAccion->ventanaPlanAccionEmpresa("consultar");
-                        }else{    
-                            $this->planAccion->consultarPlanAccion($_GET["id"],"empresa");
+                        if(!isset($_SESSION["user_id"])){
+                            $this->user->inicioSesion();
+                        }else{
+                            if($_GET['id']=="0"){
+                                $this->planAccion->ventanaPlanAccionEmpresa("consultar");
+                            }else{    
+                                $this->planAccion->consultarPlanAccion($_GET["id"],"empresa");
+                            }
                         }
                         break;
                         //

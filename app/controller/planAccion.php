@@ -44,7 +44,6 @@ class PlanAccion extends Controller{
             $ventana = $this->renderView($ventana, "{{TITULO_VENTANA}}", "Consultar Plan Acción Del Diagnostico Idea");
             $ventana = $this->renderView($ventana, "{{TITULO2}}","Seleccione el diagnostico que desea consultar su plan de accion.");
             $ventana = $this->renderView($ventana, "{{TITULO}}","Consultar Plan Acción");
-            
         }
         
         // especificamos si la url va ser de consultar o agregar plan accion
@@ -266,6 +265,13 @@ class PlanAccion extends Controller{
         $contenido=$this->renderView($contenido, "{{FILAS_RESULTADOS}}",$tablasResultados);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->showView($this->view);
+    }
+
+
+
+    public function editarPlanAccion ($tipo, $id) {
+        $this->consultarPlanAccion($id, $tipo);
+
     }
     
     
