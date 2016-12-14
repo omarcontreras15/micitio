@@ -290,6 +290,7 @@ class PlanAccion extends Controller{
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{TITULO}}","Consultar Plan De Acción");
         $contenido=$this->renderView($contenido, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
+        $contenido=$this->renderView($contenido, "{{TIPO}}", $tipo);
         
         $filaPlan=$this->planAccionModel->consultarPlanAccion($tipo,$numConsecutivo);
         $contenido=$this->renderView($contenido, "{{ASESOR}}",$filaPlan['asesor']);
