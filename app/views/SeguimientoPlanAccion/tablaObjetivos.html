@@ -5,17 +5,27 @@
 		<thead>
 			<tr>
 				<th>Objetivo {{NUMERO_OBJETIVO}}</th>
-				<th colspan="2">{{OBJETIVO}}</th>
+				<th colspan="3">{{OBJETIVO}}</th>
+				<th>{{ESTADO_OBJETIVO}}</th>
+            </tr>
+			<tr>
+				<th>FECHA DE LA REUNION (DD/MM/A)</th>
+				<th colspan="4">{{FECHA_REUNION}}</th>
+            </tr>
+			<tr>
+				<th>FECHA PROXIMA REUNION (DD/MM/A)</th>
+				<th colspan="4">{{FECHA_PROXIMA_REUNION}}</th>
             </tr>
 		</thead>
 		<thead>
 			<th>N°</th>
 			<th>TAREA</th>
+			<th>FECHA ENTREGA</th>
 			<th>EVIDENCIA</th>
             <th>ESTADO</th>
 			</tr>
 		</thead>
-		<tbody id="{{NUMERO_OBJETIVO}}-fila-tarea">
+		<tbody>
 			{{TABLA_TAREA}}
 		</tbody>
 	</table>

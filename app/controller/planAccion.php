@@ -178,22 +178,102 @@ class PlanAccion extends Controller{
 
 
     public function seguimientoPlanAccion(){
-
-        $array=null;
-        $cont=0;
-        $allTablas="";
-        $contenido=$this->getTemplate("./app/views/PlanAccion/seguimientoPlanAccion.html");
+       
+        $contenido=$this->getTemplate("./app/views/SeguimientoPlanAccion/seguimientoPlanAccion.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        //PRUEBAS
-               
-        $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
-        $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$allTablas);
-        //
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
+        //CICLO PARA CREAR LA TABLA DE PROBLEMAS
+        $tablaProblemas="";
+        while(true){
+            $tablaPro=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-problemas.html");
+            $tablaPro=$this->renderView($tablaPro, "{{NUM_PROBLEMA}}", "NUMERO DE PROBLEMA");
+            $tablaPro=$this->renderView($tablaPro, "{{NOM_PROBLEMA}}", "NOMBRE DE PROBLEMA");
+           
+            $estadoProblema="ROJO";
+
+            if($estadoProblema=="ROJO"){
+                $estadoProblema="<img src="."public/images/roja.png".">";
+            }
+            else if($estadoProblema=="VERDE"){
+                $estadoProblema="<img src='public/images/verde.png'>";
+            }
+            else if($estadoProblema=="AMARILLO"){
+                $estadoProblema="<img src='public/images/amarillo.png'>";
+            }
+            $tablaPro=$this->renderView($tablaPro, "{{ESTADO_PROBLEMA}}", $estadoProblema);
+            $tablaProblemas.=$tablaPro;
+            break;
+        }
+
+        //LLENADO DE LA TABLA PROBLEMAS
+        $this->view = $this->renderView($this->view, "{{CONTENIDO_PROBLEMAS}}", $tablaProblemas);
+
+        //CICLO PARA CREAR LA TABLA DE OBJETIVOS
+        $tablaObjetivos="";
+        while(true){
+            $tablaPro=$this->getTemplate("./app/views/SeguimientoPlanAccion/tablaObjetivos.html");
+            $tablaPro=$this->renderView($tablaPro, "{{NUMERO_OBJETIVO}}", "NUMERO OBJETIVO");
+            $tablaPro=$this->renderView($tablaPro, "{{OBJETIVO}}", "OBJETIVO");
+            $tablaPro=$this->renderView($tablaPro, "{{FECHA_REUNION}}", "FECHA REUNION");
+            $tablaPro=$this->renderView($tablaPro, "{{FECHA_PROXIMA_REUNION}}", "FECHA PROXIMA REUNION");
+
+            //COLORES EN EL ESTADO
+            $estadoObjetivo="VERDE";
+
+            if($estadoObjetivo=="ROJO"){
+                $estadoObjetivo="<img src="."public/images/roja.png".">";
+            }
+            else if($estadoObjetivo=="VERDE"){
+                $estadoObjetivo="<img src="."public/images/verde.png".">";
+            }
+            else if($estadoObjetivo=="AMARILLO"){
+                $estadoObjetivo="<img src="."public/images/amarillo.png".">";
+            }
+            $tablaPro=$this->renderView($tablaPro, "{{ESTADO_OBJETIVO}}", $estadoObjetivo);
+
+            //CONTENIDO DE LA TABLA PARA TAREAS
+
+            $contenidoTareas="";
+            while(true){
+                $tablaContenidoTareas=$this->getTemplate("./app/views/SeguimientoPlanAccion/tablaTarea.html");
+                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NUMERO_TAREA}}", "NUMERO TAREA");
+                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NOMBRE_TAREA}}", "NOMBRE TAREA");
+                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{FECHA_TAREA}}", "FECHA TAREA");
+                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{EVIDENCIA_TAREA}}", "EVIDENCIA TAREA");
+
+                $estadoTarea="AMARILLO";
+
+               if($estadoTarea=="ROJO"){
+                   $estadoTarea="<img src="."public/images/roja.png".">";
+               }
+               else if($estadoTarea=="VERDE"){
+                   $estadoTarea="<img src="."public/images/verde.png".">";
+               }
+               else if($estadoTarea=="AMARILLO"){
+                    $estadoTarea="<img src="."public/images/amarillo.png".">";
+                }
+
+
+                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas,"{{ESTADO_TAREA}}" , $estadoTarea);
+
+
+                $contenidoTareas.=$tablaContenidoTareas;
+                break;
+            }
+
+            $tablaObjetivos.=$tablaPro;
+            $tablaObjetivos = $this->renderView($tablaObjetivos, "{{TABLA_TAREA}}", $contenidoTareas);
+
+            break;
+        }
+
+        //LLENADO DE LA TABLA PROBLEMAS
+        $this->view = $this->renderView($this->view, "{{TABLA_OBJETIVOS}}", $tablaObjetivos);
+
+        //
+        
         $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
-        $this->view = $this->renderView($this->view, "{{NUM_CONSECUTIVO}}", "1");
-        $this->view = $this->renderView($this->view, "{{TIPO_DIAG}}", "Idea");
         $this->showView($this->view);
 
     }
