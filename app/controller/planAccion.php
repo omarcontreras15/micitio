@@ -360,7 +360,7 @@ class PlanAccion extends Controller{
         $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problema-editar.html");
         $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html");
         $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-tarea.html");
-        $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-resultados.html");
+        $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-resultados-editar.html");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{TITULO}}","Editar Plan De Acción");
         $contenido=$this->renderView($contenido, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
@@ -424,6 +424,7 @@ class PlanAccion extends Controller{
             $tempResultados=$this->renderView($tempResultados, "{{RESULTADO}}",$value);
             $tablasResultados.=$tempResultados;  
         }
+        $contenido=$this->renderView($contenido, "cant-resultados", $cont);
         
         $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$tablasProblemas);
         $contenido=$this->renderView($contenido, "{{TABLAS_OBJETIVOS_PROBLEMAS}}",$tablasObj);

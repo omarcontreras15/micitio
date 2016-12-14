@@ -193,9 +193,7 @@
 								</tr>
 							</thead>
 							<tbody id="resultados-plan-accion">
-								<tr id="fila-resultados-1">
 									{{FILAS_RESULTADOS}}
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -335,7 +333,7 @@
 	$("#agregar-resultados-plan-accion").on("click", function(){
 		  contFilasResultados++;
 		  var html= trResultados.replace(/1/gi,contFilasResultados);
-		  $("#resultados-plan-accion").append(html);
+		  $("#fila-resultados-"+contFilasResultados).append(html);
 		  //aumentamos el value del hidden que contiene la cantidad de tareas del objetivo
 		  $("#cant-resultados").attr("value",contFilasResultados);	
 	 });
