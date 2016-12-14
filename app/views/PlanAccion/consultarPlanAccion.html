@@ -53,20 +53,24 @@
 
 <div class="container banner">
     <div class="row">
-        <div class="col-md-10">
-    <section class="title-section">
-        <h1 class="title-header">Consultar Plan De Accción</h1>
-        <ul class="breadcrumb breadcrumb__t">
-            <li><a href="index.php">Inicio</a></li>
-            <li class="active">Consultar Plan De Accción</li>
-        </ul>
-        </div>
-        <div class="col-md-2">
-			<div align="right"><a class="banner_btn" href="index.php?mode=editar-plan-accion-{{DIAGNOSTICO}}&Num_consecutivo={{Num_consecutivo}}">Editar</a></div>
-		</div>
-        </div>
-    </section>
+        <section class="title-section">
+            <div class="col-md-10">
+                <h1 class="title-header">Consultar Plan De Accción</h1>
+                <ul class="breadcrumb breadcrumb__t">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li class="active">Consultar Plan De Accción</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <div align="right"><a class="banner_btn" href="index.php?mode=editar-plan-accion-{{DIAGNOSTICO}}&Num_consecutivo={{Num_consecutivo}}">Editar</a></div>
+            </div>
+            <div>
+                <div align="right"><a class="banner_btn" href="index.php?mode=seguimiento-plan-accion&Num_consecutivo={{NUM_CONSECUTIVO}}&tipo={{TIPO}}">Seguimiento Del Plan De Acción</a></div><br><br>
+            </div>
+        </section>
+    </div>
 </div>
+
 
 <div class='container contact'>
 
@@ -80,7 +84,7 @@
     <div class="col-md-12"><strong><br>ASESOR: </strong><label>{{ASESOR}}</label></div>
     <div class="col-md-12"><strong>FECHA:</strong><label>{{FECHA_REGISTRO}}</label></div>
     <div class="col-md-12"> <br>
-       
+
     </div>
 </div>
 
@@ -93,15 +97,15 @@
                 <p>Problemas</p>
             </div>
             <div class="stepwizard-step">
-                <button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-default btn-circle" >2</button>
+                <button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-default btn-circle">2</button>
                 <p>Objetivos</p>
             </div>
             <div class="stepwizard-step">
-                <button href="#step-3" type="button" class="btn btn-default btn-circle" >3</button>
+                <button href="#step-3" type="button" class="btn btn-default btn-circle">3</button>
                 <p>Resultados</p>
             </div>
             <div class="stepwizard-step">
-                <button href="#step-4" type="button" class="btn btn-default btn-circle" >4</button>
+                <button href="#step-4" type="button" class="btn btn-default btn-circle">4</button>
                 <p>Observaciones</p>
             </div>
         </div>
