@@ -242,7 +242,7 @@ class PlanAccionModel extends Model {
         $this->connect();        
         $query = $this->query($consulta);
         $row=mysqli_fetch_array($query);
-         $this->terminate();
+        $this->terminate();
         return $row;
     }
 
