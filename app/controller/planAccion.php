@@ -303,8 +303,9 @@ class PlanAccion extends Controller{
         
         
         $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
-        $cont=1;
+        $cont=0;
         foreach ($arrayProblemas as $value) {
+            $cont++;
             $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
             $temp=$this->renderView($temp, "{{PROBLEMAS}}",$value['problema']);
             $temp=$this->renderView($temp, "{{CAUSAS}}",$value['causa']);
@@ -319,27 +320,26 @@ class PlanAccion extends Controller{
 
             $arrayTareas=$this->planAccionModel->consultarTarea($tipo, $numConsecutivo, $value['id_problema']);
             $tareas="";
-            $cont2=1;
+            $cont2=0;
             foreach ($arrayTareas as $value2) {
+             $cont2++;
              $temp2=$this->renderView($plantillaTarea, "{{NUMERO_TAREA}}",$cont2);
              $temp2=$this->renderView($temp2, "{{TAREA}}",$value2['tarea']);
              $temp2=$this->renderView($temp2, "{{FECHA_TAREA}}",$value2['fecha_entrega']);
              $tareas.=$temp2;
-             $cont2++;
             }
             $temp=$this->renderView($temp, "{{TABLA_TAREA}}",$tareas);
             $tablasObj.=$temp;
-            $cont++;
         }
 
         $arrayResultado=$this->planAccionModel->consultarResultado($tipo, $numConsecutivo);
 
-        $cont=1;
+        $cont=0;
         foreach ($arrayResultado as  $value) {
+            $cont++;
             $tempResultados=$this->renderView($plantillaResultado, "{{NUM_RESULTADO}}",$cont);
             $tempResultados=$this->renderView($tempResultados, "{{RESULTADO}}",$value);
             $tablasResultados.=$tempResultados;
-            $cont++;
         }
         
         $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$tablasProblemas);
@@ -357,7 +357,7 @@ class PlanAccion extends Controller{
         $tablasResultados="";
         
         $contenido=$this->getTemplate("./app/views/PlanAccion/editarPlanAccion.html");
-        $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problemas.html");
+        $plantillaProblemas=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-problema-editar.html");
         $plantillaObj=$this->getTemplate("./app/views/PlanAccion/componentes/tablas-objetivos-tareas.html");
         $plantillaTarea=$this->getTemplate("./app/views/PlanAccion/componentes/tabla-tarea.html");
         $plantillaResultado=$this->getTemplate("./app/views/PlanAccion/componentes/consultas/tabla-resultados.html");
@@ -376,9 +376,10 @@ class PlanAccion extends Controller{
         
         
         $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
-        $cont=1;
+        $cont=0;
         foreach ($arrayProblemas as $value) {
-            $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
+            $cont++;
+            $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont); 
             $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}",$value['problema']);
             $temp=$this->renderView($temp, "{{CAUSAS}}",$value['causa']);
             $temp=$this->renderView($temp, "{{EFECTOS}}",$value['efecto']);
@@ -392,27 +393,27 @@ class PlanAccion extends Controller{
 
             $arrayTareas=$this->planAccionModel->consultarTarea($tipo, $numConsecutivo, $value['id_problema']);
             $tareas="";
-            $cont2=1;
+            $cont2=0;
             foreach ($arrayTareas as $value2) {
+             $cont2++;             
              $temp2=$this->renderView($plantillaTarea, "{{NUMERO_TAREA}}",$cont2);
              $temp2=$this->renderView($temp2, "{{TAREA}}",$value2['tarea']);
              $temp2=$this->renderView($temp2, "{{FECHA_TAREA}}",$value2['fecha_entrega']);
              $tareas.=$temp2;
-             $cont2++;
             }
             $temp=$this->renderView($temp, "{{TABLA_TAREA}}",$tareas);
-            $tablasObj.=$temp;
-            $cont++;
+            $tablasObj.=$temp;        
         }
+        $contenido=$this->renderView($contenido, "{{CANT_PROBLEMAS}}",$cont);
 
         $arrayResultado=$this->planAccionModel->consultarResultado($tipo, $numConsecutivo);
 
-        $cont=1;
+        $cont=0;
         foreach ($arrayResultado as  $value) {
+            $cont++;
             $tempResultados=$this->renderView($plantillaResultado, "{{NUM_RESULTADO}}",$cont);
             $tempResultados=$this->renderView($tempResultados, "{{RESULTADO}}",$value);
-            $tablasResultados.=$tempResultados;
-            $cont++;
+            $tablasResultados.=$tempResultados;  
         }
         
         $contenido=$this->renderView($contenido, "{{TABLAS_PROBLEMAS}}",$tablasProblemas);
