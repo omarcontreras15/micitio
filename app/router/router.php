@@ -158,22 +158,14 @@
                         break;
 
 
-                        case "editar-plan-accion-idea":
+                        case "editar-plan-accion":
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                            $this->planAccion->editarPlanAccion("idea",$_GET['Num_consecutivo']);
+                            $this->planAccion->editarPlanAccion($_GET['Num_consecutivo'], $_GET['tipo']);
                         }
                         break;
-
-                        case "editar-plan-accion-empresa":
-                        if(!isset($_SESSION["user_id"])){
-                            $this->user->inicioSesion();
-                        }else{
-                            $this->planAccion->editarPlanAccion("empresa",$_GET['Num_consecutivo']);
-                        }
-                        break;
-                        
+                       
 
                         case "seleccionar-consultar-diagnostico-idea-plan-accion":
                         if(!isset($_SESSION["user_id"])){
