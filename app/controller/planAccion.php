@@ -179,7 +179,7 @@ class PlanAccion extends Controller{
     public function seguimientoPlanAccion(){
        
         $contenido=$this->getTemplate("./app/views/SeguimientoPlanAccion/seguimientoPlanAccion.html");
-        $this->view = $this->renderView($this->view, "{{TITULO}}","Agregar Plan De Acción");
+        $this->view = $this->renderView($this->view, "{{TITULO}}","Segumiento Plan De Acción");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
         $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         //CICLO PARA CREAR LA TABLA DE PROBLEMAS
@@ -229,18 +229,7 @@ class PlanAccion extends Controller{
             else if($estadoObjetivo=="AMARILLO"){
                 $estadoObjetivo="<img src="."public/images/amarillo.png".">";
             }
-            $barrita="<div class='progress'>
-                         <div class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:{{PORCENTAJE_OBJETIVO}}%'>
-                         {{PORCENTAJE_OBJETIVO}}
-                         </div>
-                    </div>";
-
-            $tablaPro=$this->renderView($tablaPro, "{{ESTADO_OBJETIVO}}", $barrita);
-
-            
-
-
-
+           
             //CONTENIDO DE LA TABLA PARA TAREAS
 
             $contenidoTareas="";
@@ -249,23 +238,6 @@ class PlanAccion extends Controller{
                 $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NUMERO_TAREA}}", "NUMERO TAREA");
                 $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NOMBRE_TAREA}}", "NOMBRE TAREA");
                 $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{FECHA_TAREA}}", "FECHA TAREA");
-                
-
-
-                $boton = " <form method='post' action='index.php' enctype='multipart/form-data'>
-                            <input id='id'' name='mode' type='hidden' value='0'>
-                            <input id='id'' name='num_consecutivo' type='hidden' value='{{num_consecutivo}}'>
-                            <input id='id'' name='id_problema' type='hidden' value='{{id_problema}}'>
-                            <input id='id'' name='id_tarea' type='hidden' value='{{id_tarea}}'>
-                            <input name='imagen' type='file' />
-                            
-                            <br>
-                            <div width='1%'>
-                            <input type='submit'  class='btn btn-success' value='Enviar'>
-                            </div>
-                       </form>";
-
-                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{EVIDENCIA_TAREA}}", $boton);
 
                 $estadoTarea="ROJO";
 
