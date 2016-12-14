@@ -122,18 +122,6 @@ class PlanAccionModel extends Model {
         return $consulta['id_paccion'];
     }
 
-    
-    public function actualizarPlanAccion ($id, $obs_adicionales, $que_sucedio, $cumplio, $alcanzaron_obj, $tipo, $asesor) {
-        if($tipo == 'idea'){
-            $consulta = "UPDATE plan_accion_idea SET obs_adicionales = $obs_adicionales, asesor = $asesor, que_sucedio = $que_sucedio, cumplio = $cumplio WHERE diag_idea = $id";
-        }else{
-            $consulta = "UPDATE plan_accion_empresa SET obs_adicionales = $obs_adicionales, asesor = $asesor, que_sucedio = $que_sucedio, cumplio = $cumplio WHERE diag_empresa = $id";
-        }
-        $this->connect();        
-        $query = $this->query($consulta);
-        $this->terminate();
-    }
-
 
 
     //consulta los posibles problemas que se van a listar para el plan de accion de la empresa seleccionada
@@ -276,18 +264,6 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
-    public function eliminarProblema ($tipo, $id) {
-        if($tipo == 'idea'){
-            $consulta = "DELETE FROM problema_idea WHERE diag_idea = $id ORDER BY id_problema ASC";
-        }else{
-            $consulta = "DELETE FROM problema_empresa WHERE diag_empresa = $id ORDER BY id_problema ASC";
-        }
-        $this->connect();        
-        $query = $this->query($consulta);
-        $this->terminate();
-    }
-
-
     public function consultarTarea ($tipo, $id_diagnostico, $id_problema) {
         if($tipo == 'idea'){
             $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
@@ -302,17 +278,6 @@ class PlanAccionModel extends Model {
             array_push($array,$row);
         }
         return $array;
-    }
-
-    public function eliminarTarea ($tipo, $id_diagnostico) {
-        if($tipo == 'idea'){
-            $consulta = "DELETE FROM tarea_idea WHERE diag_idea = $id_diagnostico";
-        }else{
-            $consulta = "DELETE FROM tarea_empresa WHERE diag_empresa = $id_diagnostico";
-        }
-        $this->connect();        
-        $query = $this->query($consulta);
-        $this->terminate();
     }
 
     public function consultarResultado ($tipo, $id_diagnostico) {
@@ -330,18 +295,6 @@ class PlanAccionModel extends Model {
         }
         return $array;
     }
-
-
-   /* public function eliminarResultado ($tipo, $id_diagnostico) {
-        if($tipo == 'idea'){
-            $consulta = "DELETE FROM resultado_idea WHERE diag_idea = $id_diagnostico";    
-        }else
-            $consulta = "DELETE FROM resultado_empresa WHERE diag_empresa = $id_diagnostico";
-        }
-        $this->connect();
-        $query = $this->query($consulta);
-        $this->terminate();
-    }*/
 
 
 }
