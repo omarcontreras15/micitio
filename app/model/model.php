@@ -15,6 +15,10 @@ class Model {
         return mysqli_query($this->connection,$sql);
     }
 
+    public function multiQuery($sql){
+        return mysqli_multi_query ($this->connection,$sql);
+    }
+
 
     public function terminate(){
         mysqli_close($this->connection);
