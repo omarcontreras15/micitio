@@ -217,9 +217,9 @@ public function consultarForm($num_consecutivo){
         $cadenaAspectos.="<li><p>".$fila2['descripcion']."</p></li>";
     }
     $this->view = $this->renderView($this->view, "{{Aspectos}}", $cadenaAspectos);
-    $this->view = $this->renderView($this->view, "<p>No</p>", "<img src="."public/images/roja.png".">");
+    $this->view = $this->renderView($this->view, "<p>No</p>", "<img src="."public/images/rojo.png".">");
     $this->view = $this->renderView($this->view, "<p>Si</p>", "<img src="."public/images/verde.png".">");
-    $this->view = $this->renderView($this->view, "<p>Mas o menos</p>", "<img src="."public/images/amarillo.png".">");
+    $this->view = $this->renderView($this->view, "<p>Mas o menos</p>", "<img src="."public/images/amarill0.png".">");
     
     $this->showView($this->view);
     
