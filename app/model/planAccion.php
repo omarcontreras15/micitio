@@ -299,24 +299,11 @@ class PlanAccionModel extends Model {
 
     public function actualizarUrlEvidenciaTarea($numConsecutivo, $idProblema, $idTarea, $tipo, $url){
 
-        $consulta="";
-        
-        if($tipo=="idea"){
-            $consulta="SELECT fecha_entrega FROM tarea_idea where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
-        }else{
-             $consulta="SELECT fecha_entrega FROM tarea_empresa where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
-        }
-        $this->connect();
-        $query=$this->query($consulta);
-        $row=mysqli_fetch_array($query);
-        $row=$row['fecha_entrega'];
-
-
         $update="";
         if($tipo=="idea"){
-            $update="UPDATE tarea_idea set url_archivo='$url', fecha_subida_archi=now(), estado=$row where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+            $update="UPDATE tarea_idea set url_archivo='$url', fecha_subida_archi=now(), estado=$estado where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
         }else{
-            $update="UPDATE tarea_empresa set url_archivo='$url', fecha_subida_archi=now(), estado=$row where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+            $update="UPDATE tarea_empresa set url_archivo='$url', fecha_subida_archi=now(), estado=$estado where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
         }
         $query=$this->query($update);
         $this->terminate();
