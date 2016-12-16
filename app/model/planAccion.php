@@ -301,10 +301,11 @@ class PlanAccionModel extends Model {
 
         $update="";
         if($tipo=="idea"){
-            $update="UPDATE tarea_idea set url_archivo='$url', fecha_subida_archi=now(), estado=$estado where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+            $update="UPDATE tarea_idea set url_archivo='$url', fecha_subida_archi=now() where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
         }else{
-            $update="UPDATE tarea_empresa set url_archivo='$url', fecha_subida_archi=now(), estado=$estado where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+            $update="UPDATE tarea_empresa set url_archivo='$url', fecha_subida_archi=now()  where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
         }
+        $this->connect();
         $query=$this->query($update);
         $this->terminate();
     }
