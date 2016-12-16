@@ -203,7 +203,7 @@ class PlanAccionModel extends Model {
         for ($i=1; $i <=$cantObjectivos; $i++) {
             $cantTareas=$form[$i.'-cant-tareas'];
             for ($j=1; $j <=$cantTareas; $j++) {
-                
+                $insert="";
                 if($form['tipo']=="idea"){
                     $insert="INSERT INTO `tarea_idea` (`id_paccion`, `diag_idea`, `id_problema`, `tarea`, `fecha_entrega`) VALUES ($id_plan_accion, $numConsecutivo,'".$ids_problemas[$i-1]."','".$form[$i.'-tarea-'.$j]."', '".$form[$i.'-fecha_tarea-'.$j]."')";
                 }else{
@@ -322,7 +322,11 @@ class PlanAccionModel extends Model {
         $query=$this->query($consulta);
         $row=mysqli_fetch_array($query);
         //Eliminamos la imagen del evento ubicada en la carpeta upload 
+        try{
         unlink($row['url_archivo']);
+        }catch(Exception $e){
+
+        }
 
         //actualizamos la url y el estado
         if($tipo=="idea"){
