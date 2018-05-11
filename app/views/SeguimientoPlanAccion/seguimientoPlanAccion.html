@@ -2,8 +2,8 @@
     $(document).ready(function () {
 
         //agregar fecha al formulario
-        var fecha=new Date();
-        var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        var fecha = new Date();
+        var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
         $("#dia").html(fecha.getDate());
         $("#mes").html(meses[fecha.getMonth()]);
         $("#anio").html(fecha.getFullYear());
@@ -27,17 +27,17 @@
             }
         });
 
-        allNextBtn.click(function(){
+        allNextBtn.click(function () {
             var curStep = $(this).closest(".setup-content"),
                 curStepBtn = curStep.attr("id"),
                 nextStepWizard = $('div.setup-panel div button[href="#' + curStepBtn + '"]').parent().next().children("button"),
                 curInputs = curStep.find("input[type='text'],input[type='url']"),
                 isValid = true;
-            $('body,html').animate({scrollTop : 400}, 500);
+            $('body,html').animate({ scrollTop: 400 }, 500);
 
             $(".form-group").removeClass("has-error");
-            for(var i=0; i<curInputs.length; i++){
-                if (!curInputs[i].validity.valid){
+            for (var i = 0; i < curInputs.length; i++) {
+                if (!curInputs[i].validity.valid) {
                     isValid = false;
                     $(curInputs[i]).closest(".form-group").addClass("has-error");
                 }
@@ -52,15 +52,15 @@
 
 
     function comprobarConexion() {
-        var conn=false;
+        var conn = false;
         $.ajax({
             url: 'index.php',
             async: false,
-            data: {'tag' : 'connection'}
+            data: { 'tag': 'connection' }
         })
-            .fail(function() { conn=false; })
-            .done(function() { conn=true; })
-        if(!conn){
+            .fail(function () { conn = false; })
+            .done(function () { conn = true; })
+        if (!conn) {
             alert("Conexión a internet caida, vuelva intentarlo más tarde");
             event.preventDefault();
         }
@@ -68,121 +68,227 @@
 
 
 </script>
+<div id="prueba"></div>
 <div class="container banner">
-	<section class="title-section">
-		<h1 class="title-header">Seguimiento Plan De Accción</h1>
-		<ul class="breadcrumb breadcrumb__t">
-			<li><a href="index.php">Inicio</a></li>
-			<li class="active">Seguimiento Plan De Accción</li>
-		</ul>
-	</section>
+    <section class="title-section">
+        <h1 class="title-header">Seguimiento Plan De Accción</h1>
+        <ul class="breadcrumb breadcrumb__t">
+            <li><a href="index.php">Inicio</a></li>
+            <li class="active">Seguimiento Plan De Accción</li>
+        </ul>
+    </section>
 </div>
 <div class='container contact'>
+    <!--- bloque de alertas -->
+    <div class="alert alert-success alert-white rounded" style="display: none" id="ventana-emergente-exito">
+<button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+<div class="icon">
+    <img src="public/images/check.png" />
+</div>
+<strong>Exito!</strong> La operación se ha realizado correctamente.
+</div>
+<div class="alert alert-danger alert-white rounded" style="display: none" id="ventana-emergente-error">
+<button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+<div class="icon">
+    <img src="public/images/cerrar.png" />
+</div>
+<strong>Error!</strong> Hubo un inconveniente al subir el archivo por favor intentelo de nuevo.
+</div>
 
-	<div id="titulo">
-		<h2><strong>SEGUIMIENTO PLAN DE ACCION<strong></h2>
+<!--- bloque de alertas -->
+<div id="titulo">
+    <h2><strong>SEGUIMIENTO PLAN DE ACCION<strong></h2>
             <h4><strong>PROGRAMA DE FORTALECIMIENTO EMPRESARIAL<strong></h4></div>
 
            <div class="row">
 					 <div class="col-md-12"><strong>ASESOR: </strong>{{ASESOR}}</div>
-	<div class="col-md-12"><strong>FECHA:</strong> <span id="dia"></span>/<span id="mes">
+<div class="col-md-12"><strong>FECHA:</strong> <span id="dia"></span>/<span id="mes">
                         </span>/<span id="anio"></span></div>
-	
+
 </div>
 
 <!-- MENU DE LAS SECCIONES -->
 <hr>
 <div class="container container-fixed">
-	<div align="center">
-	<b style="color:#579526">Progreso Del Seguimiento Del Plan De Acción</b>
-	</div>
-	<div class='progress'>
-		<div class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' aria-valuenow='40' aria-valuemin='0'
-			aria-valuemax='100' style='width:{{PORCENTAJE_OBJETIVO}}%'>
-			{{PORCENTAJE_OBJETIVO}}%
-		</div>
-	</div>
-	<div class="stepwizard">
-		<div class="stepwizard-row setup-panel">
-			<div class="stepwizard-step">
-				<button href="#step-1" type="button" class="btn btn-primary btn-circle">1</button>
-				<p>Problemas</p>
-			</div>
-			<div class="stepwizard-step">
-				<button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-default btn-circle">2</button>
-				<p>Objetivos</p>
-			</div>
-		</div>
-	</div>
+    <div align="center">
+        <b style="color:#579526">Progreso Del Seguimiento Del Plan De Acción: <span id="porcentaje">{{PORCENTAJE_OBJETIVO}}%</span></b>
+</div>
+<div class='progress'>
+    <div id="div-progressbar" class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' aria-valuenow='40'
+        aria-valuemin='0' aria-valuemax='100' style='width:{{PORCENTAJE_OBJETIVO}}%'>
+</div>
+</div>
+<div class="stepwizard">
+    <div class="stepwizard-row setup-panel">
+        <div class="stepwizard-step">
+            <button href="#step-1" type="button" class="btn btn-primary btn-circle">1</button>
+            <p>Problemas</p>
+        </div>
+        <div class="stepwizard-step">
+            <button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-default btn-circle">2</button>
+            <p>Objetivos</p>
+        </div>
+    </div>
+</div>
 </div>
 <hr>
 
 <!--PROBLEMAS -->
 <div class="row setup-content" id="step-1">
-	<div class="col-xs-12">
-		<div class="col-md-12">
-			<h3 style="color:#579526">DEFINICIÓN DE PROBLEMAS</h3>
-			<hr>
-			<div class="form-group">
-				<div id="tablas-problemas" class="table-responsive">
-					<div class="iconos-add-delete">
-						<input type="hidden" id="cant-problemas" name="cant-problemas" value="{{CANT_PROBLEMAS}}" />
-					</div><br>
-					<!-- tablas objetivos -->
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <h3 style="color:#579526">DEFINICIÓN DE PROBLEMAS</h3>
+<hr>
+<div class="form-group">
+    <div id="tablas-problemas" class="table-responsive">
+        <br>
+        <!-- tablas objetivos -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>PROBLEMA</th>
+                    <th>ESTADO</th>
+                </tr>
+            </thead>
+            <tbody id="filas-problemas">
+                {{CONTENIDO_PROBLEMAS}}
+            </tbody>
+        </table>
 
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>N°</th>
-								<th>PROBLEMA</th>
-								<th>ESTADO</th>
-							</tr>
-						</thead>
-						<tbody>
-							{{CONTENIDO_PROBLEMAS}}
-						</tbody>
-					</table>
-
-				</div>
-			</div>
-			<button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-primary nextBtn btn-lg pull-right">Pasar a Objetivos</button>
-			<br><br><br>
-		</div>
-	</div>
+    </div>
+</div>
+<button href="#step-2" id="boton-soluciones2" type="button" class="btn btn-primary nextBtn btn-lg pull-right">Pasar a Objetivos</button>
+<br><br><br>
+</div>
+</div>
 </div>
 
 <!--OBJETIVOS -->
 <div class="row setup-content" id="step-2">
-	<div class="col-xs-12">
-		<div class="col-md-12">
-			<h3 style="color:#579526">DEFINICIÓN DE OBJETIVOS</h3>
-			<hr>
-			<br>
-			<div class="form-group">
-				<div class="table-responsive">
-					<input type="hidden" id="{{NUMERO_OBJETIVO}}-cant-tareas" name="{{NUMERO_OBJETIVO}}-cant-tareas" value="1" />
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <h3 style="color:#579526">DEFINICIÓN DE OBJETIVOS</h3>
+<hr>
+<br>
+<div id="tabla-objetivos" class="form-group">
+    {{TABLA_OBJETIVOS}}
+    <br>
+    <hr><br>
 
-					<table class="table table-bordered">
-						{{TABLA_OBJETIVOS}}
-					</table>
-				</div>
-				<br>
-				<hr><br>
-
-			</div>
-			<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Guardar y continuar</button>
-			<br><br>
-			<br>
-		</div>
-	</div>
+</div>
+<br><br>
+<br>
+</div>
+</div>
 </div>
 <!-- -->
 
 </div>
 
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="frame-titulo"></h3>
+            </div>
+            <div class="modal-body">
+                <iframe width="100%" frameborder="0" id="frame-url" src="" style="height: 400px;" __idm_frm__="721"></iframe>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+</div>
+</div>
+
+</div>
+</div>
+
 <!-- FIN HTML -->
 <script>
 
-//ESPACIO PARA COLOCAR EL CODIGO AJAX QUE ENVIE LOS ARCHIVOS
+    //ESPACIO PARA COLOCAR EL CODIGO AJAX QUE ENVIE LOS ARCHIVOS
+    //funcion para que se ejecute el script cuando termine de cargar
+    $(document).ready(function () {
 
+        $(".close").on("click", function () {
+            $("#ventana-emergente-exito").hide();
+            $("#ventana-emergente-error").hide();
+        });
+
+        cargarEventos();
+
+        function cargarEventos() {
+            //funcion para agregar el ajax al submit del formulario
+            $(".subir-evidencia-tarea").on("submit", function (e) {
+                //previene que se envien los datos por la url
+                e.preventDefault();
+                //convierte los datos del formulario a arrays
+                //var datos=$(this).serializeArray();
+                var datos = new FormData(this);
+                //var con la url del archivo php
+                var url = "index.php";
+                //llama a la funcion ajax
+                realizarAjax(datos, url, this);
+            });
+
+            $(".eliminar-evidencia-tarea").on("submit", function (e) {
+                //previene que se envien los datos por la url
+                e.preventDefault();
+                //convierte los datos del formulario a arrays
+                //var datos=$(this).serializeArray();
+                var datos = new FormData(this);
+                //var con la url del archivo php
+                var url = "index.php";
+                //llama a la funcion ajax
+                realizarAjax(datos, url, this);
+            });
+        }
+
+        //funcion ajax para enviar formulario a php
+        function realizarAjax(datos, url1, form) {
+            $.ajax({
+                data: datos,
+                url: url1,
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                //esta funcion se ejecuta antes de enviar los datos al php
+                beforeSend: function () {
+                    var html = "<div id='floatingBarsG'><div class='blockG' id='rotateG_01'></div><div class='blockG' id='rotateG_02'></div><div class='blockG' id='rotateG_03'></div><div class='blockG' id='rotateG_04'></div><div class='blockG' id='rotateG_05'></div><div class='blockG' id='rotateG_06'></div><div class='blockG' id='rotateG_07'></div><div class='blockG' id='rotateG_08'></div></div>";
+                    $(form).html(html);
+                },
+                //esta funncion se ejecuta cuando el php a terminado de procesar
+                //con el resultado e inserta el resultado en algun elemento html
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    //console.log(response);
+                    //mostramos la ventana emergente de que la carga de la evidencia fue exitosa
+                    $("#ventana-emergente-exito").show();
+                    //agregamos los porcentajes al progressbar y al span
+                    $("#porcentaje").html(json['porcentaje'] + "%");
+                    $("#div-progressbar").attr("style", "width:" + json['porcentaje'] + "%;");
+                    //volvemos a cargar las filas de los problemas
+                    $("#filas-problemas").html(json['problemas']);
+                    //volvemos a cargar todas las tablas con los objetivos 
+                    $("#tabla-objetivos").html(json['objetivos']);
+
+                    cargarEventos();
+                },
+                error: function (xhr, status, error) {
+                    $("#ventana-emergente-error").show();
+                }
+            });
+
+        }
+
+    });
+
+    function cargarVentana(url, title) {
+        $("#frame-titulo").html(title);
+        $("#frame-url").attr("src", url);
+        console.log(url);
+    }
 </script>

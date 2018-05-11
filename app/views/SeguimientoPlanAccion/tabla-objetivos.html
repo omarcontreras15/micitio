@@ -1,0 +1,31 @@
+<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Objetivo {{NUMERO_OBJETIVO}}</th>
+					<th colspan="3">{{OBJETIVO}}</th>
+					<th><img src="public/images/{{ESTADO_PROBLEMA}}.png"></th>
+				</tr>
+				<tr>
+					<th>FECHA DE LA REUNION (DD/MM/A)</th>
+					<th colspan="4">{{FECHA_REUNION}}</th>
+				</tr>
+				<tr>
+					<th>FECHA PROXIMA REUNION (DD/MM/A)</th>
+					<th colspan="4">{{FECHA_PROX_REUNION}}</th>
+				</tr>
+			</thead>
+			<thead>
+				<th>N°</th>
+				<th width="20%">TAREA</th>
+				<th>FECHA ENTREGA</th>
+				<th width="21%">EVIDENCIA</th>
+				<th>ESTADO</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{TABLA_TAREA}}
+			</tbody>
+		</table>
+	</div>
+	<br><hr><br>

@@ -203,7 +203,7 @@ class PlanAccionModel extends Model {
         for ($i=1; $i <=$cantObjectivos; $i++) {
             $cantTareas=$form[$i.'-cant-tareas'];
             for ($j=1; $j <=$cantTareas; $j++) {
-                
+                $insert="";
                 if($form['tipo']=="idea"){
                     $insert="INSERT INTO `tarea_idea` (`id_paccion`, `diag_idea`, `id_problema`, `tarea`, `fecha_entrega`) VALUES ($id_plan_accion, $numConsecutivo,'".$ids_problemas[$i-1]."','".$form[$i.'-tarea-'.$j]."', '".$form[$i.'-fecha_tarea-'.$j]."')";
                 }else{
@@ -267,9 +267,9 @@ class PlanAccionModel extends Model {
 
     public function consultarTarea ($tipo, $id_diagnostico, $id_problema) {
         if($tipo == 'idea'){
-            $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
+            $consulta = "SELECT * FROM tarea_idea WHERE diag_idea = $id_diagnostico AND id_problema = $id_problema";
         }else{
-            $consulta = "SELECT id_problema, id_tarea, tarea, fecha_entrega FROM tarea_empresa WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
+            $consulta = "SELECT * FROM tarea_empresa WHERE diag_empresa = $id_diagnostico AND id_problema = $id_problema";
         }
         $this->connect();        
         $query = $this->query($consulta);
@@ -297,6 +297,46 @@ class PlanAccionModel extends Model {
         return $array;
     }
 
+    public function actualizarUrlEvidenciaTarea($numConsecutivo, $idProblema, $idTarea, $tipo, $url){
+
+        $update="";
+        if($tipo=="idea"){
+            $update="UPDATE tarea_idea set url_archivo='$url', fecha_subida_archi=now() where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }else{
+            $update="UPDATE tarea_empresa set url_archivo='$url', fecha_subida_archi=now()  where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }
+        $this->connect();
+        $query=$this->query($update);
+        $this->terminate();
+    }
+
+    public function eliminarEvidenciaTarea($numConsecutivo, $idProblema, $idTarea, $tipo){
+        $consulta="";
+        
+        if($tipo=="idea"){
+            $consulta="SELECT url_archivo FROM tarea_idea where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }else{
+             $consulta="SELECT url_archivo FROM tarea_empresa where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }
+        $this->connect();
+        $query=$this->query($consulta);
+        $row=mysqli_fetch_array($query);
+        //Eliminamos la imagen del evento ubicada en la carpeta upload 
+        try{
+        unlink($row['url_archivo']);
+        }catch(Exception $e){
+
+        }
+
+        //actualizamos la url y el estado
+        if($tipo=="idea"){
+            $update="UPDATE tarea_idea set url_archivo=NULL, fecha_subida_archi=NULL, estado='rojo' where diag_idea=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }else{
+            $update="UPDATE tarea_empresa set url_archivo=NULL, fecha_subida_archi=NULL, estado='rojo' where diag_empresa=$numConsecutivo and id_problema=$idProblema and id_tarea=$idTarea";
+        }
+        $query=$this->query($update);
+        $this->terminate();
+    }
 
 }
 ?>

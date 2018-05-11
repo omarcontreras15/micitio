@@ -39,6 +39,9 @@
 				</div>
 				<hr>
 				<br>
+
+
+
 				<div id="titulo">
 					<h2>DIAGNÓSTICO DE LA EMPRESA</h2>
 					<h4>Programa de Fortalecimiento Empresarial</h4>
@@ -56,831 +59,841 @@
 				</div>
 				<br>
 			</div>
-			<div id="check1-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">I. INFORMACIÓN DE LA EMPRESA</legend>
-					<div class="row ">
-						<div class="col-md-3"><label>Nombre comercial de la empresa: </label></div>
-						<div class="col-md-3">
-							<p> {{emp_nombre}} </p>
-						</div>
-						<div class="col-md-3"><label>Razón social: </label></div>
-						<div class="col-md-3">
-							<p> {{emp_razons}} </p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"><label>Nombre de contacto:</label></div>
-						<div class="col-md-3">
-							<p> {{cl_nombre}}</p>
-						</div>
-						<div class="col-md-3"><label>Posicion en la empresa:</label></div>
-						<div class="col-md-3">
-							<p>{{posicion_empresa}} </p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"><label>Numero telefonico:</label></div>
-						<div class="col-md-3">
-							<p>{{emp_telefono}} </p>
-						</div>
-						<div class="col-md-3"><label>Celular:</label></div>
-						<div class="col-md-3">
-							<p>{{emp_celular}} </p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"><label>Productos y/o servicios:</label></div>
-						<div class="col-md-3">
-							<p>{{emp_servicios}} </p>
-						</div>
-						<div class="col-md-3"><label>Sector:</label></div>
-						<div class="col-md-3">
-							<p>{{sector}} </p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"><label>Tiempo de operación:</label></div>
-						<div class="col-md-3">
-							<p>{{tiempo_operacion}} </p>
-						</div>
-					</div>
-				</fieldset>
-				<br><br></div>
-			<div id="check2-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">ADMINISTRACIÓN</legend>
-					
-						<label>1. La empresa establece los siguientes planes a largo plazo:  </label>
-						<p>{{planes_largoplazo}}</p>
-						<br>
-						<label>2. La empresa ha definido:  </label>
-						<ol>
-						<ul>
-							<div class="row">
-								<div class="checkbox">
+			<div>
+				<div class="row">
+					<div class="col-md-6"></div>
+					<div class="col-md-2" style="text-align:right">Si&nbsp<img src="public/images/verde.png"></div>
+<div class="col-md-2" style="text-align:right">No&nbsp<img src="public/images/rojo.png"></div>
+<div class="col-md-2" style="text-align:right">Mas o menos&nbsp<img src="public/images/amarillo.png"></div>
+</div>
 
-									<div class="col-md-3"><label>Su Vision  </label></div>
-									<div class="col-md-3">
-										<p>{{vision}}</p>
-									</div><br>
-								</div>
-								<div class="checkbox">
-									<div class="col-md-3"><label>Su Mision  </label></div>
-									<div class="col-md-3">
-										<p>{{mision}}</p>
-									</div><br>
-								</div>
-								<div class="checkbox">
-									<div class="col-md-3"><label>Sus objetivos  </label></div>
-									<div class="col-md-3">
-										<p>{{objetivos}}</p>
-									</div><br>
-								</div>
-								<div class="checkbox">
-									<div class="col-md-3"><label>Su estrategias  </label></div>
-									<div class="col-md-3">
-										<p>{{estrategias}}</p>
-									</div><br>
-								</div>
-								<div class="checkbox">
-									<div class="col-md-3"><label>Plan de accion  </label></div>
-									<div class="col-md-3">
-										<p>{{plan_accion}}</p>
-									</div><br>
-								</div>
-
-							</div>
-						</ul>
-						</ol>
-						<label>3. La empresa ha definido valores </label>
-						<p>{{valores}}</p>
-						<br>
-						<label>4. Mencione los tres objetivos principales de su empresa en el largo plazo(+ de 3años): </label>
-						<br>
-						<p>{{nombre_objetivos}}</p>
-						<br>
-						<label>5. Diga los principales recursos, capacidades y competencias que posee la empresa:  </label>
-						<br>
-						<p>{{recursos}}</p>
-						<br>
-						<label>6. Mencione cuáles son las mayores debilidades que posee la empresa:</label><br>
-						<p>{{debilidades}}</p>
-						<br>
-						<label>7. Diga cuál (s) oportunidades que le ofrece actualmente el mercado: </label><br>
-						<p>{{oportunidades}}</p>
-						<br>
-						<label>8. Diga cuál (s) son los mayores obstáculos que hoy encuentra en el mercado: </label>
-						<br>
-						<p>{{obstaculos}}</p>
-						<br>
-						<label>9. Mencione la Ventaja que ofrece la empresa y que es percibida por el cliente:</label>
-						<br>
-						<p>{{ventaja_cliente}}</p>
-						<br>
-						<label>10. Ventaja que ofrece la competencia en relación a la empresa:</label><br>
-						<p>{{ventaja_empresa}}</p>
-					
-				</fieldset><br><br></div>
-
-			<div id="check3-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">PLANEACIÓN</legend>
-					<label>1. La empresa elabora planes: </label><br>
-					<p>{{tipo_planes}}</p>
-					<table>
-						<tr>
-							<td><label>2. La gerencia dedica tiempo a la planeación  </label>
-							</td>
-							<td>
-							</td>
-							<br>
-						</tr>
-						<tr>
-							<td>
-								<ol>
-									<p>Horas a la semana</p>
-									<p>{{tiempo_planeacion}}</p>
-									<br>
-								</ol>
-							</td>
-							<td>
-
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>3. La gerencia permite la participación de sus empleados en el proceso de planeación: </label>
-							</td>
-							<td>
-								<p>{{participacion_empleados}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>4. Los empleados conocen los objetivos y planes de la empresa: </label>
-							</td>
-							<td>
-								<p>{{empleados_conocen}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>5. La empresa establece estrategias, planes de acción que conduzcan al crecimiento:</label>
-							</td>
-							<td>
-								<p>{{tipo_planes}}</p>
-							</td>
-						</tr>
-					</table>
-
-
-				</fieldset><br><br></div>
-			<div id="check4-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">ORGANIZACIÓN</legend>
-					<table>
-						<tr>
-							<td>
-								<label>1. La empresa tiene el organigrama (cargos definidos y manuales de funciones) documentados y actualizados. </label>
-							</td>
-							<td>
-								<p>{{organigrama}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>2. Los procesos de la empresa ha sido documentados.</label>
-							</td>
-							<td>
-								<p>{{procesos_documentados}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>3. Se evalúan los procesos para eliminar los ineficaces e incluir aquellos que sean necesarios.</label>
-							</td>
-							<td>
-								<p>{{procesos_evaluacion}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>4. La empresa procura automatizar/modernizar todos los procesos.</label>
-							</td>
-							<td>
-								<p>{{procesos_automatizar}}</p>
-							</td>
-						</tr>
-					</table>
-				</fieldset><br><br></div>
-			<div id="check5-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">DIRECCION/LIDERAZGO</legend>
-					<table>
-							<tr>
-								<td>
-									<label>1. La gerencia obtiene el máximo compromiso de sus colaboradores. </label>
-								</td>
-								<td>
-									<p>{{max_colaboradores}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>2. La gerencia trabaja por un clima laboral adecuado.</label>
-								</td>
-								<td>
-									<p>{{clima_laboral}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>3. La gerencia motiva a los empleados a innovar, trabajar en equipo y mejorar el desempeño.</label>
-								</td>
-								<td>
-									<p>{{motivacion_empleados}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>4. Las decisiones se toman, unilateralmente:.</label>
-								</td>
-								<td>
-									<p>{{toma_desiciones}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<ol>
-										<label>En concenso:</label>
-									</ol>
-								</td>
-								<td>
-									<p>{{en_concenso}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>5. La gerencia define acciones concretas buscando mejorar sus resultados.</label>
-								</td>
-								<td>
-									<p>{{define_acciones}}</p>
-								</td>
-							</tr>
-						</table>
-				</fieldset><br><br></div>
-			<div id="check6-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">CONTROL</legend>
-					<table>
-							<tr>
-								<td>
-									<label>1. La empresa cuenta con un sistema de control</label>
-								</td>
-								<td>
-									<p>{{sistema_control}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>2. La empresa compara lo planeado con lo ejecutado, analiza los resultados y se corrige oportunamente las fallas.</label>
-								</td>
-								<td>
-									<p>{{comparar_planeado_eje}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>3. La empresa usa indicadores clave de desempeño/ rendimiento para medir la eficacia.</label>
-								</td>
-								<td>
-									<p>{{clave_desempenio}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>4. Monitorea los indicadores y hace seguimiento de los resultados de las estrategias.</label>
-								</td>
-								<td>
-									<p>{{seguimiento_indicadores}}</p>
-								</td>
-							</tr>
-						</table>
-				</fieldset><br><br></div>
-			<div id="check7-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">RECURSOS HUMANOS</legend>
-					<table>
-							<tr>
-								<td>
-									<label>1. La empresa contrata directamente al personal.</label>
-								</td>
-								<td>
-									<p>{{contrata_direc_personal}}</p>
-								</td>
-
-							</tr>
-							<tr>
-								<td>
-									<label>2. Se combina la forma de contratar (incluyendo trabajos temporales y ocasionales).</label>
-								</td>
-								<td>
-									<p>{{combina_forma_contratar}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>3. La empresa ha establecido procesos de Selección, Contratación, Inducción, Entrenamiento..</label>
-								</td>
-								<td>
-									<p>{{procesos_establecidos}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>4. La empresa ha establecido recompensas, sanciones, ascensos.</label>
-								</td>
-								<td>
-									<p>{{recompensas_establecidas}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>5. Cuántas personas laboran en la empresa:</label>
-								</td>
-								<td>
-									<p>{{num_empleados}}</p>
-									</td>
-							</tr>
-							<tr>
-								<td>
-									<label>6. El número de empleados es suficiente para cubrir las necesidades de la empresa.</label>
-								</td>
-								<td>
-									<p>{{empleados_necesarios}}</p>
-								</td>
-							</tr>
-
-						</table>
-				</fieldset><br><br></div>
-			<div id="check8-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">MERCADEO COMERCIAL</legend>
-					
-					<table>
-							<tr>
-								<td>
-									<label>1. Existe un departamento de mercadeo y ventas?</label>
-								</td>
-								<td>
-									<p>{{depto_mercadeo_ventas}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>2. El mensaje de marketing (promesa de valor) es claro, audaz, veraz y despierta interés cuando se transmite..</label>
-								</td>
-								<td>
-									<p>{{msj_marketing_claro}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>3. La gerencia dedica mínimo el 50% del tiempo al marketing y difusión.</label>
-								</td>
-								<td>
-									<p>{{dedica_tiempo_marketing}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<ol>
-										<label>o delega: </label>
-									</ol>
-								</td>
-								<td>
-									<p>{{delega_tiempo}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>4. La empresa tiene un plan de mercadeo y ventas para los próximos 12 meses</label>
-								</td>
-								<td>
-									<p>{{plan_mercadeo}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<ol>
-										<label>- Lo implementa</label>
-									</ol>
-								</td>
-								<td>
-									<p>{{implementa_plan}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<br><label>5. La empresa tiene un cronograma de marketing y presupuesto destinado para ello.</label>
-								</td>
-								<td>
-									<p>{{cronograma_marketing}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>6. Ha definido el perfil y características del cliente ideal y ha desarrollado servicios y material de marketing <br> &nbsp &nbsp &nbsp dirigidos directamente a él.</label>
-								</td>
-								<td>
-									<p>{{perfil_cliente}}</p>
-									<td>
-							</tr>
-							<tr>
-								<td>
-									<label>7. La empresa ha clasificado los clientes activos y potenciales.</label>
-								</td>
-								<td>
-									<p>{{clasificacion_cliente}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>8. La página web hace parte del ciclo de ventas.</label>
-								</td>
-								<td>
-									<p>{{web_ventas}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>9. Usa la mejor tecnología para hacer seguimiento a clientes y ventas (CRM, etc.)</label>
-								</td>
-								<td>
-									<p>{{tecnologia_seguimiento}}</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<br>
-									<label>Puntos problematicos:</label>
-									<br>
-								</td>
-							</tr>
-						</table>
-					<ol>
-						{{puntos_problematicos}}
-					</ol>
-								
-				</fieldset><br><br></div>
-			<div id="check9-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">FINANCIERA</legend>
-					
-<table>
-								<tr>
-									<td>
-										<label>1. La empresa tiene implementado un sistema de contabilidad.</label>
-									</td>
-									<td>
-										<p>{{sistema_compatibilidad}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>2. La empresa tiene la contabilidad al día y se revisa cada mes.</label>
-									</td>
-									<td>
-										<p>{{contabilidad_aldia}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>3. La empresa aplica las Normas internacionales de Contabilidad-NIIF.</label>
-									</td>
-									<td>
-										<p>{{aplica_normas_contabilidad}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>4. Cuánto ha facturado tu empresa en el último año:</label>
-									</td>
-									<td>
-										<p>{{facturacion_ultimoanio}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>5. La empresa tiene planificación financiera formal.</label>
-									</td>
-									<td>
-										<p>{{planificacion_financiera_formal}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>6. La empresa conoce el margen de rentabilidad.</label>
-									</td>
-									<td>
-										<p>{{margen_rentabilidad}}</p>
-									<td>
-								</tr>
-								<tr>
-									<td>
-										<ol>
-											<label>El margen de rentabilidad es positivo.</label>
-										</ol>
-									</td>
-									<td>
-										<p>{{margen_rentabilidad_pos}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>7. El nivel de endeudamiento de la empresa con respecto a los activos es:</label>
-									</td>
-									<td>
-										<p>{{nivel_endeudamiento}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>8. Los ingresos permiten cumplir con las obligaciones oportunamente.</label>
-									</td>
-									<td>
-										<p>{{ingresos_cumplen_objetivos}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>9. La empresa cuenta con suficiente capital de trabajo.</label>
-									</td>
-									<td>
-										<p>{{suficiente_capital}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>10. El flujo de caja (liquidez) es positivo.</label>
-									</td>
-									<td>
-										<p>{{flujo_caja_positivo}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>11. La empresa conoce cuál es el costo de su producto/servicio.</label>
-									</td>
-									<td>
-										<p>{{costo_producto}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>12. La empresa establece presupuestos y no gasta más de lo presupuestado en cada proyecto. Si</label>
-									</td>
-									<td>
-										<p>{{presupuesto_estable}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>13. Se toman decisiones con base al análisis de los estados financieros..</label>
-									</td>
-									<td>
-										<p>{{desiciones_analisis}}</p>
-									</td>
-								</tr>
-							</table>
-
-				</fieldset><br>
+</div>
+<br>
+<div id="check1-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">I. INFORMACIÓN DE LA EMPRESA</legend>
+		<div class="row ">
+			<div class="col-md-3"><label>Nombre comercial de la empresa: </label></div>
+			<div class="col-md-3">
+				<p> {{emp_nombre}} </p>
 			</div>
-			<div id="check10-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">PRDUCCIÓN</legend>
-					
-					<table>
-								<tr>
-									<td>
-										<label>1. Conoce el porcentaje de la capacidad instalada utilizada de su empresa.</label>
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<ol>
-											<label>¿Cúal es el porcentaje?</label>
-										</ol>
-									</td>
-									<td>
-										<p>{{porcentaje_capacidad}}</p>
-									</td>
-								</tr>
-								</tr>
-								<tr>
-									<td>
-										<label>2. Conoce las normas técnicas establecidas para el sector?</label>
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<ol>
-											<label>¿Cuales?</label>
-									</td>
-									<td>
-										</ol>
-										<p>{{normas_tecnicas_sector}}</p>
-									</td>
-
-								</tr>
-								<tr>
-									<td>
-										<label>3. Cuál es el estado de maquinaria y tecnología de su empresa frente a competitividad?</label>
-
-									</td>
-									<td>
-										<p>{{estado_maquinaria}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>4. La empresa programa la producción.</label>
-									</td>
-									<td>
-										<p>{{programa_produccion}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>esta programación responde a la demanda del mercado.</label>
-									</td>
-									<td>
-										<p>{{corresponde_demanda_mercado}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>5. En el proceso de producción se definen planes, tareas, operaciones, procedimientos y encadenamientos</label>
-									</td>
-									<td>
-										<p>{{produccion_planes}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>6. Se controla la calidad del producto/servicio.</label>
-									</td>
-									<td>
-										<p>{{pontrola_calidad_producto}}</p>
-
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>7. Se presentan problemas de abastecimiento de materias primas/insumos.</label>
-									</td>
-									<td>
-										<p>{{problemas_abastecimiento}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>8. La empresa planea la adquisición de maquinaria, tecnología, materia prima, etc.
-                                                    </label>
-									</td>
-									<td>
-										<p>{{Adquisicion_maquinaria}}</p>
-									</td>
-
-								</tr>
-								<tr>
-									<td>
-										<label>9. Le empresa tiene planes de contingencia para proveerse de materias primas, 
-                                                        recursos humanos, etc.</label>
-									</td>
-									<td>
-										<p>{{Planes_contingencia_maprima}}</p>
-									</td>
-
-								</tr>
-								<tr>
-									<td>
-										<label>10. La empresa realiza inventarios periódicamente.</label>
-									</td>
-									<td>
-										<p>{{Inventarios_periodicos}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>11. La empresa hace seguimiento a la rotación de inventarios.</label>
-									</td>
-									<td>
-										<p>{{Seguimiento_inventarios}}</p>
-									</td>
-
-								</tr>
-								<tr>
-									<td>
-										<label>12. La ubicación y organización de la planta permite una eficiente distribución del trabajo.</label>
-									</td>
-									<td>
-										<p>{{eficiente_dist_trabajo}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-
-									<td>
-										<img src="public/images/roja.png">
-									</td>
-
-
-								</tr>
-															</table>
-
-				</fieldset><br>
-			</div>
-			<div id="check11-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">INTERNACIONALIZACION</legend>
-					<table>
-								<tr>
-
-									<label>1. ¿A qué países ha exportado o importado? </label><br>
-
-									<p>{{paises_importado_expor}}</p><br>
-								</tr>
-								<tr>
-									<label>2. ¿A qué mercados ha exportado e importado sus competidores?</label><br>
-
-									<p>{{mercados_importado_expor}}</p><br>
-								</tr>
-								<tr>
-									<label>3. ¿Cuáles son las metas en relación a la exportación e importación?</label><br>
-
-									<p>{{metas_importado_expor}}</p><br>
-								</tr>
-								<tr>
-									<label>4. ¿Qué estrategia de marketing se requiere para asegurar las ventas de exportación/ importación? </label><br>
-
-									<p>{{estrategia_marketing}}</p><br>
-								</tr>
-								<tr>
-									<label>5. ¿Cuál es el total de ventas esperadas, domésticas y extranjeras, por los próximos tres años? </label><br>
-
-									<p>{{ventas_esperadas}}</p><br>
-								</tr>
-								<tr>
-									<label>6. ¿Cuál es el margen comercial para las ventas domésticas / internacionales? </label><br>
-
-									<p>{{margen_ventas}}</p><br>
-								</tr>
-								<tr>
-									<label>7. ¿Cuánto capital deberá ser presupuestado para sus proyectos de export/ importación?</label><br>
-
-									<p>{{capital_presupuestado}}</p><br>
-								</tr>
-							</table>
-				</fieldset><br>
-			</div>
-			<div id="check12-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">ASPECTOS ADICIONALES</legend>
-				
-							<p>{{aspectos_adicionales}}</p>
-
-				</fieldset><br>
-			</div>
-			<div id="check13-div">
-				<fieldset class="contentStyle">
-					<legend class="titleStyle">ASPECTOS A MEJORAR</legend>
-							<ol>
-							{{Aspectos}}
-							</ol>
-					
-				</fieldset><br>
+			<div class="col-md-3"><label>Razón social: </label></div>
+			<div class="col-md-3">
+				<p> {{emp_razons}} </p>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="col-md-3"><label>Nombre de contacto:</label></div>
+			<div class="col-md-3">
+				<p> {{cl_nombre}}</p>
+			</div>
+			<div class="col-md-3"><label>Posicion en la empresa:</label></div>
+			<div class="col-md-3">
+				<p>{{posicion_empresa}} </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><label>Numero telefonico:</label></div>
+			<div class="col-md-3">
+				<p>{{emp_telefono}} </p>
+			</div>
+			<div class="col-md-3"><label>Celular:</label></div>
+			<div class="col-md-3">
+				<p>{{emp_celular}} </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><label>Productos y/o servicios:</label></div>
+			<div class="col-md-3">
+				<p>{{emp_servicios}} </p>
+			</div>
+			<div class="col-md-3"><label>Sector:</label></div>
+			<div class="col-md-3">
+				<p>{{sector}} </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><label>Tiempo de operación:</label></div>
+			<div class="col-md-3">
+				<p>{{tiempo_operacion}} </p>
+			</div>
+		</div>
+	</fieldset>
+	<br><br></div>
+<div id="check2-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">ADMINISTRACIÓN</legend>
+
+		<label>1. La empresa establece los siguientes planes a largo plazo:  </label>
+		<p>{{planes_largoplazo}}</p>
+		<br>
+		<label>2. La empresa ha definido:  </label>
+		<ol>
+			<ul>
+				<div class="row">
+					<div class="checkbox">
+
+						<div class="col-md-3"><label>Su Vision  </label></div>
+						<div class="col-md-3">
+							<p>{{vision}}</p>
+						</div><br>
+					</div>
+					<div class="checkbox">
+						<div class="col-md-3"><label>Su Mision  </label></div>
+						<div class="col-md-3">
+							<p>{{mision}}</p>
+						</div><br>
+					</div>
+					<div class="checkbox">
+						<div class="col-md-3"><label>Sus objetivos  </label></div>
+						<div class="col-md-3">
+							<p>{{objetivos}}</p>
+						</div><br>
+					</div>
+					<div class="checkbox">
+						<div class="col-md-3"><label>Su estrategias  </label></div>
+						<div class="col-md-3">
+							<p>{{estrategias}}</p>
+						</div><br>
+					</div>
+					<div class="checkbox">
+						<div class="col-md-3"><label>Plan de accion  </label></div>
+						<div class="col-md-3">
+							<p>{{plan_accion}}</p>
+						</div><br>
+					</div>
+
+				</div>
+			</ul>
+		</ol>
+		<label>3. La empresa ha definido valores </label>
+		<p>{{valores}}</p>
+		<br>
+		<label>4. Mencione los tres objetivos principales de su empresa en el largo plazo(+ de 3años): </label>
+		<br>
+		<p>{{nombre_objetivos}}</p>
+		<br>
+		<label>5. Diga los principales recursos, capacidades y competencias que posee la empresa:  </label>
+		<br>
+		<p>{{recursos}}</p>
+		<br>
+		<label>6. Mencione cuáles son las mayores debilidades que posee la empresa:</label><br>
+		<p>{{debilidades}}</p>
+		<br>
+		<label>7. Diga cuál (s) oportunidades que le ofrece actualmente el mercado: </label><br>
+		<p>{{oportunidades}}</p>
+		<br>
+		<label>8. Diga cuál (s) son los mayores obstáculos que hoy encuentra en el mercado: </label>
+		<br>
+		<p>{{obstaculos}}</p>
+		<br>
+		<label>9. Mencione la Ventaja que ofrece la empresa y que es percibida por el cliente:</label>
+		<br>
+		<p>{{ventaja_cliente}}</p>
+		<br>
+		<label>10. Ventaja que ofrece la competencia en relación a la empresa:</label><br>
+		<p>{{ventaja_empresa}}</p>
+
+	</fieldset><br><br></div>
+
+<div id="check3-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">PLANEACIÓN</legend>
+		<label>1. La empresa elabora planes: </label><br>
+		<p>{{tipo_planes}}</p>
+		<table>
+			<tr>
+				<td><label>2. La gerencia dedica tiempo a la planeación  </label>
+				</td>
+				<td>
+				</td>
+				<br>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<p>Horas a la semana</p>
+						<p>{{tiempo_planeacion}}</p>
+						<br>
+					</ol>
+				</td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La gerencia permite la participación de sus empleados en el proceso de planeación: </label>
+				</td>
+				<td>
+					<p>{{participacion_empleados}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. Los empleados conocen los objetivos y planes de la empresa: </label>
+				</td>
+				<td>
+					<p>{{empleados_conocen}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. La empresa establece estrategias, planes de acción que conduzcan al crecimiento:</label>
+				</td>
+				<td>
+					<p>{{tipo_planes}}</p>
+				</td>
+			</tr>
+		</table>
+
+
+	</fieldset><br><br></div>
+<div id="check4-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">ORGANIZACIÓN</legend>
+		<table>
+			<tr>
+				<td>
+					<label>1. La empresa tiene el organigrama (cargos definidos y manuales de funciones) documentados y actualizados. </label>
+				</td>
+				<td>
+					<p>{{organigrama}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. Los procesos de la empresa ha sido documentados.</label>
+				</td>
+				<td>
+					<p>{{procesos_documentados}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. Se evalúan los procesos para eliminar los ineficaces e incluir aquellos que sean necesarios.</label>
+				</td>
+				<td>
+					<p>{{procesos_evaluacion}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. La empresa procura automatizar/modernizar todos los procesos.</label>
+				</td>
+				<td>
+					<p>{{procesos_automatizar}}</p>
+				</td>
+			</tr>
+		</table>
+	</fieldset><br><br></div>
+<div id="check5-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">DIRECCION/LIDERAZGO</legend>
+		<table>
+			<tr>
+				<td>
+					<label>1. La gerencia obtiene el máximo compromiso de sus colaboradores. </label>
+				</td>
+				<td>
+					<p>{{max_colaboradores}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. La gerencia trabaja por un clima laboral adecuado.</label>
+				</td>
+				<td>
+					<p>{{clima_laboral}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La gerencia motiva a los empleados a innovar, trabajar en equipo y mejorar el desempeño.</label>
+				</td>
+				<td>
+					<p>{{motivacion_empleados}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. Las decisiones se toman, unilateralmente:.</label>
+				</td>
+				<td>
+					<p>{{toma_desiciones}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>En concenso:</label>
+					</ol>
+				</td>
+				<td>
+					<p>{{en_concenso}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. La gerencia define acciones concretas buscando mejorar sus resultados.</label>
+				</td>
+				<td>
+					<p>{{define_acciones}}</p>
+				</td>
+			</tr>
+		</table>
+	</fieldset><br><br></div>
+<div id="check6-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">CONTROL</legend>
+		<table>
+			<tr>
+				<td>
+					<label>1. La empresa cuenta con un sistema de control</label>
+				</td>
+				<td>
+					<p>{{sistema_control}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. La empresa compara lo planeado con lo ejecutado, analiza los resultados y se corrige oportunamente las fallas.</label>
+				</td>
+				<td>
+					<p>{{comparar_planeado_eje}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La empresa usa indicadores clave de desempeño/ rendimiento para medir la eficacia.</label>
+				</td>
+				<td>
+					<p>{{clave_desempenio}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. Monitorea los indicadores y hace seguimiento de los resultados de las estrategias.</label>
+				</td>
+				<td>
+					<p>{{seguimiento_indicadores}}</p>
+				</td>
+			</tr>
+		</table>
+	</fieldset><br><br></div>
+<div id="check7-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">RECURSOS HUMANOS</legend>
+		<table>
+			<tr>
+				<td>
+					<label>1. La empresa contrata directamente al personal.</label>
+				</td>
+				<td>
+					<p>{{contrata_direc_personal}}</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<label>2. Se combina la forma de contratar (incluyendo trabajos temporales y ocasionales).</label>
+				</td>
+				<td>
+					<p>{{combina_forma_contratar}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La empresa ha establecido procesos de Selección, Contratación, Inducción, Entrenamiento..</label>
+				</td>
+				<td>
+					<p>{{procesos_establecidos}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. La empresa ha establecido recompensas, sanciones, ascensos.</label>
+				</td>
+				<td>
+					<p>{{recompensas_establecidas}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. Cuántas personas laboran en la empresa:</label>
+				</td>
+				<td>
+					<p>{{num_empleados}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>6. El número de empleados es suficiente para cubrir las necesidades de la empresa.</label>
+				</td>
+				<td>
+					<p>{{empleados_necesarios}}</p>
+				</td>
+			</tr>
+
+		</table>
+	</fieldset><br><br></div>
+<div id="check8-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">MERCADEO COMERCIAL</legend>
+
+		<table>
+			<tr>
+				<td>
+					<label>1. Existe un departamento de mercadeo y ventas?</label>
+				</td>
+				<td>
+					<p>{{depto_mercadeo_ventas}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. El mensaje de marketing (promesa de valor) es claro, audaz, veraz y despierta interés cuando se transmite..</label>
+				</td>
+				<td>
+					<p>{{msj_marketing_claro}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La gerencia dedica mínimo el 50% del tiempo al marketing y difusión.</label>
+				</td>
+				<td>
+					<p>{{dedica_tiempo_marketing}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>o delega: </label>
+					</ol>
+				</td>
+				<td>
+					<p>{{delega_tiempo}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. La empresa tiene un plan de mercadeo y ventas para los próximos 12 meses</label>
+				</td>
+				<td>
+					<p>{{plan_mercadeo}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>- Lo implementa</label>
+					</ol>
+				</td>
+				<td>
+					<p>{{implementa_plan}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br><label>5. La empresa tiene un cronograma de marketing y presupuesto destinado para ello.</label>
+				</td>
+				<td>
+					<p>{{cronograma_marketing}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>6. Ha definido el perfil y características del cliente ideal y ha desarrollado servicios y material de marketing <br> &nbsp &nbsp &nbsp dirigidos directamente a él.</label>
+				</td>
+				<td>
+					<p>{{perfil_cliente}}</p>
+					<td>
+			</tr>
+			<tr>
+				<td>
+					<label>7. La empresa ha clasificado los clientes activos y potenciales.</label>
+				</td>
+				<td>
+					<p>{{clasificacion_cliente}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>8. La página web hace parte del ciclo de ventas.</label>
+				</td>
+				<td>
+					<p>{{web_ventas}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>9. Usa la mejor tecnología para hacer seguimiento a clientes y ventas (CRM, etc.)</label>
+				</td>
+				<td>
+					<p>{{tecnologia_seguimiento}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br>
+					<label>Puntos problematicos:</label>
+					<br>
+				</td>
+			</tr>
+		</table>
+		<ol>
+			{{puntos_problematicos}}
+		</ol>
+
+	</fieldset><br><br></div>
+<div id="check9-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">FINANCIERA</legend>
+
+		<table>
+			<tr>
+				<td>
+					<label>1. La empresa tiene implementado un sistema de contabilidad.</label>
+				</td>
+				<td>
+					<p>{{sistema_compatibilidad}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. La empresa tiene la contabilidad al día y se revisa cada mes.</label>
+				</td>
+				<td>
+					<p>{{contabilidad_aldia}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. La empresa aplica las Normas internacionales de Contabilidad-NIIF.</label>
+				</td>
+				<td>
+					<p>{{aplica_normas_contabilidad}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. Cuánto ha facturado tu empresa en el último año:</label>
+				</td>
+				<td>
+					<p>{{facturacion_ultimoanio}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. La empresa tiene planificación financiera formal.</label>
+				</td>
+				<td>
+					<p>{{planificacion_financiera_formal}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>6. La empresa conoce el margen de rentabilidad.</label>
+				</td>
+				<td>
+					<p>{{margen_rentabilidad}}</p>
+					<td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>El margen de rentabilidad es positivo.</label>
+					</ol>
+				</td>
+				<td>
+					<p>{{margen_rentabilidad_pos}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>7. El nivel de endeudamiento de la empresa con respecto a los activos es:</label>
+				</td>
+				<td>
+					<p>{{nivel_endeudamiento}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>8. Los ingresos permiten cumplir con las obligaciones oportunamente.</label>
+				</td>
+				<td>
+					<p>{{ingresos_cumplen_objetivos}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>9. La empresa cuenta con suficiente capital de trabajo.</label>
+				</td>
+				<td>
+					<p>{{suficiente_capital}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>10. El flujo de caja (liquidez) es positivo.</label>
+				</td>
+				<td>
+					<p>{{flujo_caja_positivo}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>11. La empresa conoce cuál es el costo de su producto/servicio.</label>
+				</td>
+				<td>
+					<p>{{costo_producto}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>12. La empresa establece presupuestos y no gasta más de lo presupuestado en cada proyecto. Si</label>
+				</td>
+				<td>
+					<p>{{presupuesto_estable}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>13. Se toman decisiones con base al análisis de los estados financieros..</label>
+				</td>
+				<td>
+					<p>{{desiciones_analisis}}</p>
+				</td>
+			</tr>
+		</table>
+
+	</fieldset><br>
+</div>
+<div id="check10-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">PRDUCCIÓN</legend>
+
+		<table>
+			<tr>
+				<td>
+					<label>1. Conoce el porcentaje de la capacidad instalada utilizada de su empresa.</label>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>¿Cúal es el porcentaje?</label>
+					</ol>
+				</td>
+				<td>
+					<p>{{porcentaje_capacidad}}</p>
+				</td>
+			</tr>
+			</tr>
+			<tr>
+				<td>
+					<label>2. Conoce las normas técnicas establecidas para el sector?</label>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ol>
+						<label>¿Cuales?</label>
+				</td>
+				<td>
+					</ol>
+					<p>{{normas_tecnicas_sector}}</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<label>3. Cuál es el estado de maquinaria y tecnología de su empresa frente a competitividad?</label>
+
+				</td>
+				<td>
+					<p>{{estado_maquinaria}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. La empresa programa la producción.</label>
+				</td>
+				<td>
+					<p>{{programa_produccion}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>esta programación responde a la demanda del mercado.</label>
+				</td>
+				<td>
+					<p>{{corresponde_demanda_mercado}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. En el proceso de producción se definen planes, tareas, operaciones, procedimientos y encadenamientos</label>
+				</td>
+				<td>
+					<p>{{produccion_planes}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>6. Se controla la calidad del producto/servicio.</label>
+				</td>
+				<td>
+					<p>{{pontrola_calidad_producto}}</p>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>7. Se presentan problemas de abastecimiento de materias primas/insumos.</label>
+				</td>
+				<td>
+					<p>{{problemas_abastecimiento}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>8. La empresa planea la adquisición de maquinaria, tecnología, materia prima, etc.
+                                                    </label>
+				</td>
+				<td>
+					<p>{{Adquisicion_maquinaria}}</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<label>9. Le empresa tiene planes de contingencia para proveerse de materias primas, 
+                                                        recursos humanos, etc.</label>
+				</td>
+				<td>
+					<p>{{Planes_contingencia_maprima}}</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<label>10. La empresa realiza inventarios periódicamente.</label>
+				</td>
+				<td>
+					<p>{{Inventarios_periodicos}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>11. La empresa hace seguimiento a la rotación de inventarios.</label>
+				</td>
+				<td>
+					<p>{{Seguimiento_inventarios}}</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<label>12. La ubicación y organización de la planta permite una eficiente distribución del trabajo.</label>
+				</td>
+				<td>
+					<p>{{eficiente_dist_trabajo}}</p>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+
+				<td>
+					<img src="public/images/rojo.png">
+				</td>
+
+
+			</tr>
+		</table>
+
+	</fieldset><br>
+</div>
+<div id="check11-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">INTERNACIONALIZACION</legend>
+		<table>
+			<tr>
+
+				<label>1. ¿A qué países ha exportado o importado? </label><br>
+
+				<p>{{paises_importado_expor}}</p><br>
+			</tr>
+			<tr>
+				<label>2. ¿A qué mercados ha exportado e importado sus competidores?</label><br>
+
+				<p>{{mercados_importado_expor}}</p><br>
+			</tr>
+			<tr>
+				<label>3. ¿Cuáles son las metas en relación a la exportación e importación?</label><br>
+
+				<p>{{metas_importado_expor}}</p><br>
+			</tr>
+			<tr>
+				<label>4. ¿Qué estrategia de marketing se requiere para asegurar las ventas de exportación/ importación? </label><br>
+
+				<p>{{estrategia_marketing}}</p><br>
+			</tr>
+			<tr>
+				<label>5. ¿Cuál es el total de ventas esperadas, domésticas y extranjeras, por los próximos tres años? </label><br>
+
+				<p>{{ventas_esperadas}}</p><br>
+			</tr>
+			<tr>
+				<label>6. ¿Cuál es el margen comercial para las ventas domésticas / internacionales? </label><br>
+
+				<p>{{margen_ventas}}</p><br>
+			</tr>
+			<tr>
+				<label>7. ¿Cuánto capital deberá ser presupuestado para sus proyectos de export/ importación?</label><br>
+
+				<p>{{capital_presupuestado}}</p><br>
+			</tr>
+		</table>
+	</fieldset><br>
+</div>
+<div id="check12-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">ASPECTOS ADICIONALES</legend>
+
+		<p>{{aspectos_adicionales}}</p>
+
+	</fieldset><br>
+</div>
+<div id="check13-div">
+	<fieldset class="contentStyle">
+		<legend class="titleStyle">ASPECTOS A MEJORAR</legend>
+		<ol>
+			{{Aspectos}}
+		</ol>
+
+	</fieldset><br>
+</div>
+</div>
+</div>
 </div>
 <script>
- //funcion para que se ejecute el script cuando termine de cargar
-              $(document).ready(function () {
-                  $(".badgebox").click(function (){
-                    var seleccionado=$(this).prop('checked');
-                    var div=$(this).attr("id")+"-div";         
-                     if(seleccionado){
-                        $("#"+div).show();
-                        }else{
-                         $("#"+div).hide();
-                        }
-            });
-                              
-              });
+	//funcion para que se ejecute el script cuando termine de cargar
+	$(document).ready(function () {
+		$(".badgebox").click(function () {
+			var seleccionado = $(this).prop('checked');
+			var div = $(this).attr("id") + "-div";
+			if (seleccionado) {
+				$("#" + div).show();
+			} else {
+				$("#" + div).hide();
+			}
+		});
+
+	});
 </script>

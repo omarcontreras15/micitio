@@ -1,0 +1,12 @@
+<!-- Trigger the modal with a button -->
+<div>
+<form class="eliminar-evidencia-tarea" action='index.php' enctype='multipart/form-data'>
+    <input name='mode' type='hidden' value='eliminar-evidencia-tarea'>
+    <input name='num_consecutivo' type='hidden' value='{{NUM_CONSECUTIVO}}'>
+    <input name='id_problema' type='hidden' value='{{ID_PROBLEMA}}'>
+    <input name='id_tarea' type='hidden' value='{{ID_TAREA}}'>
+    <input name='tipo' type='hidden' value='{{TIPO}}'>
+    <button type="button" class="btn btn-primary" onclick="cargarVentana('{{URL_ARCHIVO}}','{{NOM_TAREA}}')"  data-toggle="modal" data-target="#myModal">Ver</button>
+    <input type='submit' class='btn btn-danger' value='Eliminar'>
+</form>
+<div>

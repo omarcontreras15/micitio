@@ -179,104 +179,200 @@ class PlanAccion extends Controller{
     }
 
 
-    public function seguimientoPlanAccion(){
-       
+    public function seguimientoPlanAccion($numConsecutivo, $tipo){
+        $contenidoProblemas="";
+        $tablasObj="";
+        
         $contenido=$this->getTemplate("./app/views/SeguimientoPlanAccion/seguimientoPlanAccion.html");
+        $plantillaProblemas=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-problemas.html");
+        $plantillaObj=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-objetivos.html");
+        $plantillaTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-tarea.html");      
+        $plantillaFormTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/form-tarea.html");
+        $plantillaVerTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/form-ver-tarea.html");
         $this->view = $this->renderView($this->view, "{{TITULO}}","Segumiento Plan De Acción");
         $this->view = $this->renderView($this->view, "{{SESION}}", $this->menu);
-        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
-        //CICLO PARA CREAR LA TABLA DE PROBLEMAS
-        $tablaProblemas="";
-        while(true){
-            $tablaPro=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-problemas.html");
-            $tablaPro=$this->renderView($tablaPro, "{{NUM_PROBLEMA}}", "NUMERO DE PROBLEMA");
-            $tablaPro=$this->renderView($tablaPro, "{{NOM_PROBLEMA}}", "NOMBRE DE PROBLEMA");
-           
-            $estadoProblema="ROJO";
 
-            if($estadoProblema=="ROJO"){
-                $estadoProblema="<img src="."public/images/roja.png".">";
-            }
-            else if($estadoProblema=="VERDE"){
-                $estadoProblema="<img src='public/images/verde.png'>";
-            }
-            else if($estadoProblema=="AMARILLO"){
-                $estadoProblema="<img src='public/images/amarillo.png'>";
-            }
-            $tablaPro=$this->renderView($tablaPro, "{{ESTADO_PROBLEMA}}", $estadoProblema);
-            $tablaProblemas.=$tablaPro;
-            break;
-        }
+        $filaPlan=$this->planAccionModel->consultarPlanAccion($tipo,$numConsecutivo);
+        $contenido=$this->renderView($contenido, "{{ASESOR}}",$filaPlan['asesor']);
 
-        //LLENADO DE LA TABLA PROBLEMAS
-        $this->view = $this->renderView($this->view, "{{CONTENIDO_PROBLEMAS}}", $tablaProblemas);
+         $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
+        $cont=0;
+        $completos=0;
+        foreach ($arrayProblemas as $value) {
+            $cont++;
+            $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
+            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}",$value['problema']);
+            $contenidoProblemas.=$temp;
+            
+            $temp=$this->renderView($plantillaObj, "{{NUMERO_OBJETIVO}}",$cont);
+            $temp=$this->renderView($temp, "{{OBJETIVO}}",$value['solucion_obj']);
+            $temp=$this->renderView($temp, "{{FECHA_REUNION}}",$value['fecha_reunion']);
+            $temp=$this->renderView($temp, "{{FECHA_PROX_REUNION}}",$value['fecha_prox_reunion']);
 
-        //CICLO PARA CREAR LA TABLA DE OBJETIVOS
-        $tablaObjetivos="";
-        while(true){
-            $tablaPro=$this->getTemplate("./app/views/SeguimientoPlanAccion/tablaObjetivos.html");
-            $tablaPro=$this->renderView($tablaPro, "{{NUMERO_OBJETIVO}}", "NUMERO OBJETIVO");
-            $tablaPro=$this->renderView($tablaPro, "{{OBJETIVO}}", "OBJETIVO");
-            $tablaPro=$this->renderView($tablaPro, "{{FECHA_REUNION}}", "FECHA REUNION");
-            $tablaPro=$this->renderView($tablaPro, "{{FECHA_PROXIMA_REUNION}}", "FECHA PROXIMA REUNION");
+            $arrayTareas=$this->planAccionModel->consultarTarea($tipo, $numConsecutivo, $value['id_problema']);
+            $tareas="";
+            $cont2=0;
+            $estado="verde";
+            
+            foreach ($arrayTareas as $value2) {
+             $temp2="";
+             $cont2++;
+              if(!isset($value2['url_archivo'])){
+                $temp2=$this->renderView($plantillaTarea, "{{FORMULARIO_TAREA}}",$plantillaFormTarea);
+             }else{
+                 $temp2=$this->renderView($plantillaVerTarea, "{{URL_ARCHIVO}}",$value2['url_archivo']);
+                 $temp2=$this->renderView($temp2, "{{NOM_TAREA}}",$value2['tarea']);
+                 $temp2=$this->renderView($plantillaTarea, "{{FORMULARIO_TAREA}}",$temp2);
+             }
+             $temp2=$this->renderView($temp2, "{{NUMERO_TAREA}}",$cont2);
+             $temp2=$this->renderView($temp2, "{{NOMBRE_TAREA}}",$value2['tarea']);
+             $temp2=$this->renderView($temp2, "{{FECHA_TAREA}}",$value2['fecha_entrega']);
+             $temp2=$this->renderView($temp2, "{{ESTADO_TAREA}}",$value2['estado']);
+             $temp2=$this->renderView($temp2, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
+             $temp2=$this->renderView($temp2, "{{ID_PROBLEMA}}",$value2['id_problema']);
+             $temp2=$this->renderView($temp2, "{{ID_TAREA}}",$value2['id_tarea']);
+             $temp2=$this->renderView($temp2, "{{TIPO}}",$tipo);
+             $tareas.=$temp2;
 
-            //COLORES EN EL ESTADO
-            $estadoObjetivo="VERDE";
-
-            if($estadoObjetivo=="ROJO"){
-                $estadoObjetivo="<img src="."public/images/roja.png".">";
-            }
-            else if($estadoObjetivo=="VERDE"){
-                $estadoObjetivo="<img src="."public/images/verde.png".">";
-            }
-            else if($estadoObjetivo=="AMARILLO"){
-                $estadoObjetivo="<img src="."public/images/amarillo.png".">";
-            }
-           
-            //CONTENIDO DE LA TABLA PARA TAREAS
-
-            $contenidoTareas="";
-            while(true){
-                $tablaContenidoTareas=$this->getTemplate("./app/views/SeguimientoPlanAccion/tablaTarea.html");
-                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NUMERO_TAREA}}", "NUMERO TAREA");
-                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{NOMBRE_TAREA}}", "NOMBRE TAREA");
-                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas, "{{FECHA_TAREA}}", "FECHA TAREA");
-
-                $estadoTarea="ROJO";
-
-               if($estadoTarea=="ROJO"){
-                   $estadoTarea="<img src="."public/images/roja.png".">";
-               }
-               else if($estadoTarea=="VERDE"){
-                   $estadoTarea="<img src="."public/images/verde.png".">";
-               }
-               else if($estadoTarea=="AMARILLO"){
-                    $estadoTarea="<img src="."public/images/amarillo.png".">";
+             if(($estado!="rojo" && $value2['estado']!="verde") || ($estado=="amarillo" && $value2['estado']=="rojo")){
+                $estado=$value2['estado'];
                 }
-
-
-                $tablaContenidoTareas=$this->renderView($tablaContenidoTareas,"{{ESTADO_TAREA}}" , $estadoTarea);
-
-
-                $contenidoTareas.=$tablaContenidoTareas;
-                break;
+                
             }
-
-            $tablaObjetivos.=$tablaPro;
-            $tablaObjetivos = $this->renderView($tablaObjetivos, "{{TABLA_TAREA}}", $contenidoTareas);
-
-            break;
+            
+            if($estado=="amarillo" || $estado=="verde"){
+                $completos++;
+            }
+            //colocamos el estado a las tablas objetivos y a la tabla problemas 
+            $temp=$this->renderView($temp, "{{ESTADO_PROBLEMA}}",$estado);
+            $contenidoProblemas=$this->renderView($contenidoProblemas, "{{ESTADO_PROBLEMA}}",$estado);
+            $temp=$this->renderView($temp, "{{TABLA_TAREA}}",$tareas);
+            $tablasObj.=$temp;
         }
-
-        //LLENADO DE LA TABLA PROBLEMAS
-        $this->view = $this->renderView($this->view, "{{TABLA_OBJETIVOS}}", $tablaObjetivos);
-
-        //
         
-        $this->view = $this->renderView($this->view, "{{ASESOR}}", $this->planAccionModel->consultarNombreAsesor());
+        $porcentaje=round((($completos*100)/$cont),2);
+        $contenido=$this->renderView($contenido, "{{PORCENTAJE_OBJETIVO}}",$porcentaje);
+        $contenido=$this->renderView($contenido, "{{CONTENIDO_PROBLEMAS}}",$contenidoProblemas);
+        $contenido=$this->renderView($contenido, "{{TABLA_OBJETIVOS}}",$tablasObj);
+        $this->view = $this->renderView($this->view, "{{CONTENT}}", $contenido);
         $this->showView($this->view);
 
     }
+
+    public function subirEvidencia($numConsecutivo, $idObjetivo, $idTarea, $tipo){
+        $urlArchivo= $this->agregarArchivo();
+        $this->planAccionModel->actualizarUrlEvidenciaTarea($numConsecutivo, $idObjetivo, $idTarea, $tipo, $urlArchivo);
+        $json=$this->recargarPlanAccion($numConsecutivo, $tipo);
+        $this->showView($json);
+    }
+
+    public function eliminarEvidencia($numConsecutivo, $idObjetivo, $idTarea, $tipo){
+        $this->planAccionModel->eliminarEvidenciaTarea($numConsecutivo, $idObjetivo, $idTarea, $tipo);
+         $json=$this->recargarPlanAccion($numConsecutivo, $tipo);
+         $this->showView($json);
+    }
+
+    public function recargarPlanAccion($numConsecutivo, $tipo){
+
+        $contenidoProblemas="";
+        $tablasObj="";
+        $jsonArray= array();
+        
+        $plantillaProblemas=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-problemas.html");
+        $plantillaObj=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-objetivos.html");
+        $plantillaTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/tabla-tarea.html");
+        $plantillaFormTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/form-tarea.html");
+        $plantillaVerTarea=$this->getTemplate("./app/views/SeguimientoPlanAccion/form-ver-tarea.html");
+       
+        $filaPlan=$this->planAccionModel->consultarPlanAccion($tipo,$numConsecutivo);
+        $arrayProblemas=$this->planAccionModel->consultarProblema ($tipo, $numConsecutivo);
+
+        $cont=0;
+        $completos=0;
+        foreach ($arrayProblemas as $value) {
+            $cont++;
+            $temp=$this->renderView($plantillaProblemas, "{{NUM_PROBLEMA}}",$cont);
+            $temp=$this->renderView($temp, "{{NOM_PROBLEMA}}",$value['problema']);
+            $contenidoProblemas.=$temp;
+            
+            $temp=$this->renderView($plantillaObj, "{{NUMERO_OBJETIVO}}",$cont);
+            $temp=$this->renderView($temp, "{{OBJETIVO}}",$value['solucion_obj']);
+            $temp=$this->renderView($temp, "{{FECHA_REUNION}}",$value['fecha_reunion']);
+            $temp=$this->renderView($temp, "{{FECHA_PROX_REUNION}}",$value['fecha_prox_reunion']);
+
+            $arrayTareas=$this->planAccionModel->consultarTarea($tipo, $numConsecutivo, $value['id_problema']);
+            $tareas="";
+            $cont2=0;
+            $estado="verde";
+
+            foreach ($arrayTareas as $value2) {
+             $cont2++;
+             $temp2="";
+              if(!isset($value2['url_archivo'])){
+                $temp2=$this->renderView($plantillaTarea, "{{FORMULARIO_TAREA}}",$plantillaFormTarea);
+             }else{
+                 $temp2=$this->renderView($plantillaVerTarea, "{{URL_ARCHIVO}}",$value2['url_archivo']);
+                 $temp2=$this->renderView($temp2, "{{NOM_TAREA}}",$value2['tarea']);
+                 $temp2=$this->renderView($plantillaTarea, "{{FORMULARIO_TAREA}}",$temp2);
+             }
+
+             $temp2=$this->renderView($temp2, "{{NUMERO_TAREA}}",$cont2);
+             $temp2=$this->renderView($temp2, "{{NOMBRE_TAREA}}",$value2['tarea']);
+             $temp2=$this->renderView($temp2, "{{FECHA_TAREA}}",$value2['fecha_entrega']);
+             $temp2=$this->renderView($temp2, "{{ESTADO_TAREA}}",$value2['estado']);
+             $temp2=$this->renderView($temp2, "{{NUM_CONSECUTIVO}}",$numConsecutivo);
+             $temp2=$this->renderView($temp2, "{{ID_PROBLEMA}}",$value2['id_problema']);
+             $temp2=$this->renderView($temp2, "{{ID_TAREA}}",$value2['id_tarea']);
+             $temp2=$this->renderView($temp2, "{{TIPO}}",$tipo);
+             $tareas.=$temp2;
+
+             if(($estado!="rojo" && $value2['estado']!="verde") || ($estado=="amarillo" && $value2['estado']=="rojo")){
+                $estado=$value2['estado'];
+                }
+                
+            }
+            
+            if($estado=="amarillo" || $estado=="verde"){
+                $completos++;
+            }
+            //colocamos el estado a las tablas objetivos y a la tabla problemas 
+            $temp=$this->renderView($temp, "{{ESTADO_PROBLEMA}}",$estado);
+            $contenidoProblemas=$this->renderView($contenidoProblemas, "{{ESTADO_PROBLEMA}}",$estado);
+            $temp=$this->renderView($temp, "{{TABLA_TAREA}}",$tareas);
+            $tablasObj.=$temp;
+        }
+        
+        $porcentaje=round((($completos*100)/$cont),2);
+        
+        $jsonArray['problemas']=$contenidoProblemas;
+        $jsonArray['objetivos']=$tablasObj;
+        $jsonArray['porcentaje']=$porcentaje;
+
+        return json_encode($jsonArray);
+    }
+
+    //metodo para mover un archivo traido del formulario a la carpeta upload
+  private function agregarArchivo(){
+    $urlArchivo="";
+    if (is_uploaded_file($_FILES['evidencia']['tmp_name'])){
+        $nombreDirectorio = "public/upload/";
+        $nombreFichero = $_FILES['evidencia']['name'];
+        //opcional
+        $tipoArchivo=$_FILES['evidencia']['type'];
+        $extencionFichero= ".". substr(strrchr($tipoArchivo, "/"), 1);
+        //
+        //id unico de tiempo
+        $idUnico=time();
+        
+        $urlArchivo = $nombreDirectorio . $idUnico . "_" . $nombreFichero;
+        move_uploaded_file($_FILES['evidencia']['tmp_name'], $urlArchivo);
+        
+            return $urlArchivo;
+        }else{
+            return false;
+            }
+    }
+    
     
     public function consultarPlanAccion($numConsecutivo, $tipo){
         $tablasProblemas="";

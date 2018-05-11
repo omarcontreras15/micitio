@@ -102,9 +102,9 @@
                         if(!isset($_SESSION["user_id"])){
                             $this->user->inicioSesion();
                         }else{
-                          $this->planAccion->seguimientoPlanAccion();   
+                          $this->planAccion->seguimientoPlanAccion($_GET['Num_consecutivo'], $_GET['tipo']);   
                         } 
-                            break;
+                        break;
 
                         //agregar plan de accion
                         case "agregar-plan-accion-idea":
@@ -292,6 +292,14 @@
 
                     case "editar-plan-accion":
                         $this->planAccion->actualizarPlanAccion($_POST);
+                    break;
+
+                    case "subir-evidencia-tarea":
+                        $this->planAccion->subirEvidencia($_POST['num_consecutivo'],$_POST['id_problema'],$_POST['id_tarea'], $_POST['tipo']);
+                    break;
+
+                     case "eliminar-evidencia-tarea":
+                        $this->planAccion->eliminarEvidencia($_POST['num_consecutivo'],$_POST['id_problema'],$_POST['id_tarea'], $_POST['tipo']);
                     break;
 
                 default:
